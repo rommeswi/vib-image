@@ -1,0 +1,4 @@
+name: font-install
+type: shell
+commands:
+  - "echo Installing Nerdfonts"
