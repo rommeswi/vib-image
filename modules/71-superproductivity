@@ -1,0 +1,4 @@
+name: superproductivity
+type: shell
+commands:
+  - "echo Installing Superproductivity..."
