@@ -31,6 +31,8 @@ stages:
       - kitty
       - emacs-pgtk
       - vim
+      - gnome-tweaks
+      - gnome-browser-connector
 
   # Put your custom actions before this comment
 
