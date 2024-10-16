@@ -1,0 +1,14 @@
+modules:
+- name: gnome-debs
+  type: apt
+  source:
+    packages:
+    - gnome-tweaks
+    - gnome-extensions
+    - gnome-keyring
+    - gnome-browser-connector
+    
+- name: gnome-extensions-installer
+  type: shell
+  - bash /gnome-extensions/install-extensions.sh
+  - rm -rf /gnome-extensions
