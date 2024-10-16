@@ -1,4 +1,9 @@
 name: superproductivity
 type: shell
 commands:
-  - "echo Installing Superproductivity..."
+- apx arch enter
+- git clone https://aur.archlinux.org/superproductivity-bin.git /tmp/superproductivity
+- cd /tmp/superproductivity
+- makepkg -si
+- exit
+- apx arch export -a superproductivty
