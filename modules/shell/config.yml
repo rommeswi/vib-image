@@ -1,4 +1,5 @@
 name: zsh-config
 type: shell
 commands:
-- echo Need to find a way to store zshrc
+- bash /shellrc/install-shell.sh
+- rm -rf /shellrc
