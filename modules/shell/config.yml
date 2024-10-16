@@ -1,5 +1,5 @@
 name: zsh-config
 type: shell
 commands:
-- mv -f /shellrc/* /etc/skel
+- mv -f /shellrc/* /etc/skel/
 - rm -r /shellrc
