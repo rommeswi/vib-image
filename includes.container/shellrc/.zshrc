@@ -13,3 +13,4 @@ SAVEHIST=1000
 setopt autocd extendedglob
 bindkey -e
 # End of lines configured by zsh-newuser-install
+eval "$(oh-my-posh init zsh --config ~/.oh-my-posh/config.json)"
