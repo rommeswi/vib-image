@@ -5,6 +5,13 @@
 # burn my windows
 # system resources
 # alphabetical app grid
+# user themes
+# removable drive menu
+# system monitor
+# pomodoro?
+# run or raise?
+# day starts on monday
+# clipboard manager?
 
 # gtile
 # requires npm, git
@@ -13,3 +20,8 @@ cd /tmp/gTile
 npm ci
 npm run build:dist
 npm run install:extension
+
+# Burn my windows
+# git clone https://github.com/Schneegans/Burn-My-Windows.git /tmp/Burn-My-Windows
+# cd /tmp/Burn-My-Windows
+# make install
