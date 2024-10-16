@@ -33,10 +33,15 @@ stages:
       - vim
       - git
       - npm
-      - gir1.2-vte-2.91
-      - gir1.2-handy-1
       - wl-clipboard
       - openssh-client
+      
+  - name gnome-config
+    type: includes
+    includes:
+    - modules/gnome/debs.yml
+    - modules/gnome/extensions.yml
+    - modules/gnome/config.yml
 
   - name: lab-modules
     type: includes
