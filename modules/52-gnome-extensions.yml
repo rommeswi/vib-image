@@ -3,3 +3,10 @@ type: shell
 commands:
 - bash /gnome-extensions/install-extensions.sh
 - rm -rf /gnome-extensions
+modules:    
+- name: gnome-debs
+  type: apt
+  source:
+    packages:
+    - gnome-tweaks
+    - gnome-shell-extensions
