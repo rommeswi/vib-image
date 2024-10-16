@@ -1,0 +1,8 @@
+name: gnome-debs
+type: apt
+source:
+  packages:
+  - gir1.2-vte-2.91
+  - gir1.2-handy-1
+  - gnome-shell-extensions
+  - gnome-tweaks
