@@ -23,5 +23,5 @@ FONT_URL=$(curl -s https://api.github.com/repos/ryanoasis/nerd-fonts/releases/la
 curl $FONT_URL -fLo ./SourceCodePro.tar.xz
 tar -xf SourceCodePro.tar.xz
 rm SourceCodePro.tar.xz
-mv /fonts/* /usr/local/share/fonts/opentype/
+mv -f /fonts/* /usr/local/share/fonts/
 fc-cache -f -v
