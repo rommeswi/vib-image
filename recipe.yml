@@ -36,7 +36,7 @@ stages:
       - wl-clipboard
       - openssh-client
       
-  - name gnome-config
+  - name: gnome-config
     type: includes
     includes:
     - modules/gnome/debs.yml
