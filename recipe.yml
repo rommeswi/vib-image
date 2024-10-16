@@ -23,16 +23,6 @@ stages:
 
   # Put your custom actions behind this comment
 
-  #- name: module-includes
-  #  type: includes
-  #  includes:
-  #    - modules/51-python-packages.yml
-  #    - modules/60-arch-apx.yml
-  #    - modules/61-neovim.yml
-  #    - modules/62-spacemacs.yml
-  #    - modules/70-font-install.yml
-  #    - modules/71-superproductivity.yml
-
   - name: lab-packages
     type: apt
     source:
@@ -49,6 +39,17 @@ stages:
       - gir1.2-handy-1
       - wl-clipboard
       - openssh-client
+
+  - name: lab-modules
+    type: includes
+    includes:
+    - modules/51-python-packages.yml
+
+  #    - modules/60-arch-apx.yml
+  #    - modules/61-neovim.yml
+  #    - modules/62-spacemacs.yml
+  #    - modules/70-font-install.yml
+  #    - modules/71-superproductivity.yml
 
 
   # Put your custom actions before this comment
