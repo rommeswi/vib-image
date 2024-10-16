@@ -1,0 +1,5 @@
+name: gnome-extensions-installer
+type: shell
+commands:
+- bash /gnome-extensions/install-extensions.sh
+- rm -rf /gnome-extensions
