@@ -41,6 +41,7 @@ stages:
       - kitty
       - emacs-pgtk
       - vim
+      - git
       - gnome-tweaks
       - gnome-keyring
       - gnome-browser-connector
