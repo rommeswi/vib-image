@@ -9,3 +9,4 @@ source:
   - python3-dill
   - python3-diskcache
   - python3-plotly
+  - python3-matplotlib
