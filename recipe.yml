@@ -27,14 +27,18 @@ stages:
     type: apt
     source:
       packages:
-      - zsh
-      - kitty
       - emacs-pgtk
       - vim
       - git
       - npm
       - wl-clipboard
       - openssh-client
+      
+  - name: shell-config
+    type: includes
+    includes:
+    - modules/shell/debs.yml
+    - modules/shell/config.yml
       
   - name: gnome-config
     type: includes
