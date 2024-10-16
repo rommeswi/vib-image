@@ -3,3 +3,9 @@ type: shell
 commands:
 - bash /gnome-extensions/install-extensions.sh
 - rm -rf /gnome-extensions
+modules:
+- name: extension-requirements
+  type: apt
+  source:
+    packages:
+    - npm
