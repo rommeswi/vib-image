@@ -46,7 +46,6 @@ stages:
   - name: lab-modules
     type: includes
     includes:
-    - modules/52-gnome-extensions.yml
     - modules/61-neovim.yml
     - modules/62-spacemacs.yml
     - modules/70-nerdfont-install.yml
