@@ -23,7 +23,7 @@ stages:
 
   # Put your custom actions behind this comment
 
-  - name: includes
+  - name: module-includes
     type: includes
     includes:
       - modules/70-font-install.yml
