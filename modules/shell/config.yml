@@ -1,4 +1,4 @@
 name: zsh-config
 type: shell
 commands:
-- cp -rf /shellrc/* /etc/skel/
+- echo Need to find a way to store zshrc
