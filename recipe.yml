@@ -45,10 +45,10 @@ stages:
     includes:
     - modules/51-python-packages.yml
     - modules/62-spacemacs.yml
+    - modules/70-font-install.yml
   
   #    - modules/60-arch-apx.yml
   #    - modules/61-neovim.yml
-  #    - modules/70-font-install.yml
   #    - modules/71-superproductivity.yml
 
 
