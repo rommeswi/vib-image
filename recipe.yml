@@ -30,7 +30,6 @@ stages:
       - emacs-pgtk
       - vim
       - git
-      - npm
       - wl-clipboard
       - openssh-client
       
