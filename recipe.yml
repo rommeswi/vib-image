@@ -26,7 +26,7 @@ stages:
   - name: module-includes
     type: includes
     includes:
-      - modules/51-python.yml
+      - modules/51-python-packages.yml
       - modules/60-arch.yml
       - modules/70-font-install.yml
       - modules/71-superproductivity.yml
