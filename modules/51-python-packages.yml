@@ -2,6 +2,7 @@ name: python-packages
 type: apt
 source:
   packages:
+  - python3-venv
   - python3-scipy
   - python3-numpy
   - python3-pandas
