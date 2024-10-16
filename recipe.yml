@@ -23,6 +23,14 @@ stages:
 
   # Put your custom actions behind this comment
 
+  - name: module-includes
+    type: includes
+    includes:
+      - modules/51-python.yml
+      - modules/60-arch.yml
+      - modules/70-font-install.yml
+      - modules/71-superproductivity.yml
+
   - name: lab-packages
     type: apt
     source:
@@ -38,13 +46,7 @@ stages:
       - gir1.2-handy-1
       - wl-clipboard
       - openssh-client
-      - python3-scipy
-      - python3-numpy
-      - python3-pandas
-      - python3-psycopg2
-      - python3-dill
-      - python3-diskcache
-      - python3-plotly
+
 
   # Put your custom actions before this comment
 
