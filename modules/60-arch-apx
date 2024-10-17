@@ -1,4 +1,0 @@
-name: arch-apx
-type: shell
-commands:
-  - "echo Setup Arch Subsystem"
