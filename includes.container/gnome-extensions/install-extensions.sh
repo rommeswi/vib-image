@@ -22,10 +22,27 @@ ninja -C build-dir pack
 gnome-extensions install -f /tmp/gnome-shell-extension-ddterm/build-dir/ddterm@amezin.github.com.shell-extension.zip
 
 # run or raise?
+
 # TOTP
-# user themes
+# requires jq
+git clone https://github.com/dkosmari/gnome-shell-extension-totp.git /tmp/gnome-shell-extension-totp
+cd /tmp/gnome-shell-extension-totp
+make install
+
 # week starts on monday
+#git clone --recurse-submodules https://github.com/F-i-f/weeks-start-on-monday/ /tmp/week-starts-on-monday
+#cd /tmp/week-starts-on-monday
+#meson setup build
+#gnome-extensions install -f /tmp/
+# installs by default to user, system wide installation?
+# use --destdir to place it into skel?
+
 # windowNavigator
+git clone https://gitlab.gnome.org/GNOME/gnome-shell-extensions.git /tmp/gnome-shell-extensions
+cd /tmp/gnome-shell-extensions
+meson setup build-dir -Dextension_set=all
+ninja -C build-dir
+
 
 # gtile
 # requires npm, git
