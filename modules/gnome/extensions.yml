@@ -8,5 +8,6 @@ modules:
   type: apt
   source:
     packages:
+    - meson
     - gettext
     - npm
