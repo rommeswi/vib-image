@@ -1,0 +1,13 @@
+repositories:
+  - repo: ddterm/gnome-shell-extension-ddterm
+    asset: ddterm@amezin.github.com.shell-extension.zip
+  - repo: github.com/stuarthayhurst/alphabetical-grid-extension.git
+    asset: test
+  - repo: Schneegans/Burn-My-Windows.git 
+    asset: test
+  - repo: dkosmari/gnome-shell-extension-totp.git
+    asset: test
+  - repo: gTile/gTile.git
+    asset: test
+  - repo: F-i-f/weeks-start-on-monday/ 
+    asset: test
