@@ -33,7 +33,8 @@ for i in $(seq 0 $(echo "$repos" | yq 'length-1')); do
 
     # Verify if the file was downloaded
     if [ -f "$ASSET_NAME" ]; then
-        echo "$ASSET_NAME downloaded successfully from $REPO."
+        echo "$ASSET_NAME downloaded successfully from $REPO, installing."
+        gnome-extensions install -f "$ASSET_NAME"
     else
         echo "Error: Failed to download $ASSET_NAME from $REPO."
     fi
