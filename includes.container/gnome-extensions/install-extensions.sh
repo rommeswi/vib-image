@@ -4,14 +4,19 @@
 # burn my windows
 git clone https://github.com/Schneegans/Burn-My-Windows.git /tmp/Burn-My-Windows
 cd /tmp/Burn-My-Windows
-make install
+make zip
+unzip burn-my-windows@schneegans.github.com.zip
+cp -r burn-my-windows@schneegans.github.com /usr/share/gnome-shell/extensions/
 
 # alphabetical app grid
 # requires gettext (deb)
 git clone https://github.com/stuarthayhurst/alphabetical-grid-extension.git /tmp/alphabetical-grid-extension
 cd /tmp/alphabetical-grid-extension
 make build
-make install
+cd ./build/
+unzip AlphabeticalAppGrid@stuarthayhurst.shell-extension.zip
+cp -r AlphabeticalAppGrid@stuarthayhurst.shell-extension /usr/share/gnome-shell/extensions/
+
 
 # ddterm (maybe downloading the zip is faster)
 # requires meson, gtk-builder-tool, gtk4-builder-tool, xsltproc, msgcmp, msgmerge, xgettext, zip
@@ -19,7 +24,9 @@ git clone https://github.com/ddterm/gnome-shell-extension-ddterm.git /tmp/gnome-
 cd /tmp/gnome-shell-extension-ddterm
 meson setup build-dir
 ninja -C build-dir pack
-gnome-extensions install -f /tmp/gnome-shell-extension-ddterm/build-dir/ddterm@amezin.github.com.shell-extension.zip
+cd /tmp/gnome-shell-extension-ddterm/build-dir/
+unzip gnome-shell-extension-ddterm/build-dir/ddterm@amezin.github.com.shell-extension.zip
+cp -r gnome-shell-extension-ddterm/build-dir/ddterm@amezin.github.com.shell-extension.zip /usr/share/gnome-shell/extensions/
 
 # run or raise?
 
@@ -38,10 +45,10 @@ make install
 # use --destdir to place it into skel?
 
 # windowNavigator
-git clone https://gitlab.gnome.org/GNOME/gnome-shell-extensions.git /tmp/gnome-shell-extensions
-cd /tmp/gnome-shell-extensions
-meson setup build-dir -Dextension_set=all
-ninja -C build-dir
+# git clone https://gitlab.gnome.org/GNOME/gnome-shell-extensions.git /tmp/gnome-shell-extensions
+# cd /tmp/gnome-shell-extensions
+# meson setup build-dir -Dextension_set=all
+# ninja -C build-dir
 
 
 # gtile
@@ -50,5 +57,6 @@ git clone https://github.com/gTile/gTile.git /tmp/gTile
 cd /tmp/gTile
 npm ci
 npm run build:dist
+ls -a
 npm run install:extension
 
