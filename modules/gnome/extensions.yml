@@ -8,4 +8,4 @@ modules:
   type: apt
   source:
     packages:
-    - jq
+    - yq
