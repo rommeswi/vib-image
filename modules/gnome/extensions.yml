@@ -1,16 +1,11 @@
 name: gnome-extensions-installer
 type: shell
 commands:
-- bash /gnome-extensions/install-extensions.sh
+- bash /gnome-extensions/download-extensions.sh
 - rm -rf /gnome-extensions
 modules:
 - name: extension-requirements
   type: apt
   source:
     packages:
-    - meson
-    - xsltproc 
-    - gettext
-    - npm
-    - imagemagick
     - jq
