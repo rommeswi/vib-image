@@ -1,7 +1,15 @@
 #!/bin/bash
 
 # YAML file containing repositories and assets
-YAML_FILE="extensions.yml"
+YAML_FILE="/gnome-extensions/extensions.yml"
+
+# Check if file exists.
+if [ -f "$YAML_FILE" ]; then
+        echo "Processing Gnome Extensions in $YAML_FILE."
+else
+    echo "Error: Failed to find $YAML_FILE."
+    exit 1
+fi
 
 # Check if yq is installed
 if ! command -v yq &> /dev/null; then
