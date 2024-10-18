@@ -7,7 +7,8 @@ curl -s https://ohmyposh.dev/install.sh | bash -s -- -d /usr/local/bin
 curl -s https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/1_shell.omp.json -o 1_shell.omp.json
 
 # Copy oh-my-posh configuration
-mkdir -p /etc/skel/.config/oh-my-posh/
+mkdir -p /etc/skel/.config/oh-my-posh/themes
+cp /root/.cache/oh-my-posh/themes /etc/skel/.config/oh-my-posh/themes
 cp /tmp/shell/1_shell.omp.json /etc/skel/.config/oh-my-posh/config.json
 
 # Copy zshrc
