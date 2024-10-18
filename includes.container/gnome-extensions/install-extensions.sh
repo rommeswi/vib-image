@@ -5,6 +5,7 @@
 git clone https://github.com/Schneegans/Burn-My-Windows.git /tmp/Burn-My-Windows
 cd /tmp/Burn-My-Windows
 make zip
+ls -a
 unzip burn-my-windows@schneegans.github.com.zip
 cp -r burn-my-windows@schneegans.github.com /usr/share/gnome-shell/extensions/
 
@@ -14,6 +15,7 @@ git clone https://github.com/stuarthayhurst/alphabetical-grid-extension.git /tmp
 cd /tmp/alphabetical-grid-extension
 make build
 cd ./build/
+ls -a
 unzip AlphabeticalAppGrid@stuarthayhurst.shell-extension.zip
 cp -r AlphabeticalAppGrid@stuarthayhurst.shell-extension /usr/share/gnome-shell/extensions/
 
@@ -57,6 +59,7 @@ git clone https://github.com/gTile/gTile.git /tmp/gTile
 cd /tmp/gTile
 npm ci
 npm run build:dist
+tar -xzf gtile.dist.tgz
 ls -a
 npm run install:extension
 
