@@ -9,5 +9,8 @@ modules:
   source:
     packages:
     - meson
+    - xsltproc 
     - gettext
     - npm
+    - imagemagick
+    - jq
