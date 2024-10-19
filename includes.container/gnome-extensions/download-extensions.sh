@@ -26,9 +26,12 @@ for i in $(seq 0 $(echo "$repos" | yq 'length-1')); do
     
     echo "Processing $REPO for asset $ASSET_NAME..."
 
+    # Encode the @ symbol in the asset name to match URL encoding
+    ENCODED_ASSET_NAME=$(echo "$ASSET_NAME" | sed 's/@/%40/g')
+
     # Fetch the latest release from the GitHub API
     API_URL="https://api.github.com/repos/$REPO/releases/latest"
-    ASSET_URL=$(curl -s $API_URL | grep "browser_download_url" | grep "$ASSET_NAME" | cut -d '"' -f 4)
+    ASSET_URL=$(curl -s $API_URL | grep "browser_download_url" | grep "$ENCODED_ASSET_NAME" | cut -d '"' -f 4)
 
     # Check if we got the asset URL
     if [ -z "$ASSET_URL" ]; then
