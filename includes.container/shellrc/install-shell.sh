@@ -11,6 +11,9 @@ mkdir -p /etc/skel/.config/oh-my-posh/themes
 cp /root/.cache/oh-my-posh/themes /etc/skel/.config/oh-my-posh/themes
 cp /tmp/shell/1_shell.omp.json /etc/skel/.config/oh-my-posh/config.json
 
+# Install Prezto
+git clone --recursive https://github.com/sorin-ionescu/prezto.git ".config/zsh/.zprezto"
+
 # Copy zshrc
 cp /shellrc/.zshrc /etc/skel/.zshrc
 
