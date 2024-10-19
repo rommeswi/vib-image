@@ -21,8 +21,8 @@ fi
 repos=$(yq '.repositories' $YAML_FILE)
 
 for i in $(seq 0 $(echo "$repos" | yq 'length-1')); do
-    REPO=$(echo "$repos" | yq ".[$i].repo")
-    ASSET_NAME=$(echo "$repos" | yq ".[$i].asset")
+    REPO=$(echo "$repos" | yq -r ".[$i].repo")
+    ASSET_NAME=$(echo "$repos" | yq -r ".[$i].asset")
     
     echo "Processing $REPO for asset $ASSET_NAME..."
 
