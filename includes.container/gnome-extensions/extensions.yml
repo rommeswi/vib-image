@@ -5,7 +5,7 @@ repositories:
     asset: AlphabeticalAppGrid@stuarthayhurst.shell-extension.zip 
   - repo: Schneegans/Burn-My-Windows
     asset:  burn-my-windows@schneegans.github.com.zip
-  - repo: gTile/gTile.git
+  - repo: gTile/gTile
     asset:  gtile.dist.zip
   - repo: F-i-f/weeks-start-on-monday
     asset:  weeks-start-on-monday@extensions.gnome-shell.fifi.org.v18.shell-extension.zip
