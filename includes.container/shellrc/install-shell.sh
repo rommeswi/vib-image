@@ -15,7 +15,7 @@ cp /root/.cache/oh-my-posh/themes /etc/skel/.config/zsh/oh-my-posh/themes
 cp /etc/skel/.config/zsh/oh-my-posh/themes/1_shell.omp.json /etc/skel/.config/zsh/oh-my-posh/config.json
 
 # Install Prezto
-git clone --recursive https://github.com/sorin-ionescu/prezto.git /etc/skel/.config/zsh/zprezto
+git clone --recursive https://github.com/sorin-ionescu/prezto.git /etc/skel/.config/zsh/.zprezto
 
 # Copy kitty config
 mkdir -p /etc/skel/.config/kitty/
