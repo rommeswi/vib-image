@@ -1,4 +1,4 @@
-name: totp-extension
+name: gnome-shell-extension-totp
 type: make
 buildcommand: echo TOTP-extension-installation
 installcommand: make install -d
