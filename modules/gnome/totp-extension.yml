@@ -6,3 +6,9 @@ source:
   url: https://github.com/dkosmari/gnome-shell-extension-totp
   branch: master
   commit: latest
+modules:
+  - name: build-deps
+    type: apt
+    source:
+      packages:
+      - make
