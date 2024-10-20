@@ -11,4 +11,4 @@ modules:
     type: apt
     source:
       packages:
-      - make
+      - jq
