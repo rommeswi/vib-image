@@ -35,7 +35,7 @@ for i in $(seq 0 $(echo "$repos" | yq 'length-1')); do
     API_URL="https://api.github.com/repos/$REPO/releases/latest"
     echo "Fetching asset url from $API_URL..."
     
-    ASSET_URL=$(curl -s $API_URL | grep "browser_download_url" | grep -w "$ENCODED_ASSET_NAME" | cut -d '"' -f 4)
+    ASSET_URL=$(curl -s $API_URL | grep "browser_download_url" | grep "$ENCODED_ASSET_NAME" | grep -v ".asc" | cut -d '"' -f 4)
     echo "Obtained asset url $ASSET_URL."
 
     # Check if we got the asset URL
