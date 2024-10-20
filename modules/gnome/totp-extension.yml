@@ -1,5 +1,6 @@
 name: totp-extension
 type: make
+buildCommand: echo Installing TOTP extension...
 source:
   type: git
   url: https://github.com/dkosmari/gnome-shell-extension-totp
