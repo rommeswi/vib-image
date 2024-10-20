@@ -44,6 +44,7 @@ stages:
     includes:
     - modules/gnome/debs.yml
     - modules/gnome/extensions.yml
+    - modules/gnome/totp-extension.yml
     - modules/gnome/config.yml
 
   - name: lab-modules
