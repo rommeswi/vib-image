@@ -1,6 +1,6 @@
 name: totp-extension
 type: make
-buildCommand:
+buildCommand: "echo Installing TOTP-extension"
 installCommand: "make install"
   source:
     type: git
