@@ -46,15 +46,19 @@ stages:
     - modules/gnome/extensions.yml
     - modules/gnome/config.yml
 
+  - name: neovim
+    type: includes
+    includes:
+    - modules/neovim/install.yml
+    - modules/neovim/config.yml
+    
   - name: lab-modules
     type: includes
     includes:
-    - modules/61-neovim.yml
     - modules/62-spacemacs.yml
     - modules/70-nerdfont-install.yml
     - modules/51-python-packages.yml
   
-  #    - modules/60-arch-apx.yml
   #    - modules/71-superproductivity.yml
 
 
