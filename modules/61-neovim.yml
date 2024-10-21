@@ -1,7 +1,0 @@
-name: neovim
-type: flatpak
-system:
-  repourl: "https://flathub.org/repo/flathub.flatpakrepo"
-  reponame: "flathub"
-  install:
-    - io.neovim.nvim
