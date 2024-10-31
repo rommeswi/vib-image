@@ -9,3 +9,4 @@ modules:
   source:
     packages:
     - yq
+    - unar
