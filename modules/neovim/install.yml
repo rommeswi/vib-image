@@ -5,9 +5,9 @@ commands:
 - mkdir -pv /tmp
 - tar -C /tmp/nvim -vxzf nvim-linux64.tar.gz
 - cd /tmp/nvim
-- cp -r bin /usr/local/bin
-- cp -r lib /usr/local/lib
-- cp -r share /usr/local/share
+#- cp -r bin /usr/local/bin
+#- cp -r lib /usr/local/lib
+#- cp -r share /usr/local/share
 modules:
 - name: neovim-requirements
   type: apt
