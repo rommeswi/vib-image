@@ -1,7 +1,9 @@
 name: neovim-install
-type: flatpak
-system:
-  repourl: "https://flathub.org/repo/flathub.flatpakrepo"
-  reponame: "flathub"
-  install:
-    - io.neovim.nvim
+type: shell
+commands:
+  - curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
+  - tar -C /tmp/nvim -xzf nvim-linux64.tar.gz
+  - cd /tmp/nvim
+  - cp -r bin /usr/local/bin
+  - cp -r lib /usr/local/lib
+  - cp -r share /usr/local/share
