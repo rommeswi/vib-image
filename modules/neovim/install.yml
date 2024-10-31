@@ -13,3 +13,4 @@ modules:
   source:
     packages:
     - curl
+    - tar
