@@ -12,7 +12,7 @@ curl -s https://ohmyposh.dev/install.sh | bash -s -- -d /usr/local/bin
 # Copy oh-my-posh configuration
 mkdir -p /etc/skel/.config/zsh/oh-my-posh/themes
 cp /root/.cache/oh-my-posh/themes /etc/skel/.config/zsh/oh-my-posh/themes
-cp /etc/skel/.config/zsh/oh-my-posh/themes/1_shell.omp.json /etc/skel/.config/zsh/oh-my-posh/config.json
+cp /shellrc/omp-config.json /etc/skel/.config/zsh/oh-my-posh/config.json
 
 # Install Prezto
 git clone --recursive https://github.com/sorin-ionescu/prezto.git /etc/skel/.config/zsh/.zprezto
