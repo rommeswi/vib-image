@@ -57,7 +57,7 @@ for i in $(seq 0 $(echo "$repos" | yq 'length-1')); do
         mkdir -p /usr/share/gnome-shell/extensions/tmp
         unzip "$ASSET_NAME" -d /usr/share/gnome-shell/extensions/tmp
         ASSET_UUID=$(jq -r '.uuid' /usr/share/gnome-shell/extensions/tmp/metadata.json)
-        mv -r tmp "/usr/share/gnome-shell/extensions/$ASSET_UUID"
+        mv tmp "/usr/share/gnome-shell/extensions/$ASSET_UUID"
         rm "$ASSET_NAME"
     else
         echo "Error: Failed to download $ASSET_NAME from $REPO."
