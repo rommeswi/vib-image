@@ -2,7 +2,7 @@
 
 # Copy zshrc
 cp /shellrc/.zshenv /etc/skel/.zshenv
-cp /shellrc/.config/zsh /etc/skel/.config/zsh
+cp -r /shellrc/.config/zsh /etc/skel/.config/zsh
 
 # Install oh-my-posh
 mkdir -p /tmp/shell/
