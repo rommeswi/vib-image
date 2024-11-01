@@ -9,4 +9,5 @@ modules:
   source:
     packages:
     - yq
-    - unar
+    - jq
+    - unzip
