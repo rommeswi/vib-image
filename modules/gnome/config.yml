@@ -2,7 +2,8 @@ name: gnome-config
 type: shell
 commands:
 - echo Configuring Gnome
-- wget -i https://unsplash.com/photos/H4uGE2skayY/download?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzMwNTUyMDQ5fA&force=true -O /etc/skel/Pictures/tokyonight.jpg
+- mkdir -p /etc/skel/Pictures
+- wget https://unsplash.com/photos/H4uGE2skayY/download?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzMwNTUyMDQ5fA&force=true -O /etc/skel/Pictures/tokyonight.jpg
 plugins:
 - name: gnome-config-req
   type: apt
