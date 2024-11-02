@@ -18,6 +18,11 @@ cp /shellrc/omp-config.json /etc/skel/.config/zsh/oh-my-posh/config.json
 # Install Prezto
 git clone --recursive https://github.com/sorin-ionescu/prezto.git /etc/skel/.config/zsh/.zprezto
 
+# Install zpm-zsh ls plugin
+cd /etc/skel/.config/zsh/.zprezto
+git submodule add https://github.com/zpm-zsh/ls.git modules/ls
+git submodule update --init --recursive
+
 # Copy kitty config
 mkdir -p /etc/skel/.config/kitty/
 cp /shellrc/kitty.conf /etc/skel/.config/kitty/kitty.conf
