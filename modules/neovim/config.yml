@@ -2,6 +2,5 @@ name: neovim-config
 type: shell
 commands: 
 - git clone https://github.com/LazyVim/starter /etc/skel/.config/nvim
-#- ln -s $(flatpak info --show-location io.neovim.nvim)/export/bin/nvim /usr/local/bin/nvim
-#- sh /neovim/neovim-config.sh
-#- rm -rf /neovim
+- cp /neovim/.nvimrc /etc/skel/.nvimrc
+- rm -rf /neovim
