@@ -21,7 +21,14 @@ git clone --recursive https://github.com/sorin-ionescu/prezto.git /etc/skel/.con
 # Install zpm-zsh ls plugin
 cd /etc/skel/.config/zsh/.zprezto
 git submodule add https://github.com/zpm-zsh/ls.git modules/ls
+git submodule add https://github.com/marlonrichert/zcolors.git modules/zcolors
+git submodule add https://github.com/Freed-Wu/zsh-help.git modules/zsh-help
 git submodule update --init --recursive
+
+# Install eza tokyonight theme
+git clone https://github.com/eza-community/eza-themes.git /tmp/eza-themes
+mkdir -p /etc/skel/.config/eza
+cp /tmp/eza-themes/themes/tokyonight.yml /etc/skel/.config/eza/theme.yml
 
 # Copy kitty config
 mkdir -p /etc/skel/.config/kitty/
