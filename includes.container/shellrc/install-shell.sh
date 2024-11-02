@@ -2,6 +2,7 @@
 
 # Copy zshrc
 cp /shellrc/.zshenv /etc/skel/.zshenv
+cp /shellrc/.zshrc /etc/skel/.zshrc
 cp -r /shellrc/.config/zsh /etc/skel/.config/zsh
 
 # Install oh-my-posh
