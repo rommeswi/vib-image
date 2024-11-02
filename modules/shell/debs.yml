@@ -4,3 +4,4 @@ source:
   packages:
   - kitty
   - zsh
+  - eza
