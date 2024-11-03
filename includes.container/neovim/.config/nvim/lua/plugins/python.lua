@@ -57,7 +57,6 @@ return {
       ensure_installed = {
         "black",
         "debugpy",
-        "nvim-nio",
         "pyre",
         "python-lsp-server",
         "ruff",
