@@ -6,6 +6,7 @@ source:
   - python3-scipy
   - python3-numpy
   - python3-pandas
+  - python3-dask
   - python3-psycopg2
   - python3-dill
   - python3-diskcache
