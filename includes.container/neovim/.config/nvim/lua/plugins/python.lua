@@ -1,4 +1,4 @@
-local plugins = {
+return {
   {
     "nvimtools/none-ls.nvim",
     ft = {"python"},
@@ -33,7 +33,9 @@ local plugins = {
   {
     "mfussenegger/nvim-dap",
     config = function(_, opts)
-      require("core.utils").load_mappings("dap")
+      local dap = require('dap')
+      vim.keymap.set('n', '<leader>db', function() dap.toggle_breakpoint() end, { silent = true, desc = "Toggle breakpoint" })
+      vim.keymap.set('n', '<leader>dpr', function() dap.continue() end, { silent = true, desc = "Run test" })
     end
   },
   {
@@ -61,4 +63,4 @@ local plugins = {
       },
     },
   },
-},
+}
