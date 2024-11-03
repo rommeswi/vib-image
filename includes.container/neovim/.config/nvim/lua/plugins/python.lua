@@ -40,7 +40,7 @@ local plugins = {
     "williamboman/mason.nvim",
     opts = {
       ensure_installed = {
-        "blue",
+        "black",
         "debugpy",
         "pyre",
         "python-lsp-server",
