@@ -3,7 +3,7 @@ type: shell
 commands:
 - echo Configuring Gnome
 - mkdir -p /etc/skel/Pictures
-- wget https://unsplash.com/photos/H4uGE2skayY/download?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzMwNTUyMDQ5fA&force=true -O /etc/skel/Pictures/tokyonight.jpg
+- wget -O /etc/skel/Pictures/tokyonight.jpg "https://unsplash.com/photos/H4uGE2skayY/download?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzMwNTUyMDQ5fA&force=true"
 plugins:
 - name: gnome-config-req
   type: apt
