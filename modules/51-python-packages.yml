@@ -12,6 +12,9 @@ source:
   - python3-plotly
   - python3-matplotlib
   - python3-pylsp
+  - python3-pylsp-isort
+  - python3-pylsp-jsonrpc
   - python3-pylsp-mypy
   - python3-pylsp-ruff
+  - python3-pylsp-rope
   - python3-pylsp-black
