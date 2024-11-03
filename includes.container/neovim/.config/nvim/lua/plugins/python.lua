@@ -1,5 +1,18 @@
 local plugins = {
   {
+    "nvimtools/none-ls.nvim",
+    ft = {"python"},
+    opts = function()
+      local null_ls = require("null-ls")
+      local opts = {
+        sources = {
+          null_ls.builtins.formatting.black,
+        }
+      }
+      return opts
+    end,
+  },
+  {
     "rcarriga/nvim-dap-ui",
     dependencies = "mfussenegger/nvim-dap",
     config = function()
