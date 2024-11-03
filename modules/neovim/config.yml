@@ -3,5 +3,5 @@ type: shell
 commands: 
 - git clone https://github.com/LazyVim/starter /etc/skel/.config/nvim
 - cp /neovim/.nvimrc /etc/skel/.nvimrc
-- cp -r /neovim/.config/nvim /etc/skel/nvim
+- cp -r /neovim/.config/nvim /etc/skel/.config/nvim
 - rm -rf /neovim
