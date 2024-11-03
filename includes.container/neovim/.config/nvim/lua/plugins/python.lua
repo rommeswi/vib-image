@@ -35,7 +35,6 @@ return {
     config = function(_, opts)
       local dap = require('dap')
       vim.keymap.set('n', '<leader>db', function() dap.toggle_breakpoint() end, { silent = true, desc = "Toggle breakpoint" })
-      vim.keymap.set('n', '<leader>dpr', function() dap.continue() end, { silent = true, desc = "Run test" })
     end
   },
   {
