@@ -7,6 +7,9 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
+# wget history file
+alias wget="wget --hsts-file ~/.config/wget/wget-hsts"
+
 # colored-man-pages
 # termcap
 # ks       make the keypad send commands
