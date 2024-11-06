@@ -4,5 +4,3 @@
 
 vim.keymap.set({"n", "o"}, "gh", "^", { desc = "Go to line beginning" })
 vim.keymap.set({"n", "o"}, "gl", "$", { desc = "Go to line end" })
-vim.keymap.set({"n", "o"}, "<A-h>", "gl", "^")
-vim.keymap.set({"n", "o"}, "<A-l>", "gl", "$")
