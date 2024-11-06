@@ -8,11 +8,17 @@ mkdir -p /etc/skel/.config/kitty/
 cp /shellrc/kitty.conf /etc/skel/.config/kitty/kitty.conf
 
 #
+# Bash
+#
+mkdir -p /etc/skel/.config/bash
+cp /shellrc/.profile /etc/skel/.profile
+cp -r /shellrc/.config/bash /etc/skel/.config/bash
+
+#
 # Zsh
 #
-# Copy zshrc
+mkdir -p /etc/skel/.config/zsh
 cp /shellrc/.zshenv /etc/skel/.zshenv
-cp /shellrc/.zshrc /etc/skel/.zshrc
 cp -r /shellrc/.config/zsh /etc/skel/.config/zsh
 
 #
