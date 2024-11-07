@@ -1,8 +1,8 @@
 name: gnome-extensions-installer
 type: shell
 commands:
-- bash /gnome-extensions/download-extensions.sh
-- rm -rf /gnome-extensions
+- bash /gnome/download-extensions.sh
+- rm -rf /gnome
 modules:
 - name: extension-requirements
   type: apt
