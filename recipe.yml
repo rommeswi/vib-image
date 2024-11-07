@@ -44,6 +44,11 @@ stages:
     - modules/gnome/debs.yml
     - modules/gnome/extensions.yml
     - modules/gnome/config.yml
+    
+  - name: nerdfonts
+    type: includes
+    includes:
+    - modules/nerdfonts/install.yml
 
   - name: neovim
     type: includes
@@ -61,11 +66,6 @@ stages:
     includes:
     - modules/spacemacs/install.yml
     - modules/spacemacs/config.yml
-    
-  - name: lab-modules
-    type: includes
-    includes:
-    - modules/70-nerdfont-install.yml
  
   #    - modules/71-superproductivity.yml
 
