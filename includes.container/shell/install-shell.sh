@@ -5,7 +5,7 @@
 #
 # Copy kitty config
 mkdir -p /etc/skel/.config/kitty/
-cp /shell/kitty.conf /etc/skel/.config/kitty/kitty.conf
+cp -r /shell/.config/kitty /etc/skel/.config/kitty
 
 #
 # Bash
