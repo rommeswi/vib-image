@@ -1,9 +1,0 @@
-name: superproductivity
-type: shell
-commands:
-- apx arch enter
-- git clone https://aur.archlinux.org/superproductivity-bin.git /tmp/superproductivity
-- cd /tmp/superproductivity
-- makepkg -si
-- exit
-- apx arch export -a superproductivty
