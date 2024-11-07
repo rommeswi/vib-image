@@ -11,3 +11,4 @@ modules:
     - yq
     - jq
     - unzip
+    - libglib2.0-bin
