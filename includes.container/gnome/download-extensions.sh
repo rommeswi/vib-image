@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # YAML file containing repositories and assets
-YAML_FILE="/gnome-extensions/extensions.yml"
+YAML_FILE="/gnome/extensions.yml"
 
 # Check if file exists.
 if [ -f "$YAML_FILE" ]; then
