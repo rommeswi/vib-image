@@ -1,5 +1,0 @@
-name: warp-terminal
-type: dpkg
-source:
-  url: https://app.warp.dev/get_warp?package=deb
-  type: file
