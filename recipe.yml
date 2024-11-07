@@ -27,7 +27,6 @@ stages:
     type: apt
     source:
       packages:
-      - emacs-pgtk
       - vim
       - git
       - wl-clipboard
@@ -57,10 +56,15 @@ stages:
     includes:
     - modules/python/install.yml
 
+  - name: spacemacs
+    type: includes
+    includes:
+    - modules/spacemacs/install.yml
+    - modules/spacemacs/config.yml
+    
   - name: lab-modules
     type: includes
     includes:
-    - modules/62-spacemacs.yml
     - modules/70-nerdfont-install.yml
  
   #    - modules/71-superproductivity.yml
