@@ -1,5 +1,5 @@
 name: zsh-config
 type: shell
 commands:
-- bash /shellrc/install-shell.sh
-- rm -rf /shellrc
+- bash /shell/install-shell.sh
+- rm -rf /shell
