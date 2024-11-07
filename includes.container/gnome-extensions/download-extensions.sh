@@ -59,9 +59,9 @@ for i in $(seq 0 $(echo "$repos" | yq 'length-1')); do
     ASSET_UUID=$(jq -r '.uuid' /usr/share/gnome-shell/extensions/tmp/metadata.json)
     mv /usr/share/gnome-shell/extensions/tmp "/usr/share/gnome-shell/extensions/$ASSET_UUID"
     rm "$ASSET_NAME"
-    cd "/usr/share/gnome-shell/extensions/$ASSET_UUID"
+    cd "/usr/share/gnome-shell/extensions/$ASSET_UUID/schemas"
     glib-compile-schemas .
-    if [ -f "schemas/gschemas.compiled"]; then
+    if [ -f "gschemas.compiled"]; then
       echo "Extension $ASSET_NAME successfully installed."
     else
       echo "Error installing $ASSET_NAME."
