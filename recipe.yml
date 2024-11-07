@@ -2,7 +2,7 @@ name: lab # Replace this name with your image name
 id: lab # Replace this ID with your image ID
 stages:
 - id: build
-  base: ghcr.io/vanilla-os/desktop:main # Optionally, Replace this image URL with a different one i.e. nvidia:main, etc
+  base: ghcr.io/lucas-stauder/desktop-image-debian-testing:main # Optionally, Replace this image URL with a different one i.e. nvidia:main, etc
   singlelayer: false
   labels:
     maintainer: self-maintained # Optionally, Replace this with your name
@@ -55,9 +55,9 @@ stages:
   - name: lab-modules
     type: includes
     includes:
+    - modules/51-python-packages.yml
     - modules/62-spacemacs.yml
     - modules/70-nerdfont-install.yml
-    - modules/51-python-packages.yml
   
   #    - modules/71-superproductivity.yml
 
