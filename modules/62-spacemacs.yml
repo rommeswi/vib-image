@@ -1,4 +1,0 @@
-name: spacemacs
-type: shell
-commands:
-  - "git clone https://github.com/syl20bnr/spacemacs /etc/skel/.emacs.d"
