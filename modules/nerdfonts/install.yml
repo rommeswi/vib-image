@@ -1,5 +1,5 @@
 name: nerdfonts-install
 type: shell
 commands:
-- bash /fonts/nerdfont-install.sh
-- rm -rf /fonts
+- bash /nerdfonts/nerdfont-install.sh
+- rm -rf /nerdfonts
