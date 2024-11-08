@@ -1,5 +1,5 @@
 name: spacemacs
 type: shell
 commands:
-  - "git clone https://github.com/syl20bnr/spacemacs /etc/skel/.emacs.d"
-  - "cp /spacemacs/.spacemacs /etc/skel/.spacemacs
+  - git clone https://github.com/syl20bnr/spacemacs /etc/skel/.emacs.d
+  - cp /spacemacs/.spacemacs /etc/skel/.spacemacs
