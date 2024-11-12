@@ -19,3 +19,4 @@ source:
   - python3-pylsp-rope
   - python3-pylsp-black
   - python3-pylsp-ruff
+  - virtualenv
