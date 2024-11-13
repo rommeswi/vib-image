@@ -2,22 +2,29 @@ name: python-packages
 type: apt
 source:
   packages:
+  # Virtual Environments
   - python3-venv
+  - virtualenv
+  # Debugging (DAP)
+  - python3-debugpy
+  # Language Servers
+  - python3-pylsp
+  - python3-pylsp-mypy
+  - python3-pylsp-rope
+  - python3-pylsp-black
+  - python3-pylsp-isort
+  - python3-pylsp-jsonrpc
+  - python3-pylsp-ruff
+  # Caching and Parallelization
+  - python3-diskcache
+  - python3-dask
+  - python3-dill
+  # Data analysis
   - python3-scipy
   - python3-numpy
   - python3-pandas
   - python3-jinja2
-  - python3-dask
-  - python3-psycopg2
-  - python3-dill
-  - python3-diskcache
   - python3-plotly
   - python3-matplotlib
-  - python3-pylsp
-  - python3-pylsp-isort
-  - python3-pylsp-jsonrpc
-  - python3-pylsp-mypy
-  - python3-pylsp-rope
-  - python3-pylsp-black
-  - python3-pylsp-ruff
-  - virtualenv
+  # Experiments
+  - python3-psycopg2
