@@ -1,0 +1,5 @@
+name: texlive-packages
+type: apt
+source:
+  packages:
+  - texlive-full
