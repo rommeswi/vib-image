@@ -62,6 +62,12 @@ stages:
     - modules/python/install.yml
     - modules/python/config.yml
 
+  - name: texlive
+    type: includes
+    includes:
+    - modules/texlive/install.yml
+    - modules/texlive/config.yml
+
   - name: spacemacs
     type: includes
     includes:
