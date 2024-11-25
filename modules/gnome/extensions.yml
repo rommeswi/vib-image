@@ -12,3 +12,4 @@ modules:
     - jq
     - unzip
     - libglib2.0-bin
+    - x11-utils
