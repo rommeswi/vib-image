@@ -9,3 +9,5 @@ repositories:
     asset:  gtile.dist.zip
   - repo: F-i-f/weeks-start-on-monday
     asset:  weeks-start-on-monday@extensions.gnome-shell.fifi.org.v18.shell-extension.zip
+  - repo: wget hardpixel/unite-shell
+    asset: unite-v80.zip
