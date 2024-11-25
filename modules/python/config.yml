@@ -2,4 +2,3 @@ name: python-config
 type: shell
 commands:
 - ln -s /usr/bin/python3 /usr/bin/python
-- yes | pip install uv
