@@ -1,0 +1,12 @@
+name: icons-install
+type: dpkg
+source:
+$ sudo dpkg -i /path/to/ocs-url*.deb # need to fix this
+modules:
+- name: icon-requirements
+  type: pkg
+  packages:
+  - libqt5svg5
+  - qtdeclarative5-qtquick2-plugin 
+  - qtdeclarative5-window-plugin 
+  - qtdeclarative5-controls-plugin
