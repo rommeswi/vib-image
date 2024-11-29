@@ -10,3 +10,10 @@ modules:
   - qtdeclarative5-qtquick2-plugin 
   - qtdeclarative5-window-plugin 
   - qtdeclarative5-controls-plugin
+
+name: colorful-dark
+type: shell
+commands:
+- git clone https://github.com/L4ki/Colorful-Plasma-Themes.git /tmp/icons
+- cp -rP /tmp/icons/Colorful\ Icons\ Themes/Colorful-Dark-Icons/* /usr/share/icons/Colorful-Dark-Icons/*
+- rm -R /tmp/icons
