@@ -2,8 +2,7 @@ name: neovim-config
 type: shell
 commands: 
 - git clone https://github.com/LazyVim/starter /etc/skel/.config/nvim
-- cp /neovim/.nvimrc /etc/skel/.nvimrc
-- cp -rfv /neovim/.config/nvim/* /etc/skel/.config/nvim
+- cp -rf /neovim/etc/skel /etc/skel
 - rm -rf /neovim
 plugins:
 - name: neovim-config-requirements
