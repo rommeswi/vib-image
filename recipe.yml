@@ -31,7 +31,12 @@ stages:
       - git
       - wl-clipboard
       - openssh-client
-      
+
+  - name: zerotier
+    type: includes
+    includes:
+    - modules/zerotier/install.yml
+          
   - name: shell-config
     type: includes
     includes:
@@ -45,11 +50,6 @@ stages:
     - modules/gnome/extensions.yml
     - modules/gnome/config.yml
 
-  - name: zerotier
-    type: includes
-    includes:
-    - modules/zerotier/install.yml
-    
   - name: nerdfonts
     type: includes
     includes:
