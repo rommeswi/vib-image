@@ -5,6 +5,7 @@ commands:
 - git clone https://github.com/zerotier/ZeroTierOne.git /tmp/zerotier
 - cd /tmp/zerotier
 - make -f make-linux.mk
+- make -f make-linux.mk install
 - cd /tmp
 - rm -r zerotier
 modules:
