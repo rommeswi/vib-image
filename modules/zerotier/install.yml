@@ -1,10 +1,16 @@
 name: zerotier-install
 type: shell
 commands:
-- curl -s https://install.zerotier.com | sudo bash
+- cd /tmp
+- git clone https://github.com/zerotier/ZeroTierOne.git /tmp/zerotier
+- cd /tmp/zerotier
+- make -f make-linux.mk
+- cd /tmp
+- rm -r zerotier
 modules:
-- name: zerotier-requirements
-  type: apt
-  source:
-    packages:
-    - curl
+- name: make-deps
+    type: apt
+    source:
+      packages:
+      - make
+      - git
