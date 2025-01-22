@@ -1,0 +1,10 @@
+name: zerotier-install
+type: shell
+commands:
+- curl -s https://install.zerotier.com | sudo bash
+modules:
+- name: zerotier-requirements
+  type: apt
+  source:
+    packages:
+    - curl
