@@ -19,3 +19,4 @@ modules:
     - cargo
     - pkg-config
     - openssl
+    - libssl-dev
