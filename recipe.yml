@@ -44,6 +44,11 @@ stages:
     - modules/gnome/debs.yml
     - modules/gnome/extensions.yml
     - modules/gnome/config.yml
+
+  - name: zerotier
+    type: includes
+    includes:
+    - modules/zerotier/install.yml
     
   - name: nerdfonts
     type: includes
