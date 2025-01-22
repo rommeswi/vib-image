@@ -9,8 +9,8 @@ commands:
 - rm -r zerotier
 modules:
 - name: make-deps
-    type: apt
-    source:
-      packages:
-      - make
-      - git
+  type: apt
+  source:
+    packages:
+    - make
+    - git
