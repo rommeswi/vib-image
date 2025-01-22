@@ -13,11 +13,12 @@ modules:
   type: apt
   source:
     packages:
-    - make
+    - build-essential
+    - clang
     - git
-    - gcc
-    - g++
     - cargo
     - pkg-config
     - openssl
     - libssl-dev
+    - libminiupnpc-dev
+    - libnatpmp-dev
