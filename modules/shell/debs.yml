@@ -6,3 +6,4 @@ source:
   - zsh
   - eza
   - ranger
+  - cron
