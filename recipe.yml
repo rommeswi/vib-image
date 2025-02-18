@@ -27,12 +27,12 @@ stages:
   - name: lab-packages
     type: apt
     sources:
-      packages:
-      - vim
-      - git
-      - wl-clipboard
-      - openssh-client
-      - linux-headers-amd64
+      - packages:
+        - vim
+        - git
+        - wl-clipboard
+        - openssh-client
+        - linux-headers-amd64
 
   - name: zerotier
     type: includes
