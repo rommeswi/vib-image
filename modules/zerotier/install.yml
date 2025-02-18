@@ -11,7 +11,7 @@ commands:
 modules:
 - name: make-deps
   type: apt
-  source:
+  sources:
     packages:
     - build-essential
     - clang

@@ -1,6 +1,6 @@
 name: python-packages
 type: apt
-source:
+sources:
   packages:
   # Virtual Environments
   - python3-venv

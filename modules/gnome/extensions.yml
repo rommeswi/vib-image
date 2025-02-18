@@ -6,7 +6,7 @@ commands:
 modules:
 - name: extension-requirements
   type: apt
-  source:
+  sources:
     packages:
     - yq
     - jq

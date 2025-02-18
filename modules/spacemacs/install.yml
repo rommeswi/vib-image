@@ -1,5 +1,5 @@
 name: spacemacs-install
 type: apt
-source:
+sources:
   packages:
   - emacs-pgtk

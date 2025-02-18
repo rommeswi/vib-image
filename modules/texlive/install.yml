@@ -1,4 +1,4 @@
 name: texlive-packages
 type: apt
-source:
+sources:
   packages:
