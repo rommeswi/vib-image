@@ -26,7 +26,7 @@ stages:
 
   - name: lab-packages
     type: apt
-    source:
+    sources:
       packages:
       - vim
       - git
