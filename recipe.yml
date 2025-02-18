@@ -34,46 +34,46 @@ stages:
         - openssh-client
         - linux-headers-amd64
 
-  - name: zerotier
-    type: includes
-    includes:
-    - modules/zerotier/install.yml
-          
-  - name: shell-config
-    type: includes
-    includes:
-    - modules/shell/debs.yml
-    - modules/shell/config.yml
-      
-  - name: gnome-config
-    type: includes
-    includes:
-    - modules/gnome/debs.yml
-    - modules/gnome/extensions.yml
-    - modules/gnome/config.yml
-
-  - name: nerdfonts
-    type: includes
-    includes:
-    - modules/nerdfonts/install.yml
-
-  - name: neovim
-    type: includes
-    includes:
-    - modules/neovim/install.yml
-    - modules/neovim/config.yml
-
-  - name: python
-    type: includes
-    includes:
-    - modules/python/install.yml
-    #- modules/python/config.yml
-
-  - name: spacemacs
-    type: includes
-    includes:
-    - modules/spacemacs/install.yml
-    - modules/spacemacs/config.yml
+# - name: zerotier
+#   type: includes
+#   includes:
+#   - modules/zerotier/install.yml
+#         
+# - name: shell-config
+#   type: includes
+#   includes:
+#   - modules/shell/debs.yml
+#   - modules/shell/config.yml
+#     
+# - name: gnome-config
+#   type: includes
+#   includes:
+#   - modules/gnome/debs.yml
+#   - modules/gnome/extensions.yml
+#   - modules/gnome/config.yml
+#
+# - name: nerdfonts
+#   type: includes
+#   includes:
+#   - modules/nerdfonts/install.yml
+#
+# - name: neovim
+#   type: includes
+#   includes:
+#   - modules/neovim/install.yml
+#   - modules/neovim/config.yml
+#
+# - name: python
+#   type: includes
+#   includes:
+#   - modules/python/install.yml
+#   #- modules/python/config.yml
+#
+# - name: spacemacs
+#   type: includes
+#   includes:
+#   - modules/spacemacs/install.yml
+#   - modules/spacemacs/config.yml
  
   #    - modules/71-superproductivity.yml
 
