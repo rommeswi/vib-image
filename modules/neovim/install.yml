@@ -18,3 +18,4 @@ modules:
     - fzf
     - ripgrep
     - fd-find
+    - nodejs
