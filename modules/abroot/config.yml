@@ -1,5 +1,5 @@
 name: add-image-name
 type: shell
 commands:
-- sh -c 'set -e; IMAGE_NAME="$(cat /image-info/image-name)"; echo "custom image name: $IMAGE_NAME"; IMAGE_NAME_ESCAPED="$(echo "$IMAGE_NAME" | sed "s|/|\\\\/|g")"; sed -i "s|changed_automatically_by_vib|$IMAGE_NAME_ESCAPED|g" /usr/share/abroot/abroot.json; rm -rf /image-info'
+  - sh -c 'set -e; IMAGE_NAME="$(cat /image-info/image-name)"; echo "custom image name: $IMAGE_NAME"; IMAGE_NAME_ESCAPED="$(echo "$IMAGE_NAME" | sed "s|/|\\\\/|g")"; sed -i "s|changed_automatically_by_vib|$IMAGE_NAME_ESCAPED|g" /usr/share/abroot/abroot.json; rm -rf /image-info'
 
