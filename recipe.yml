@@ -27,7 +27,7 @@ stages:
   - name: lab-packages
     type: apt
     sources:
-    - packages:
+      packages:
       - vim
       - git
       - wl-clipboard
