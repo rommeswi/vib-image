@@ -1,6 +1,6 @@
 name: icons-install
 type: dpkg
-sources:
+source:
 $ sudo dpkg -i /path/to/ocs-url*.deb # need to fix this
 modules:
 - name: icon-requirements
