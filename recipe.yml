@@ -33,6 +33,13 @@ stages:
       - openssh-client
       - linux-headers-amd64
 
+  - name: gnome-config
+    type: includes
+    includes:
+    - modules/gnome/debs.yml
+    - modules/gnome/extensions.yml
+    - modules/gnome/config.yml
+
   - name: zerotier
     type: includes
     includes:
