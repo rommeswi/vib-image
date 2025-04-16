@@ -10,7 +10,7 @@ source:
 modules:
   - name: build-deps
     type: apt
-    sources:
+    source:
     - packages:
       - jq
       - make

@@ -1,6 +1,6 @@
 name: shell-debs
 type: apt
-sources:
+source:
 - packages:
   - kitty
   - zsh

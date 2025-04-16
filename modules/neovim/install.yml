@@ -11,7 +11,7 @@ commands:
 modules:
 - name: neovim-requirements
   type: apt
-  sources:
+  source:
   - packages:
     - curl
     - tar

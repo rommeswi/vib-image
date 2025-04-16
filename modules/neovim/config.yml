@@ -7,6 +7,6 @@ commands:
 plugins:
 - name: neovim-config-requirements
   type: apt
-  sources:
+  source:
   - packages:
     - git
