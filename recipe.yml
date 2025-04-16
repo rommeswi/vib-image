@@ -33,6 +33,11 @@ stages:
       - openssh-client
       - linux-headers-amd64
 
+  - name: zerotier
+    type: includes
+    includes:
+    - modules/zerotier/install.yml
+
   - name: nerdfonts
     type: includes
     includes:
