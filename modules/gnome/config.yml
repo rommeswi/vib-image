@@ -7,6 +7,6 @@ commands:
 plugins:
 - name: gnome-config-req
   type: apt
-  sources:
+  source:
     - packages:
       - wget
