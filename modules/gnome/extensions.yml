@@ -7,7 +7,7 @@ modules:
 - name: extension-requirements
   type: apt
   source:
-  - packages:
+    packages:
     - yq
     - jq
     - unzip
