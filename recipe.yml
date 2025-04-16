@@ -33,6 +33,12 @@ stages:
       - openssh-client
       - linux-headers-amd64
 
+  - name: python
+    type: includes
+    includes:
+    - modules/python/install.yml
+    #- modules/python/config.yml
+
   - name: spacemacs
     type: includes
     includes:
