@@ -3,15 +3,15 @@ type: make
 buildCommand: "echo TOTP-extension-installation"
 installCommand: "make install -d"
 source:
-  - type: git
-    url: https://github.com/dkosmari/gnome-shell-extension-totp
-    branch: master
-    commit: latest
+  type: git
+  url: https://github.com/dkosmari/gnome-shell-extension-totp
+  branch: master
+  commit: latest
 modules:
   - name: build-deps
     type: apt
     source:
-    - packages:
+      packages:
       - jq
       - make
       - git

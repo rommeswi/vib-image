@@ -8,5 +8,5 @@ plugins:
 - name: neovim-config-requirements
   type: apt
   source:
-  - packages:
+    packages:
     - git

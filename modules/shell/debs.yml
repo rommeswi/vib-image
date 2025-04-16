@@ -1,7 +1,7 @@
 name: shell-debs
 type: apt
 source:
-- packages:
+  packages:
   - kitty
   - zsh
   - eza

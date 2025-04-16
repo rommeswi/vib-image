@@ -8,7 +8,7 @@ stages:
     maintainer: self-maintained # Optionally, Replace this with your name
   args:
     DEBIAN_FRONTEND: noninteractive # Set the image environment as non-interactive
-  
+
   # Commands to run first before building the modules
   runs:
     commands:
@@ -26,7 +26,7 @@ stages:
   - name: lab-packages
     type: apt
     source:
-    - packages:
+      packages:
       - vim
       - git
       - wl-clipboard
@@ -57,8 +57,8 @@ stages:
       - name: remove-prev-fsguard
         type: shell
         commands:
-          - rm -rf /FsGuard 
-          - rm -f ./minisign.pub ./minisign.key 
+          - rm -rf /FsGuard
+          - rm -f ./minisign.pub ./minisign.key
           - chmod +x /usr/sbin/init
 
   - name: cleanup2
