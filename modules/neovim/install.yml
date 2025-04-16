@@ -1,7 +1,7 @@
 name: neovim-install
 type: shell
 commands:
-- curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
+- curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
 - mkdir -p /tmp
 - tar -C /tmp -xzf nvim-linux64.tar.gz
 - cd /tmp/nvim-linux64/
