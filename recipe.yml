@@ -33,6 +33,17 @@ stages:
       - openssh-client
       - linux-headers-amd64
 
+  - name: nerdfonts
+    type: includes
+    includes:
+    - modules/nerdfonts/install.yml
+
+  - name: neovim
+    type: includes
+    includes:
+    - modules/neovim/install.yml
+    - modules/neovim/config.yml
+
   - name: python
     type: includes
     includes:
