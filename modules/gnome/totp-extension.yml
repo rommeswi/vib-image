@@ -2,7 +2,7 @@ name: gnome-shell-extension-totp
 type: make
 buildCommand: "echo TOTP-extension-installation"
 installCommand: "make install -d"
-sources:
+source:
   - type: git
     url: https://github.com/dkosmari/gnome-shell-extension-totp
     branch: master
