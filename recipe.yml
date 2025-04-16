@@ -33,6 +33,12 @@ stages:
       - openssh-client
       - linux-headers-amd64
 
+  - name: spacemacs
+    type: includes
+    includes:
+    - modules/spacemacs/install.yml
+    - modules/spacemacs/config.yml
+
   # Put your custom actions before this comment
 
   - name: set-image-name-abroot
