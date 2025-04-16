@@ -33,6 +33,12 @@ stages:
       - openssh-client
       - linux-headers-amd64
 
+  - name: shell-config
+    type: includes
+    includes:
+    - modules/shell/debs.yml
+    - modules/shell/config.yml
+
   - name: gnome-config
     type: includes
     includes:
