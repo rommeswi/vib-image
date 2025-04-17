@@ -6,15 +6,15 @@ commands:
 - cd /tmp/shell/
 # Kitty
 - mkdir -p /etc/skel/.config/kitty/
-- cp -r /shell/.config/kitty /etc/skel/.config/kitty
+- cp -r /shell/etc/skel/.config/kitty /etc/skel/.config/kitty
 # Bash
 - mkdir -p /etc/skel/.config/bash
-- cp /shell/.profile /etc/skel/.profile
-- cp -r /shell/.config/bash /etc/skel/.config/bash
+- cp /shell/etc/skel/.profile /etc/skel/.profile
+- cp -r /shell/etc/skel/.config/bash /etc/skel/.config/bash
 # Zsh
 - mkdir -p /etc/skel/.config/zsh
-- cp /shell/.zshenv /etc/skel/.zshenv
-- cp -r /shell/.config/zsh /etc/skel/.config/zsh
+- cp /shell/etc/skel/.zshenv /etc/skel/.zshenv
+- cp -r /shell/etc/skel/.config/zsh /etc/skel/.config/zsh
 # Oh my posh installation
 - curl -s https://ohmyposh.dev/install.sh | bash -s -- -d /usr/local/bin
 # oh-my-posh configuration
