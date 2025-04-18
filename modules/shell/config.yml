@@ -4,23 +4,14 @@ commands:
 # Set working dir
 - mkdir -p /tmp/shell/
 - cd /tmp/shell/
-# Kitty
-- mkdir -p /etc/skel/.config/kitty/
-- cp -r /shell/etc/skel/.config/kitty /etc/skel/.config/kitty
-# Bash
-- mkdir -p /etc/skel/.config/bash
-- cp /shell/etc/skel/.profile /etc/skel/.profile
-- cp -r /shell/etc/skel/.config/bash /etc/skel/.config/bash
-# Zsh
-- mkdir -p /etc/skel/.config/zsh
-- cp /shell/etc/skel/.zshenv /etc/skel/.zshenv
-- cp -r /shell/etc/skel/.config/zsh /etc/skel/.config/zsh
+# Copy structure of /etc/skel
+- mkdir -p /etc/skel/
+- cp -rf /shell/etc/skel /etc/skel
 # Oh my posh installation
 - curl -s https://ohmyposh.dev/install.sh | bash -s -- -d /usr/local/bin
 # oh-my-posh configuration
 - mkdir -p /etc/skel/.config/zsh/oh-my-posh/themes
 - cp -r /root/.cache/oh-my-posh/themes /etc/skel/.config/zsh/oh-my-posh/themes
-- cp /shell/omp-config.json /etc/skel/.config/zsh/oh-my-posh/config.json
 # Install Prezto
 - git clone --recursive https://github.com/sorin-ionescu/prezto.git /etc/skel/.config/zsh/.zprezto
 # Install zpm-zsh ls plugin
@@ -37,7 +28,8 @@ commands:
 - git submodule update --init --recursive
 - cd /tmp/shell/
 # Install eza tokyonight theme
-- git clone https://github.com/eza-community/eza-themes.git /tmp/eza-themes
+- git clone https://github.com/eza-community/eza-themes.git /tmp/shell/eza-themes
 - mkdir -p /etc/skel/.config/eza
-- cp /tmp/eza-themes/themes/tokyonight.yml /etc/skel/.config/eza/theme.yml
+- cp /tmp/shell/eza-themes/themes/tokyonight.yml /etc/skel/.config/eza/theme.yml
 - rm -rf /shell
+- rm -rf /tmp/shell
