@@ -19,7 +19,7 @@ commands:
 # Improved ls commands
 - git submodule add https://github.com/zpm-zsh/ls.git modules/ls
 # Replace ls with eza:
-- git submodule update https://github.com/z-shell/zsh-eza.git
+- git submodule add https://github.com/z-shell/zsh-eza.git
 # zcolors
 - git submodule add https://github.com/marlonrichert/zcolors.git modules/zcolors
 # zsh-help
