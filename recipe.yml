@@ -29,6 +29,7 @@ stages:
       packages:
       - vim
       - git
+      - meld
       - wl-clipboard
       - openssh-client
       - linux-headers-amd64
