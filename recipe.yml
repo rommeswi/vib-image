@@ -38,7 +38,7 @@ stages:
     type: apt
     source:
       packages:
-      - fuse
+      - libfuse2t64
 
   - name: shell-config
     type: includes
