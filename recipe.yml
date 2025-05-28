@@ -34,6 +34,12 @@ stages:
       - openssh-client
       - linux-headers-amd64
 
+  - name: studio-recording
+    type: apt
+    source:
+      packages:
+      - fuse
+
   - name: shell-config
     type: includes
     includes:
