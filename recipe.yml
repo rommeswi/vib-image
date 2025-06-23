@@ -34,17 +34,26 @@ stages:
       - openssh-client
       - linux-headers-amd64
 
+  - name: shell-config
+    type: includes
+    includes:
+    - modules/shell/debs.yml
+    - modules/shell/config.yml
+
+# Streaming and video recording (OBS)
+
   - name: studio-recording
     type: apt
     source:
       packages:
       - libfuse2t64
 
-  - name: shell-config
+# Fonts and Beautyfication
+
+  - name: nerdfonts
     type: includes
     includes:
-    - modules/shell/debs.yml
-    - modules/shell/config.yml
+    - modules/nerdfonts/install.yml
 
   - name: gnome-config
     type: includes
@@ -53,15 +62,22 @@ stages:
     - modules/gnome/extensions.yml
     - modules/gnome/config.yml
 
+# For using Logitech mice like MX Master
+
+  - name: logitech-config
+    type: apt
+    source:
+      packages:
+      - solaar
+
+# For remote desktop (external IP)
+
   - name: zerotier
     type: includes
     includes:
     - modules/zerotier/install.yml
 
-  - name: nerdfonts
-    type: includes
-    includes:
-    - modules/nerdfonts/install.yml
+# Editors and programming
 
   - name: neovim
     type: includes
