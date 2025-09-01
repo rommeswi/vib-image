@@ -7,8 +7,8 @@ commands:
 - INSTALL_DIR=\"/usr/local/bin\"
 - echo \"Fetching latest release...\"
 - LATEST_RELEASE_URL=$(curl -s \"https://api.github.com/repos/$REPO/releases/latest\" | jq -r \".assets[] | select(.name==\"$FILE_NAME\") | .browser_download_url\")
-- if [[ -z \"$LATEST_RELEASE_URL\" ]]; then echo \"Error: Could not find the latest release URL.\" exit 1 fi
-- echo \"Latest release URL: $LATEST_RELEASE_URL\"
+- if [[ -z \"$LATEST_RELEASE_URL\" ]]; then echo \"Error Could not find the latest release URL.\" exit 1 fi
+- echo \"Latest release URL is $LATEST_RELEASE_URL\"
 - echo \"Downloading $FILE_NAME...\"
 - curl -L -o \"$FILE_NAME\" \"$LATEST_RELEASE_URL\"
 - echo \"Extracting files...\"
