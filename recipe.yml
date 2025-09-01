@@ -89,7 +89,7 @@ stages:
     type: includes
     includes:
     - modules/python/install.yml
-    #- modules/python/config.yml
+    - modules/python/config.yml
 
   - name: spacemacs
     type: includes
