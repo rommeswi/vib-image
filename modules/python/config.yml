@@ -7,7 +7,7 @@ commands:
 - INSTALL_DIR=/usr/local/bin
 - TARGET_URL=https://google.com
 - echo \"Fetching latest release of $FILE_NAME ...\"
-- wget -v \"$TARGET_URL\"
+- echo -n "$TARGET_URL" | od -c
 modules:
 - name: diagnostic-requirements
   type: apt
