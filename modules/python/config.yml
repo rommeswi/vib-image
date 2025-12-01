@@ -8,3 +8,17 @@ commands:
 - echo \"Fetching latest release...\"
 - LATEST_RELEASE_URL=$(curl -s \"https://api.github.com/repos/$REPO/releases/latest\" | jq -r --arg FILE \"$FILE_NAME\" '.assets[] | select(.name==$FILE) | .browser_download_url')
 - echo \"$LATEST_RELEASE_URL\"
+- if [ -z \"$LATEST_RELEASE_URL\" ]; then echo \"Error Could not find the latest release URL.\"; exit 1; fi
+- echo \"Latest release URL is $LATEST_RELEASE_URL\"
+- echo \"Downloading $FILE_NAME...\"
+- curl -L -o \"$FILE_NAME\" \"$LATEST_RELEASE_URL\"
+- echo \"Extracting files...\"
+- tar -xzf \"$FILE_NAME\" uv uvx
+- echo \"Installing binaries to $INSTALL_DIR...\"
+- mv uv uvx \"$INSTALL_DIR\"
+- echo \"Cleaning up...\"
+- rm \"$FILE_NAME\"
+- echo \"Verifying installation...\"
+- if command -v uv &> /dev/null && command -v uvx &> /dev/null; then echo \"Installation successful!\" else echo \"Installation failed. Please check manually.\"
+- fi
+
