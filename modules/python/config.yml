@@ -3,9 +3,9 @@ type: shell
 commands:
 - echo \"Installing astral-sh/uv\"
 - ln -s /usr/bin/python3 /usr/bin/python
-- REPO=\"astral-sh/uv\"
-- FILE_NAME=\"uv-x86_64-unknown-linux-gnu.tar.gz\"
-- INSTALL_DIR=\"/usr/local/bin\"
+- REPO=astral-sh/uv
+- FILE_NAME=uv-x86_64-unknown-linux-gnu.tar.gz
+- INSTALL_DIR=/usr/local/bin
 - echo \"Fetching latest release of $FILE_NAME ...\"
 - LATEST_RELEASE_URL=$(curl -s \"https://api.github.com/repos/$REPO/releases/latest\" | jq -r --arg FILE \"$FILE_NAME\" '.assets[] | select(.name==$FILE) | .browser_download_url')
 - echo \"$LATEST_RELEASE_URL\"
