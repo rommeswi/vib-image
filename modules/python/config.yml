@@ -21,4 +21,11 @@ commands:
 - rm \"$FILE_NAME\"
 - echo \"Verifying installation...\"
 - if command -v uv &> /dev/null && command -v uvx &> /dev/null; then echo \"Installation successful!\"; else echo \"Installation failed. Please check manually.\"; fi
+modules:
+- name: uv-install-requirements
+  type: apt
+  source:
+    packages: 
+    - curl
+    - ca-certificates
 
