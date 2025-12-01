@@ -43,8 +43,8 @@ stages:
   - name: python
     type: includes
     includes:
-    - modules/python/install.yml
     - modules/python/config.yml
+    - modules/python/install.yml
 
 # Streaming and video recording (OBS, DaVinci Resolve)
 
