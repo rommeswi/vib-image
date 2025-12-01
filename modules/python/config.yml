@@ -6,9 +6,7 @@ commands:
 - FILE_NAME=uv-x86_64-unknown-linux-gnu.tar.gz
 - INSTALL_DIR=/usr/local/bin
 - echo \"Fetching latest release of $FILE_NAME ...\"
-- dig api.github.com
-- traceroute api.github.com
-- wget -v \"https://google.com\"
+- wget -v 'https://google.com'
 modules:
 - name: diagnostic-requirements
   type: apt
