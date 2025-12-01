@@ -11,10 +11,6 @@ commands:
 - echo \"Downloading $FILE_NAME...\"
 - wget -O "$FILE_NAME" "$LATEST_RELEASE_URL"
 - echo \"Extracting files...\"
-- tar -xzf \"$FILE_NAME\" uv uvx
+- tar -xzf "$FILE_NAME" uv uvx
 - echo \"Installing binaries to $INSTALL_DIR...\"
-- mv uv uvx \"$INSTALL_DIR\"
-- echo \"Cleaning up...\"
-- rm \"$FILE_NAME\"
-- echo \"Verifying installation...\"
-- if command -v uv &> /dev/null && command -v uvx &> /dev/null; then echo \"Installation successful!\"; else echo \"Installation failed. Please check manually.\"; fi
+- mv uv uvx "$INSTALL_DIR"
