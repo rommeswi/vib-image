@@ -7,7 +7,7 @@ commands:
 - INSTALL_DIR=/usr/local/bin
 - echo \"Fetching latest release of $FILE_NAME ...\"
 - wget -v 'https://api.github.com/repos/astral-sh/uv/releases/latest'
-- LATEST_RELEASE_URL=$(wget -qO 'https://api.github.com/repos/astral-sh/uv/releases/latest' | jq -r --arg FILE 'uv-x86_64-unknown-linux-gnu.tar.gz' '.assets[] | select(.name==$FILE) | .browser_download_url')
+- LATEST_RELEASE_URL=$(wget -qO - 'https://api.github.com/repos/astral-sh/uv/releases/latest' | jq -r '.assets[] | select(.name==\"$FILE_NAME\") | .browser_download_url')
 - echo \"Latest release URL is $LATEST_RELEASE_URL\"
 - echo \"Downloading $FILE_NAME...\"
 - wget -qO "$FILE_NAME" "$LATEST_RELEASE_URL"
