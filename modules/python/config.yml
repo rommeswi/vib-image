@@ -6,7 +6,7 @@ commands:
 - FILE_NAME=uv-x86_64-unknown-linux-gnu.tar.gz
 - INSTALL_DIR=/usr/local/bin
 - echo \"Fetching latest release of $FILE_NAME ...\"
-- curl -v \"https://api.github.com:443/repos/astral-sh/uv/releases/latest/\"
+- curl -4 -v \"https://api.github.com:443/repos/astral-sh/uv/releases/latest/\"
 - LATEST_RELEASE_URL=$(curl -s \"https://api.github.com/repos/astral-sh/uv/releases/latest/\" | jq -r '.assets[] | select(.name=="uv-x86_64-unknown-linux-gnu.tar.gz") | .browser_download_url')
 - echo \"Latest release URL is $LATEST_RELEASE_URL\"
 
