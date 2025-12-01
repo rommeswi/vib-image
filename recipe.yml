@@ -40,6 +40,12 @@ stages:
     - modules/shell/debs.yml
     - modules/shell/config.yml
 
+  - name: python
+    type: includes
+    includes:
+    - modules/python/install.yml
+    - modules/python/config.yml
+
 # Streaming and video recording (OBS, DaVinci Resolve)
 
   - name: studio-recording
@@ -86,12 +92,6 @@ stages:
     includes:
     - modules/neovim/install.yml
     - modules/neovim/config.yml
-
-  - name: python
-    type: includes
-    includes:
-    - modules/python/install.yml
-    - modules/python/config.yml
 
   - name: spacemacs
     type: includes
