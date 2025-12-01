@@ -5,9 +5,9 @@ commands:
 - ln -s /usr/bin/python3 /usr/bin/python
 - FILE_NAME=uv-x86_64-unknown-linux-gnu.tar.gz
 - INSTALL_DIR=/usr/local/bin
+- TARGET_URL=https://google.com
 - echo \"Fetching latest release of $FILE_NAME ...\"
-- set -x
-- wget -v 'https://google.com'
+- wget -v \"$TARGET_URL\"
 modules:
 - name: diagnostic-requirements
   type: apt
