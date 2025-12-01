@@ -5,13 +5,6 @@ commands:
 - ln -s /usr/bin/python3 /usr/bin/python
 - FILE_NAME=uv-x86_64-unknown-linux-gnu.tar.gz
 - INSTALL_DIR=/usr/local/bin
-- TARGET_URL=https://google.com
 - echo \"Fetching latest release of $FILE_NAME ...\"
-- echo -n "$TARGET_URL" | od -c
-modules:
-- name: diagnostic-requirements
-  type: apt
-  source:
-    packages:
-    - traceroute
-    - dnsutils
+- LATEST_RELEASE_URL=$(wget -q0 'https://api.github.com/repos/astral-sh/uv/releases/latest' | jq -r '.assets[] | select(.name=="uv-x86_64-unknown-linux-gnu.tar.gz") | .browser_download_url')
+- echo \"Latest release URL is $LATEST_RELEASE_URL\"
