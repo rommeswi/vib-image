@@ -8,7 +8,7 @@ commands:
 - echo \"Fetching latest release of $FILE_NAME ...\"
 - dig api.github.com
 - traceroute api.github.com
-- curl -v \"https\://google.com\"
+- wget -v \"https://google.com\"
 modules:
 - name: diagnostic-requirements
   type: apt
