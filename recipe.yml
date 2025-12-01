@@ -40,13 +40,15 @@ stages:
     - modules/shell/debs.yml
     - modules/shell/config.yml
 
-# Streaming and video recording (OBS)
+# Streaming and video recording (OBS, DaVinci Resolve)
 
   - name: studio-recording
     type: apt
     source:
       packages:
       - libfuse2t64
+      - rocm-podman-support
+      - lshw
 
 # Fonts and Beautyfication
 
