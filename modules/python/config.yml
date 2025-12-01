@@ -11,6 +11,6 @@ commands:
 - echo \"Downloading $FILE_NAME...\"
 - wget -qO "$FILE_NAME" "$LATEST_RELEASE_URL"
 - echo \"Extracting files...\"
-- tar -xzf "$FILE_NAME" uv uvx
+- tar --strip-components=1 -xzf "$FILE_NAME" uv uvx
 - echo \"Installing binaries to $INSTALL_DIR...\"
 - mv uv uvx "$INSTALL_DIR"
