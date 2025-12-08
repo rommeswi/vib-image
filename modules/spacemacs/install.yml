@@ -2,4 +2,12 @@ name: spacemacs-install
 type: apt
 source:
   packages:
-  - emacs-pgtk
+  - emacs-pgtk # for wayland
+  - autoconf # this and all remaining for epdf builder
+  - automake
+  - gcc
+  - libpng-dev
+  - make
+  - libpoppler-dev
+  - libpoppler-glib-dev
+  - zlib1g-dev
