@@ -6,7 +6,6 @@ source:
   - gir1.2-handy-1
   - gnome-shell-extensions
   - gnome-shell-extension-prefs
-  - gnome-shell-extension-easyscreencast
   - gnome-shell-extension-gpaste
   - gnome-shell-extension-system-monitor
   - gnome-shell-extension-gsconnect
