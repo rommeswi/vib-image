@@ -32,6 +32,12 @@ stages:
       - emacs-pgtk
       - vim
 
+  - name: install-claude-code
+    type: shell
+    commands:
+    - apt-get install -y nodejs npm
+    - npm install -g @anthropic-ai/claude-code
+
   # Put your custom actions before this comment
 
   - name: set-image-name-abroot

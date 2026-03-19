@@ -1,0 +1,221 @@
+{
+    "browsers": [
+        {
+            "name": "Firefox",
+            "id": "org.mozilla.firefox"
+        },
+        {
+            "name": "Zen",
+            "id": "app.zen_browser.zen",
+            "active": false
+        },
+        {
+            "name": "Brave Browser",
+            "id": "com.brave.Browser",
+            "active": false
+        },
+        {
+            "name": "Chromium",
+            "id": "org.chromium.Chromium",
+            "active": false
+        }
+    ],
+    "core": [
+        {
+            "name": "Audio Player",
+            "id": "org.gnome.Decibels"
+        },
+        {
+            "name": "Calculator",
+            "id": "org.gnome.Calculator"
+        },
+        {
+            "name": "Calendar",
+            "id": "org.gnome.Calendar"
+        },
+        {
+            "name": "Characters",
+            "id": "org.gnome.Characters"
+        },
+        {
+            "name": "Clocks",
+            "id": "org.gnome.clocks"
+        },
+        {
+            "name": "Connections",
+            "id": "org.gnome.Connections"
+        },
+        {
+            "name": "Contacts",
+            "id": "org.gnome.Contacts"
+        },
+        {
+            "name": "Disk Usage Analyzer",
+            "id": "org.gnome.baobab"
+        },
+        {
+            "name": "Document Scanner",
+            "id": "org.gnome.SimpleScan"
+        },
+        {
+            "name": "Document Viewer",
+            "id": "org.gnome.Papers"
+        },
+        {
+            "name": "File Roller",
+            "id": "org.gnome.FileRoller"
+        },
+        {
+            "name": "Fonts",
+            "id": "org.gnome.font-viewer"
+        },
+        {
+            "name": "Image Viewer",
+            "id": "org.gnome.Loupe"
+        },
+        {
+            "name": "Logs",
+            "id": "org.gnome.Logs"
+        },
+        {
+            "name": "Maps",
+            "id": "org.gnome.Maps"
+        },
+        {
+            "name": "Photos",
+            "id": "org.gnome.Photos"
+        },
+        {
+            "name": "Snapshot",
+            "id": "org.gnome.Snapshot"
+        },
+        {
+            "name": "Text Editor",
+            "id": "org.gnome.TextEditor"
+        },
+        {
+            "name": "Videos",
+            "id": "org.gnome.Showtime"
+        },
+        {
+            "name": "Weather",
+            "id": "org.gnome.Weather"
+        },
+        {
+            "name": "VSCodium",
+            "id": "com.vscodium.codium"
+        },
+        {
+            "name": "PyCharm Community",
+            "id": "com.jetbrains.PyCharm-Community"
+        },
+        {
+            "name": "Postman",
+            "id": "com.getpostman.Postman"
+        },
+        {
+            "name": "Xournal++",
+            "id": "com.github.xournalpp.xournalpp"
+        },
+        {
+            "name": "Obsidian",
+            "id": "md.obsidian.Obsidian"
+        },
+        {
+            "name": "Okular",
+            "id": "org.kde.okular"
+        }
+    ],
+    "utilities": [
+        {
+            "name": "Boxes",
+            "id": "org.gnome.Boxes"
+        },
+        {
+            "name": "D\u00e9j\u00e0 Dup Backups",
+            "id": "org.gnome.DejaDup"
+        },
+        {
+            "name": "Sound Recorder",
+            "id": "org.gnome.SoundRecorder"
+        },
+        {
+            "name": "Extension Manager",
+            "id": "com.mattjakeman.ExtensionManager"
+        },
+        {
+            "name": "VLC",
+            "id": "org.videolan.VLC"
+        },
+        {
+            "name": "Spotify",
+            "id": "com.spotify.Client"
+        },
+        {
+            "name": "OBS Studio",
+            "id": "com.obsproject.Studio"
+        },
+        {
+            "name": "GIMP",
+            "id": "org.gimp.GIMP"
+        },
+        {
+            "name": "Krita",
+            "id": "org.kde.krita"
+        },
+        {
+            "name": "Blender",
+            "id": "org.blender.Blender"
+        },
+        {
+            "name": "GitHub Desktop",
+            "id": "io.github.shiftey.Desktop"
+        },
+        {
+            "name": "Gitg",
+            "id": "org.gnome.gitg"
+        },
+        {
+            "name": "Bitwarden",
+            "id": "com.bitwarden.desktop"
+        },
+        {
+            "name": "Solaar",
+            "id": "io.github.pwr_solaar.solaar"
+        },
+        {
+            "name": "Hamster",
+            "id": "org.gnome.Hamster"
+        }
+    ],
+    "office": [
+        {
+            "name": "Zotero",
+            "id": "org.zotero.Zotero"
+        },
+        {
+            "name": "JabRef",
+            "id": "org.jabref.jabref"
+        },
+        {
+            "name": "Zoom",
+            "id": "us.zoom.Zoom"
+        },
+        {
+            "name": "Discord",
+            "id": "com.discordapp.Discord"
+        },
+        {
+            "name": "Alpaca",
+            "id": "com.jeffser.Alpaca"
+        },
+        {
+            "name": "ZapZap",
+            "id": "com.rtosta.zapzap"
+        },
+        {
+            "name": "Betterbird",
+            "id": "eu.betterbird.Betterbird"
+        }
+    ]
+}
