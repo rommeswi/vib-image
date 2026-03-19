@@ -1,0 +1,12 @@
+name: neovim-config
+type: shell
+commands: 
+- git clone https://github.com/LazyVim/starter /etc/skel/.config/nvim
+- cp -rf /neovim/etc/skel /etc/skel
+- rm -rf /neovim
+plugins:
+- name: neovim-config-requirements
+  type: apt
+  source:
+    packages:
+    - git

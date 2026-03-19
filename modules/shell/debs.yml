@@ -1,0 +1,9 @@
+name: shell-debs
+type: apt
+source:
+  packages:
+  - kitty
+  - zsh
+  - eza
+  - ranger
+  - cron

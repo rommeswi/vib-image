@@ -1,0 +1,4 @@
+name: texlive-config
+type: shell
+commands:
+- echo "Texlive installed."

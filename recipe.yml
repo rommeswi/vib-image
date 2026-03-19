@@ -1,5 +1,5 @@
-name: Custom Vanilla Desktop # Replace this name with your image name
-id: custom # Replace this ID with your image ID
+name: lab # Replace this name with your image name
+id: lab # Replace this ID with your image ID
 stages:
 - id: build
   base: ghcr.io/vanilla-os/desktop:main # Optionally, Replace this image URL with a different one i.e. nvidia:main, etc
@@ -8,7 +8,7 @@ stages:
     maintainer: self-maintained # Optionally, Replace this with your name
   args:
     DEBIAN_FRONTEND: noninteractive # Set the image environment as non-interactive
-  
+
   # Commands to run first before building the modules
   runs:
     commands:
@@ -23,14 +23,81 @@ stages:
 
   # Put your custom actions behind this comment
 
-  - name: example-packages # Sample module using the built-in Apt module to install packages
+  - name: lab-packages
     type: apt
     source:
       packages:
-      - zsh
-      - kitty
-      - emacs-pgtk
       - vim
+      - git
+      - meld
+      - wl-clipboard
+      - openssh-client
+      - linux-headers-amd64
+
+  - name: shell-config
+    type: includes
+    includes:
+    - modules/shell/debs.yml
+    - modules/shell/config.yml
+
+# Streaming and video recording (OBS, DaVinci Resolve)
+
+  - name: studio-recording
+    type: apt
+    source:
+      packages:
+      - libfuse2t64
+      - rocm-podman-support
+      - lshw
+
+# Fonts and Beautyfication
+
+  - name: nerdfonts
+    type: includes
+    includes:
+    - modules/nerdfonts/install.yml
+
+  - name: gnome-config
+    type: includes
+    includes:
+    - modules/gnome/debs.yml
+    - modules/gnome/extensions.yml
+    - modules/gnome/config.yml
+
+# For using Logitech mice like MX Master
+
+  - name: logitech-config
+    type: apt
+    source:
+      packages:
+      - solaar
+
+# For remote desktop (external IP)
+
+  - name: zerotier
+    type: includes
+    includes:
+    - modules/zerotier/install.yml
+
+# Editors and programming
+
+  - name: neovim
+    type: includes
+    includes:
+    - modules/neovim/install.yml
+    - modules/neovim/config.yml
+
+  - name: spacemacs
+    type: includes
+    includes:
+    - modules/spacemacs/install.yml
+    - modules/spacemacs/config.yml
+
+  - name: python
+    type: includes
+    includes:
+    - modules/python/install.yml
+    - modules/python/config.yml
 
   - name: install-claude-code
     type: shell
@@ -43,7 +110,7 @@ stages:
   - name: set-image-name-abroot
     type: includes
     includes:
-      - modules/80-set-image-abroot-config.yml
+      - modules/abroot/config.yml
 
   - name: cleanup
     type: shell
@@ -62,8 +129,8 @@ stages:
       - name: remove-prev-fsguard
         type: shell
         commands:
-          - rm -rf /FsGuard 
-          - rm -f ./minisign.pub ./minisign.key 
+          - rm -rf /FsGuard
+          - rm -f ./minisign.pub ./minisign.key
           - chmod +x /usr/sbin/init
 
   - name: cleanup2

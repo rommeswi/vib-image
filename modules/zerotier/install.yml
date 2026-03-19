@@ -1,0 +1,24 @@
+name: zerotier-install
+type: shell
+commands:
+- cd /tmp
+- git clone https://github.com/zerotier/ZeroTierOne.git /tmp/zerotier
+- cd /tmp/zerotier
+- make -f make-linux.mk
+- make -f make-linux.mk install
+- cd /tmp
+- rm -r zerotier
+modules:
+- name: make-deps
+  type: apt
+  source:
+    packages:
+    - build-essential
+    - clang
+    - git
+    - cargo
+    - pkg-config
+    - openssl
+    - libssl-dev
+    - libminiupnpc-dev
+    - libnatpmp-dev

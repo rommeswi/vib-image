@@ -1,15 +1,25 @@
-# Custom Vib Image
+# Vanilla Science Image
 
-This template repository is a starting point for creating custom [Vib images](https://github.com/Vanilla-OS/Vib) on top of the [official Vanilla OS images](https://images.vanillaos.org) like [desktop image](https://github.com/Vanilla-OS/desktop-image). It contains a basic recipe and an example module to get you started.
+This repository builds a custom [Vib image](https://github.com/Vanilla-OS/Vib) on top of the [official Vanilla OS image](https://images.vanillaos.org) like [desktop image](https://github.com/Vanilla-OS/desktop-image).
+The goal of the image is to provide an easy starting point for doing data-driven scientific work. It comes with Emacs and Neovim as editors, python, a selection of useful tools along with a Tokyo night Gnome theme.
 
-> [!TIP]
-> It is suggested to check the [Vib documentation](https://docs.vanillaos.org/collections/vib) to know more about the recipe format, structure of modules and the supported fields.
+## Use the custom image
 
-## Getting Started
+If you already have Vanilla OS installed, just point ABRoot to the custom image to use it:
 
-- First, click on the <kbd>Use this template</kbd> button in the top right corner, then from the drop-down menu select <kbd>Create a new repository</kbd>. This would create a new repository with the same files and directories as this repository.
+- Edit the configuration file with the command: `abroot config-editor`.
+- Change the "name" entry from something like `vanilla-os/desktop` to `rommeswi/vib-image`.  [**Note**: All characters must be in lowercase.]
+- Now, Run `abroot upgrade` to switch to the custom image.
+- You may want to create a new user account to make use of the heavy customization of the user environment.
+
+If you are installing Vanilla OS, select the installation option to use a custom image and supply the image data in the dialogue.
+
+## Modifying the Image
+
+> [!NOTE]
+> If you want to use NVIDIA drivers, you need to change the base image in the recipe.yml from desktop:main to nvidia:main.
+
 - Go to **Settings → Actions → General** and ensure "_Allow all actions and reusable workflows_" are enabled.
-- Now, clone the repository to your local machine and let's start customizing your image. You can also use the GitHub online editor if you prefer.
 - Open the `vib-build.yml` workflow file and replace the custom image name with an image name of your choosing in line 14.
 - Open the `recipe.yml` file and replace the image name and ID with your image name and ID in lines 1 and 2.
 - Now, perform your additions and modifications to the recipe as per your requirements.
@@ -17,16 +27,8 @@ This template repository is a starting point for creating custom [Vib images](ht
 - Optionally, add your modules to the `modules` directory and add them to the package-modules `includes` in `recipe.yml`.
 - You can check the Actions tab in GitHub to see the build progress of your image.
 
-> [!NOTE]
-> It is suggested to add `vib-image` and `vib` tags to your repository for your image to be easily discoverable to others.
-
-## Use your custom image
-
-If your image is successfully built, you can then point ABRoot to your custom image to use it.
-
-- Edit the configuration file with the command: `abroot config-editor`.
-- Change the "name" entry from something like `vanilla-os/desktop` to `your-github-name/your-image-name` (for example `taukakao/custom`).  [**Note**: All characters must be in lowercase.]
-- Now, Run `abroot upgrade` to switch to your custom image.
+> [!TIP]
+> The [Vib documentation](https://docs.vanillaos.org/collections/vib) has more information about recipe format, structure of modules and the supported fields.
 
 ## Explore
 

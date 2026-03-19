@@ -1,0 +1,15 @@
+name: gnome-extensions-installer
+type: shell
+commands:
+- bash /gnome/download-extensions.sh
+- rm -rf /gnome
+modules:
+- name: extension-requirements
+  type: apt
+  source:
+    packages:
+    - yq
+    - jq
+    - unzip
+    - libglib2.0-bin
+    - x11-utils

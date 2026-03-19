@@ -1,0 +1,140 @@
+#
+# Sets Prezto options.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+
+#
+# General
+#
+
+# Set case-sensitivity for completion, history lookup, etc.
+# zstyle ':prezto:*:*' case-sensitive 'yes'
+
+# Color output (auto set to 'no' on dumb terminals).
+zstyle ':prezto:*:*' color 'yes'
+
+# Add additional directories to load prezto modules from
+# zstyle ':prezto:load' pmodule-dirs $HOME/.zprezto-contrib
+
+# Allow module overrides when pmodule-dirs causes module name collisions
+# zstyle ':prezto:load' pmodule-allow-overrides 'yes'
+
+# Set the Zsh modules to load (man zshmodules).
+# zstyle ':prezto:load' zmodule 'attr' 'stat'
+
+# Set the Zsh functions to load (man zshcontrib).
+# zstyle ':prezto:load' zfunction 'zargs' 'zmv'
+
+# Set the Prezto modules to load (browse modules).
+# The order matters.
+zstyle ':prezto:load' pmodule \
+  'editor' \
+  'history' \
+  'directory' \
+  'spectrum' \
+  'git' \
+  'utility' \
+  'completion' \
+  'syntax-highlighting' \
+  'history-substring-search' \
+  'autosuggestions'
+
+#
+# Autosuggestions
+#
+
+#
+# Completion
+#
+
+#
+# Directory
+#
+
+AUTO_CD=1
+
+#
+# Editor
+#
+
+# Set the characters that are considered to be part of a word.
+# zstyle ':prezto:module:editor' wordchars '*?_-.[]~&;!#$%^(){}<>'
+
+# Set the key mapping style to 'emacs' or 'vi'.
+zstyle ':prezto:module:editor' key-bindings 'vi'
+
+#
+# Git
+#
+
+#
+# History
+#
+
+SHARE_HISTORY=1
+
+# Set the maximum  number  of  events  stored  in  the  internal history list.
+zstyle ':prezto:module:history' histsize 10000
+
+# Set the maximum number of history events to save in the history file.
+zstyle ':prezto:module:history' savehist 10000
+
+#
+# History Substring Search
+#
+
+#
+# Spectrum
+#
+
+#
+# Syntax Highlighting
+#
+zstyle ':prezto:module:syntax-highlighting' color 'yes'
+
+# Set syntax highlighters.
+# By default, only the main highlighter is enabled.
+zstyle ':prezto:module:syntax-highlighting' highlighters \
+  'main' \
+  'brackets' \
+  'pattern' \
+  'line' \
+  'cursor' \
+  'root'
+
+# Set syntax highlighting styles.
+zstyle ':prezto:module:syntax-highlighting' styles \
+  'builtin' 'bg=blue' \
+  'command' 'bg=blue' \
+  'function' 'bg=blue'
+
+# Set syntax pattern styles.
+zstyle ':prezto:module:syntax-highlighting' pattern \
+  'rm*-rf*' 'fg=white,bold,bg=red'
+
+#
+# Utility
+#
+
+zstyle ':prezto:module:utility' safe-ops 'no'
+
+#
+# EXTRA PLUGINS START HERE
+#
+
+#
+# ls
+#
+zstyle ':prezto:load' pmodule ls
+
+#
+# zcolors
+#
+zstyle ':prezto:load' pmodule zcolors
+
+#
+# zsh-help
+#
+zstyle ':prezto:load' pmodule zsh-help
