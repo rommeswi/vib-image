@@ -10,8 +10,8 @@ commands:
 # Oh my posh installation
 - curl -s https://ohmyposh.dev/install.sh | bash -s -- -d /usr/local/bin
 # oh-my-posh configuration
-- mkdir -p /etc/skel/.config/zsh/oh-my-posh/themes
-- cp -r /root/.cache/oh-my-posh/themes /etc/skel/.config/zsh/oh-my-posh/themes
+- mkdir -p /etc/skel/.config/oh-my-posh/themes
+- cp -r /root/.cache/oh-my-posh/themes /etc/skel/.config/oh-my-posh/themes
 # Install Prezto
 - git clone --recursive https://github.com/sorin-ionescu/prezto.git /etc/skel/.config/zsh/.zprezto
 # Install zpm-zsh ls plugin

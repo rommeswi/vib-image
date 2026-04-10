@@ -54,6 +54,10 @@ zstyle ':prezto:load' pmodule \
 #
 
 AUTO_CD=1
+chpwd() {
+    ls -a
+  }
+alias ranger='source ranger'
 
 #
 # Editor
@@ -118,7 +122,7 @@ zstyle ':prezto:module:syntax-highlighting' pattern \
 # Utility
 #
 
-zstyle ':prezto:module:utility' safe-ops 'no'
+# zstyle ':prezto:module:utility' safe-ops 'yes'
 
 #
 # EXTRA PLUGINS START HERE
@@ -127,14 +131,14 @@ zstyle ':prezto:module:utility' safe-ops 'no'
 #
 # ls
 #
-zstyle ':prezto:load' pmodule ls
+# zstyle ':prezto:load' pmodule ls
 
 #
 # zcolors
 #
-zstyle ':prezto:load' pmodule zcolors
+# zstyle ':prezto:load' pmodule zcolors
 
 #
 # zsh-help
 #
-zstyle ':prezto:load' pmodule zsh-help
+# zstyle ':prezto:load' pmodule zsh-help

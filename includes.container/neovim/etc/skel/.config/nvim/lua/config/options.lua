@@ -9,3 +9,5 @@ vim.opt.formatoptions = vim.opt.formatoptions + "t"
 vim.opt.wrap = true
 vim.opt.linebreak = true
 vim.opt.breakindent = true
+
+vim.opt.listchars:append("trail:~")

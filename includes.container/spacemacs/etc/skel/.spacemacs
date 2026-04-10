@@ -83,8 +83,12 @@ This function should only modify configuration layer settings."
            json-fmt-tool 'prettier
            json-backend 'lsp)
 
+     (kotlin :variables
+             kotlin-backend 'lsp
+             kotlin-lsp-jar-path "~/.emacs.d/.cache/lsp/kotlin/server/bin/kotlin-language-server")
+
      (latex :variables
-            latex-backend 'company-auctex)
+            latex-backend 'lsp)
 
      ;; lean
 
@@ -108,7 +112,8 @@ This function should only modify configuration layer settings."
 
      prettier
 
-     (python :variables python-backend 'anaconda
+     (python :variables python-backend 'lsp
+             python-lsp-server 'pyright
              python-fill-column 70)
 
      (ranger :variables
@@ -617,13 +622,13 @@ It should only modify the values of Spacemacs settings."
   ;; a non-negative integer (pixel size), or a floating-point (point size).
   ;; Point size is recommended, because it's device independent. (default 10.0)
   (if (> (frame-outer-width) 3000)
-      (setq-default dotspacemacs-default-font '("SpaceMono Nerd Font"
-                                                :size 18.0
+      (setq-default dotspacemacs-default-font '("SpaceMono Nerd Font Mono"
+                                                :size 20.0
                                                 :weight normal
                                                 :width normal
                                                 ))
-      (setq-default dotspacemacs-default-font '("SpaceMono Nerd Font"
-                                              :size 12.0
+    (setq-default dotspacemacs-default-font '("SpaceMono Nerd Font Mono"
+                                              :size 14.0
                                               :weight normal
                                               :width normal
                                               ))

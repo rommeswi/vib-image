@@ -11,4 +11,4 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
-eval "$(oh-my-posh init zsh --config ~/.config/zsh/oh-my-posh/config.json)"
+eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/config.json)"

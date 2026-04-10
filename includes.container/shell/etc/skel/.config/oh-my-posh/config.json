@@ -126,5 +126,5 @@
     "template": "\ue200 {{ .Folder }} \ue200 "
   },
 
-  "version": 2
+  "version": 3
 }
