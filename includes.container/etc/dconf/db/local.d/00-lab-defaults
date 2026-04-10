@@ -1,0 +1,6 @@
+[org/gnome/shell]
+favorite-apps=['org.vanillaos.Installer.desktop', 'org.gnome.Epiphany.desktop', 'org.gnome.Photos.desktop', 'org.gnome.Nautilus.desktop', 'org.gnome.Software.desktop', 'org.gnome.Yelp.desktop', 'kitty.desktop', 'emacs.desktop']
+
+[org/gnome/desktop/background]
+picture-uri='file:///usr/share/backgrounds/tokyonight.jpg'
+picture-uri-dark='file:///usr/share/backgrounds/tokyonight.jpg'

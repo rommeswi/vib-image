@@ -2,8 +2,11 @@ name: gnome-config
 type: shell
 commands:
 - echo Configuring Gnome
+- cp -rf /gnome/etc/skel/. /etc/skel/
+- dconf update
 - mkdir -p /etc/skel/Pictures
 - wget -O /etc/skel/Pictures/tokyonight.jpg "https://unsplash.com/photos/H4uGE2skayY/download?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzMwNTUyMDQ5fA&force=true"
+- cp /etc/skel/Pictures/tokyonight.jpg /usr/share/backgrounds/tokyonight.jpg
 plugins:
 - name: gnome-config-req
   type: apt
