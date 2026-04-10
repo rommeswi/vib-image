@@ -6,7 +6,7 @@ commands:
 - cd /tmp/shell/
 # Copy structure of /etc/skel
 - mkdir -p /etc/skel/
-- cp -rf /shell/etc/skel /etc/skel
+- cp -rf /shell/etc/skel/. /etc/skel/
 # Oh my posh installation
 - curl -s https://ohmyposh.dev/install.sh | bash -s -- -d /usr/local/bin
 # oh-my-posh configuration
