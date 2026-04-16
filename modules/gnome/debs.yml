@@ -10,3 +10,4 @@ source:
   - gnome-shell-extension-system-monitor
   - gnome-shell-extension-gsconnect
   - gnome-tweaks
+  - dconf-cli
