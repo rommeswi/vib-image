@@ -29,6 +29,7 @@ stages:
       packages:
       - vim
       - git
+      - clonezilla
       - meld
       - wl-clipboard
       - openssh-client
