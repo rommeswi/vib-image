@@ -51,16 +51,6 @@ This function should only modify configuration layer settings."
 
      emacs-lisp
 
-     ;; the next layer requires a working R installation
-     ;; then run R in terminal
-     ;; execute the following commands:
-     ;; install.packages("lintr")
-     ;; install.packages("languageserver")
-     (ess :variables
-          ess-r-backend 'lsp
-          ess-assign-key "\M--")
-
-
      ;; the next layer changes the behavior of the s, f, and t searches
      (evil-snipe :variables
                  evil-snipe-enable-alternate-f-and-t-behaviors t
@@ -83,10 +73,6 @@ This function should only modify configuration layer settings."
            json-fmt-tool 'prettier
            json-backend 'lsp)
 
-     (kotlin :variables
-             kotlin-backend 'lsp
-             kotlin-lsp-jar-path "~/.emacs.d/.cache/lsp/kotlin/server/bin/kotlin-language-server")
-
      (latex :variables
             latex-backend 'lsp)
 
@@ -99,14 +85,10 @@ This function should only modify configuration layer settings."
      major-modes
 
      ;; mu4e requires setting '(mu4e-user-mail-address-list
-     ;; (quote ("rommeswi@ntu.edu.tw" "bla"))) via customize-variable
+     ;; (quote ("user@example.com"))) via customize-variable
      ;; mu4e
 
-     major-modes
-
      multiple-cursors
-
-     openai
 
      pdf
 
@@ -780,14 +762,19 @@ package is loaded, you should place your code here."
   ;; Choose theme depending on dark or light mode in GTK
   ;; use external command to call the following functions
   ;; emacsclient --eval "(change-theme-to-light)"
-  ( defun change-theme-to-light ()
-    (load-theme 'solarized-light-high-contrast t)
-    )
+  (defun change-theme-to-light ()
+    (spacemacs/load-theme 'solarized-light-high-contrast)
+    (dolist (buf (buffer-list))
+      (with-current-buffer buf
+        (when (eq major-mode 'pdf-view-mode)
+          (pdf-view-midnight-minor-mode -1)))))
 
-  ( defun change-theme-to-dark ()
-    (load-theme 'rebecca t)
-    )
-  ;; Still need to go through all pdf buffers to switch to dark mode.
+  (defun change-theme-to-dark ()
+    (spacemacs/load-theme 'rebecca)
+    (dolist (buf (buffer-list))
+      (with-current-buffer buf
+        (when (eq major-mode 'pdf-view-mode)
+          (pdf-view-midnight-minor-mode 1)))))
 
   ;; Spaceline configuration
   (setq spaceline-all-the-icons-separator-type 'none)
@@ -814,8 +801,10 @@ package is loaded, you should place your code here."
   ;;        Fonts
   ;; ~~~~~~~~~~~~~~~~~~~~~~
 
-  ;; this config requires to run M-x all-the-icons-install-fonts
-  ;; this config requires to download nerd fonts
+  ;; auto-install all-the-icons fonts on first run
+  (when (and (display-graphic-p)
+             (not (member "all-the-icons" (font-family-list))))
+    (all-the-icons-install-fonts t))
 
   ;; remove underline and overline from mode-line:
   (set-face-attribute 'mode-line nil
@@ -923,12 +912,16 @@ package is loaded, you should place your code here."
   ;; ~~~~~~~~~~~~~~~~~~~~~~
 
   ;; ivy-bibtex configuration
+  ;; PDFs are expected as <citekey>.pdf inside ~/bibliography/pdfs/
+  ;; Set bibtex-completion-bibliography via dir-locals or add ~/bibliography/references.bib
   (setq
    bibtex-maintain-sorted-entries t
-   bibtex-completion-bibliography '("~/projects/bibliography/biblatex.bib")
-   bibtex-completion-library-path "~/projects/bibliography/PDFs"
-   bibtex-completion-notes-path "~/projects/bibliography/notes.org"
+   bibtex-completion-library-path '("~/bibliography/pdfs")
+   bibtex-completion-notes-path   "~/bibliography/notes.org"
+   bibtex-completion-pdf-extension '(".pdf" ".epub")
    bibtex-completion-pdf-open-function #'find-file-other-window)
+  (when (file-exists-p "~/bibliography/references.bib")
+    (setq bibtex-completion-bibliography '("~/bibliography/references.bib")))
 
   ;; ~~~~~~~~~~~~~~~~~~~~~~
   ;;        LaTeX
@@ -984,7 +977,7 @@ package is loaded, you should place your code here."
   (let ((prefix (if (eq latex-backend 'lsp) "R" "r")))
     (spacemacs/declare-prefix-for-mode 'latex-mode (concat "m" prefix) "reftex")
     (spacemacs/set-leader-keys-for-major-mode 'latex-mode
-      (concat prefix "m")    'ivy-bibtex))
+      (concat prefix "m") 'ivy-bibtex-with-local-bibliography))
 
   ;; symbolify \not
   ;; symbolify \int
@@ -994,13 +987,6 @@ package is loaded, you should place your code here."
   (setq TeX-save-query nil)
 
   ;; ~~~~~~~~~~~~~~~~~~~~~~
-  ;; OpenAI
-  ;; ~~~~~~~~~~~~~~~~~~~~~~
-  (setq openai-user "user")
-  (setq openai-key (getenv "OPENAI_API_KEY"))
-  (setq openai--show-log t)
-
-  ;; ~~~~~~~~~~~~~~~~~~~~~~
   ;; Python
   ;; ~~~~~~~~~~~~~~~~~~~~~~
   ;; enable camel case
@@ -1008,12 +994,6 @@ package is loaded, you should place your code here."
   ;; enable shell restart shortcut
   (spacemacs/set-leader-keys-for-major-mode 'python-mode
     "sn" 'python-shell-restart)
-
-  ;; ~~~~~~~~~~~~~~~~~~~~~~
-  ;; R / ESS
-  ;; ~~~~~~~~~~~~~~~~~~~~~~
-  (setq-default ess-indent-with-fancy-comments nil)
-  (setq-default ess-ask-for-ess-directory nil)
 
   ;; ~~~~~~~~~~~~~~~~~~~~~~
   ;; Files and Associations
@@ -1033,10 +1013,12 @@ package is loaded, you should place your code here."
   (setq-default pdf-view-use-scaling t)
   (setq-default pdf-view-display-size 'fit-page)
 
-  (setq-default pdf-view-mode-hook (lambda ()
-                                     (if (eq spacemacs--cur-theme "rebecca")
-                                         (pdf-view-midnight-minor-mode t)
-                                       (pdf-view-midnight-minor-mode nil))))
+  (setq pdf-view-midnight-colors '("#f1eff8" . "#292a44"))
+  (add-hook 'pdf-view-mode-hook
+            (lambda ()
+              (if (eq spacemacs--cur-theme 'rebecca)
+                  (pdf-view-midnight-minor-mode 1)
+                (pdf-view-midnight-minor-mode -1))))
 
   ;; ~~~~~~~~~~~
   ;; Magit
