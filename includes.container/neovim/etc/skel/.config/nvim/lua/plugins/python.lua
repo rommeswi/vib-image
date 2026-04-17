@@ -32,6 +32,12 @@ return {
   },
   {
     "mfussenegger/nvim-dap",
+    config = function(_, opts)
+      local dap = require("dap")
+      vim.keymap.set("n", "<leader>db", function()
+        dap.toggle_breakpoint()
+      end, { silent = true, desc = "Toggle breakpoint" })
+    end,
   },
   {
     "mfussenegger/nvim-dap-python",
@@ -41,12 +47,12 @@ return {
       "rcarriga/nvim-dap-ui",
     },
     config = function(_, opts)
-      local path = "~/.local/share/nvim/mason/packages/debugpy/venv/bin/python"
-      require("dap-python").setup(path)
+      --local path = "~/.local/share/nvim/mason/packages/debugpy/venv/bin/python"
+      require("dap-python").setup()
     end,
   },
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     opts = {
       ensure_installed = {
         "black",
