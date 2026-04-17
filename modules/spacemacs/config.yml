@@ -5,4 +5,3 @@ commands:
   - cp -rf /spacemacs/etc/skel/. /etc/skel/
   - mkdir -p /etc/skel/.config/systemd/user/default.target.wants
   - ln -s ../emacs.service /etc/skel/.config/systemd/user/default.target.wants/emacs.service
-  - find /usr/share/applications -name 'emacs*.desktop' -exec sed -i 's|^Exec=emacs|Exec=emacsclient -c -a "" |' {} +

@@ -251,6 +251,11 @@
                             "name": "Sound Recorder",
                             "icon": "org.gnome.SoundRecorder",
                             "flatpak": true
+                        },
+                        {
+                            "name": "Logseq",
+                            "icon": "com.logseq.Logseq",
+                            "flatpak": true
                         }
                     ]
                 },
@@ -523,6 +528,13 @@
                     "type": "command",
                     "commands": [
                         "!nextBoot !noRoot flatpak install -y com.brave.Browser"
+                    ]
+                },
+                {
+                    "if": "Logseq",
+                    "type": "command",
+                    "commands": [
+                        "!nextBoot !noRoot flatpak install -y com.logseq.Logseq"
                     ]
                 }
             ]
