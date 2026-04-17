@@ -3,3 +3,6 @@ type: shell
 commands:
   - git clone https://github.com/syl20bnr/spacemacs /etc/skel/.emacs.d
   - cp -rf /spacemacs/etc/skel/. /etc/skel/
+  - mkdir -p /etc/skel/.config/systemd/user/default.target.wants
+  - ln -s ../emacs.service /etc/skel/.config/systemd/user/default.target.wants/emacs.service
+  - find /usr/share/applications -name 'emacs*.desktop' -exec sed -i 's|^Exec=emacs|Exec=emacsclient -c -a "" |' {} +
