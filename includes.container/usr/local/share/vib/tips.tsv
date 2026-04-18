@@ -1,0 +1,125 @@
+# category|icon|id|text
+# Shell — interactive shortcuts
+shell|󰆍|shell-ctrl-r|Press `Ctrl+R` to search through your command history - start typing to filter
+shell|󰆍|shell-ctrl-t|Press `Ctrl+T` to pick a file from the current directory tree and insert its path
+shell|󰆍|shell-alt-c|Press `Alt+C` to navigate into any subdirectory interactively
+shell|󰆍|shell-vi-mode|Press `Esc` at the prompt to edit your command like a text file; press `i` to type again
+shell|󰆍|shell-bang-bang|`!!` re-runs your last command (handy with `sudo !!`); `!$` reuses its last argument
+shell|󰆍|shell-zoxide|`z dirname` takes you to a folder you have visited before - no full path needed
+# Shell — pipes and redirection
+shell|󰆍|shell-pipe|`cmd | cmd2` passes the output of one command as input to the next; chain as many as you like
+shell|󰆍|shell-redirect|`cmd > file` saves the output to a file (overwrites it); `>>` adds to the end without overwriting
+shell|󰆍|shell-stderr|`cmd 2> file` saves error messages to a file; `&>` saves both normal output and errors together
+shell|󰆍|shell-background|`cmd &` runs a command in the background so you can keep using the terminal
+shell|󰆍|shell-jobs|`jobs` lists background tasks; `fg` brings the most recent one back; `bg` resumes a paused one
+shell|󰆍|shell-subshell|`$(cmd)` inserts the output of a command into another - e.g. `echo "Today is $(date)"`
+shell|󰆍|shell-var|`$VAR` inserts the value of a variable anywhere in a command - e.g. `echo $HOME` shows your home folder
+shell|󰆍|shell-and-or|`cmd1 && cmd2` runs cmd2 only if cmd1 succeeded; `||` runs it only if cmd1 failed
+shell|󰆍|shell-alias|`alias short='long command'` creates a shortcut; add it to `.zshrc` to keep it across sessions
+shell|󰆍|shell-export|`export VAR=value` sets an environment variable for the current session and all programs you launch
+shell|󰆍|shell-xargs|`xargs` feeds the output of one command as arguments to another - e.g. `fd .log | xargs wc -l`
+shell|󰆍|shell-subst|`which cmd` shows where on the system a command lives
+shell|󰆍|shell-env|`env` lists all environment variables currently set in your session
+# Shell — text processing
+shell|󰆍|shell-grep|`grep pattern file` filters and prints only lines that match a pattern; `-i` ignores capitalisation
+shell|󰆍|shell-head-tail|`head -n 10 file` shows the first 10 lines of a file; `tail -n 10` shows the last 10
+shell|󰆍|shell-wc|`wc -l file` counts lines; `-w` counts words; `-c` counts bytes
+shell|󰆍|shell-sort|`sort file` sorts lines alphabetically; `-n` sorts by number; `-r` reverses the order
+shell|󰆍|shell-uniq|`sort file | uniq` removes duplicate lines - sort first so duplicates are adjacent
+shell|󰆍|shell-cut|`cut -d, -f1 file` extracts a column from comma-separated text; change the delimiter with `-d`
+# Shell — processes and system
+shell|󰆍|shell-man|`man cmd` opens the manual for any command - press `q` to quit, arrow keys to scroll
+shell|󰆍|shell-chmod|`chmod +x file` makes a file executable so you can run it as a command
+shell|󰆍|shell-ps|`ps aux` lists every running process with its ID, owner and resource usage
+shell|󰆍|shell-kill|`kill PID` stops a process by its ID; `kill -9 PID` forces it to stop immediately
+shell|󰆍|shell-df|`df -h` shows how much space is left on each filesystem in a readable format
+shell|󰆍|shell-du|`du -sh folder` shows how much disk space a folder and its contents take up
+shell|󰆍|shell-curl|`curl -O url` downloads a file from the internet into the current folder
+shell|󰆍|shell-tar|`tar -xzf archive.tar.gz` unpacks a compressed archive; `tar -czf archive.tar.gz folder` creates one
+shell|󰆍|shell-ssh-cmd|`ssh user@host` opens a secure shell session on another machine
+shell|󰆍|shell-history|`history` lists your recent commands with numbers; `!42` re-runs command number 42
+# Files
+files|󰉋|files-ll|`ll` shows file sizes, permissions and dates; `la` also shows hidden files
+files|󰉋|files-ll-tree|`ll --tree` shows the contents of the current folder as a tree
+files|󰉋|files-cat|`cat file` shows the file with syntax colours and line numbers
+files|󰉋|files-ranger|`ranger` lets you browse folders and open files with vim bindings - press `q` to quit
+# Search
+search|󱎸|search-rg|`rg pattern` searches inside files across your whole project instantly
+search|󱎸|search-fd|`fd name` finds files by name - just type part of the name, no wildcards needed
+# Editors
+editors||editors-e|`e file` opens the file in your editor
+editors||editors-nvim|`nvim file` opens a file in Neovim; type `:q` and Enter to quit
+editors||editors-nvim-tutor|`nvim +Tutor` opens an interactive tutorial that teaches you the basics of Vim in about 30 minutes
+editors||editors-space|Press `Space` in nvim or Spacemacs to discover available commands
+editors||editors-hl|In nvim and Spacemacs, press `H` to jump to the start of a line and `L` to jump to the end - easier than `^` and `$`
+# Python
+python|󰌠|python-uv-run|`uv run script.py` runs a Python script and handles its dependencies automatically
+python|󰌠|python-uvx|`uvx tool` runs a Python command-line tool without any setup
+python|󰌠|python-uv-init|Run `uv init` in a folder to initialise a Python project; add dependencies to the generated `pyproject.toml`
+# Packages
+packages|󰏗|packages-apx|`apx` installs containers for apps from Fedora, Arch, or Ubuntu without modifying the base system
+packages|󰏗|packages-apx-export|Commands installed with `apx` still need to be exported with `apx export`
+packages|󰏗|packages-abroot|`abroot upgrade` updates the core system; if something goes wrong, select the previous state at boot
+packages|󰏗|packages-software|Typing `software` in the overview gives you access to many additional desktop applications
+# Network
+network|󰛳|network-zerotier|Use `zerotier` to create a private network between your computers, no matter where they are
+network|󰛳|network-gsconnect|`GSConnect` in the system tray lets your phone share notifications, files and clipboard with your desktop
+# SSH
+ssh|󰖔|ssh-keygen|`ssh-keygen -t ed25519` generates a modern SSH key pair - add the public key to GitHub or remote servers
+ssh|󰖔|ssh-pubkey|Your SSH public key is at `~/.ssh/id_ed25519.pub` - this is safe to share; never share the private key
+# Git
+git|󰊢|git-status|`git status` shows what has changed; `git diff` shows the exact lines; `git log --oneline` shows the history
+git|󰊢|git-add-p|`git add -p` lets you stage changes chunk by chunk - useful for keeping commits focused
+git|󰊢|git-stash|`git stash` saves your uncommitted work so you can switch context; `git stash pop` brings it back
+git|󰊢|git-commit|`git commit -m 'message'` records a snapshot; push it with `git push` to share it
+# Terminal — kitty
+terminal|󰆍|terminal-tabs|`Ctrl+Shift+T` opens a new tab in `kitty`; `Ctrl+Tab` switches to the next one; `Ctrl+Shift+Enter` splits the pane
+terminal|󰆍|terminal-copy|`Ctrl+Shift+C` copies selected text in `kitty`; `Ctrl+Shift+V` pastes
+terminal|󰆍|terminal-scroll|`Ctrl+Shift+Up`/`Down` scrolls one line at a time; `Ctrl+Shift+PageUp`/`PageDown` scrolls a full page
+terminal|󰆍|terminal-history|Press `Ctrl+Shift+H` in `kitty` to browse the full scrollback history in your editor
+terminal|󰆍|terminal-search|Press `Ctrl+Shift+F` in `kitty` to search through the terminal output
+terminal|󰆍|terminal-url|`Ctrl+click` any URL in `kitty` to open it in your browser
+# Browser
+browser|󰈹|browser-firefox|`Firefox` blocks cross-site trackers by default - check the shield icon in the address bar for details
+browser|󰈹|browser-brave|`Brave` blocks ads and trackers automatically - no extensions needed for a clean browsing experience
+browser|󰈹|browser-chromium|`Chromium` is the open-source browser Chrome is built on, without Google data collection
+browser|󰈹|browser-gnome-web|`GNOME Web` turns any website into a standalone app - open the site and choose Install as Web Application
+browser|󰈹|browser-zen|`Zen Browser` is a Firefox-based browser built for wide screens - it supports all Firefox extensions
+browser|󰈹|browser-ublock|Add `uBlock Origin` to your browser to block ads and malicious scripts across all websites
+browser|󰈹|browser-leechblock|`LeechBlock NG` lets you set time limits on distracting websites - configure it once and stay focused
+browser|󰈹|browser-bitwarden|`Bitwarden` is a free open-source password manager available as a browser extension and desktop app
+# Security
+security|󰒃|security-passwords|Never store passwords or API tokens in plain text - use `Bitwarden` for passwords and `GNOME Keyring` for app secrets
+security|󰒃|security-flatseal|`Flatseal` controls what each Flatpak app can access - revoke file, network or device permissions per app
+security|󰒃|security-metadata|`Metadata Cleaner` strips hidden data from files before sharing - location, camera model, author name and more
+# Office and notes
+office|󰏆|office-libreoffice|`LibreOffice` opens and edits Word, Excel and PowerPoint files - use it as a full office suite
+office|󰆴|office-logseq|`Logseq` organises your notes as a knowledge graph - use `[[double brackets]]` to link ideas across pages
+office|󰓓|office-rnote|`Rnote` is a handwriting and sketching app - great for annotating PDFs with a stylus or drawing tablet
+# Utilities
+utilities|󰙵|utilities-bottles|`Bottles` runs Windows applications on Linux - create a bottle, pick a runner, and install your app
+utilities|󱖫|utilities-boxes|`Boxes` creates and runs virtual machines - download an ISO and have it running in a few clicks
+utilities|󱔗|utilities-dejdup|`Deja Dup` backs up your files automatically - set a schedule and destination once, then forget about it
+utilities|󰊢|utilities-extension-manager|`Extension Manager` lets you browse and install GNOME Shell extensions without opening a browser
+utilities|󰋊|utilities-disk-usage|`Disk Usage Analyzer` shows what is taking up space on your drive - open a folder for a visual breakdown
+utilities|󰈙|utilities-file-roller|`File Roller` creates and opens zip and tar.gz archives - right-click any file or folder to compress it
+utilities|󰖔|utilities-connections|`Connections` accesses other computers remotely over RDP or VNC
+# GNOME desktop
+gnome|󰨇|gnome-super|Press `Super` to open the overview and search for apps, files and settings
+gnome|󰨇|gnome-super-twice|Press `Super` twice quickly to open the full app grid
+gnome|󰨇|gnome-alt-number|In the overview, press `Alt+number` to jump directly to a specific open window
+gnome|󰨇|gnome-pin-app|Right-click an app in the overview and choose Pin; then press `Super+number` to launch it instantly
+gnome|󰨇|gnome-super-up|Press `Super+Up` to maximise the active window; `Super+Down` to minimise it
+gnome|󰨇|gnome-super-sides|Press `Super+Left` or `Super+Right` to snap the active window to half the screen
+gnome|󰨇|gnome-super-space|Press `Super+Space` to switch between keyboard layouts
+gnome|󰨇|gnome-f12|Press `F12` to drop a terminal down from the top of the screen - press it again to hide it
+gnome|󰨇|gnome-gtile-open|Press `Super+Enter` to open the `gTile` grid overlay, then click cells to snap the active window
+gnome|󰨇|gnome-gtile-presets|Inside the `gTile` overlay, press `Ctrl+1` through `Ctrl+5` to snap the window to a column preset
+gnome|󰆍|gnome-gpaste|`GPaste` keeps a history of everything you copy - click the clipboard icon in the top bar to retrieve it
+gnome|󰑫|gnome-shortwave|`Shortwave` is an internet radio app - search by station name, genre or location
+# Claude Code
+claude|󱚣|claude-cli|`claude` is an AI coding assistant available in the terminal - run `claude` to start a session in any project
+claude|󱚣|claude-extensions|The `claude` command works best with editor extensions - check your editor's extension marketplace
+# System
+system|󰏗|system-labstick|This system is built from `hendrikirdneh/labstick` - fork it on GitHub to build your own image and point `abroot` at your Docker image
+system|󰊢|system-ext-manager|Some GNOME extensions may be installed but switched off - open `Extension Manager` to see what is available

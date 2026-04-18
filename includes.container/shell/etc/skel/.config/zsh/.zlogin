@@ -20,6 +20,6 @@
 # Execute code only if STDERR is bound to a TTY.
 if [[ -o INTERACTIVE && -t 2 ]]; then
 
-  [[ -x "$HOME/.local/share/vib/vib-tip.sh" ]] && bash "$HOME/.local/share/vib/vib-tip.sh"
+  [[ -x /usr/local/bin/vib-tip ]] && /usr/local/bin/vib-tip show
 
 fi >&2

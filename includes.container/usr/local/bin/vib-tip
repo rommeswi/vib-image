@@ -1,0 +1,184 @@
+#!/usr/bin/env bash
+# Tip-of-the-day manager for vib images.
+#
+# Usage: vib-tip [show|dismiss [id]|reset|disable|enable|list]
+#
+# User config (set in ~/.zshrc or ~/.zshenv):
+#   VIB_TIPS=off                          — disable tips entirely
+#   VIB_TIPS_CATEGORIES="shell git ssh"   — show only these categories
+#
+# Or press ^Xd at the zsh prompt to dismiss the last tip,
+#           ^Xu to unsubscribe (creates ~/.local/share/vib/disabled).
+
+TIPS_DB="${VIB_TIPS_DB:-/usr/local/share/vib/tips.tsv}"
+VIB_STATE="${XDG_DATA_HOME:-$HOME/.local/share}/vib"
+DISMISSED_FILE="$VIB_STATE/dismissed-tips"
+DISABLED_FILE="$VIB_STATE/disabled"
+LAST_TIP_FILE="$VIB_STATE/last-tip-id"
+
+R=$'\033[0m'
+BORDER=$'\033[38;2;86;95;137m'
+TITLE_C=$'\033[1;38;2;122;162;247m'
+TEXT_C=$'\033[38;2;192;202;245m'
+CODE_C=$'\033[38;2;125;207;255m'
+HINT=$'\033[38;2;115;122;162m'
+BOLD=$'\033[1m'
+
+_highlight() {
+  local text="$1" result="" chunk
+  while [[ "$text" == *'`'* ]]; do
+    chunk="${text%%\`*}"
+    result+="${TEXT_C}${chunk}${CODE_C}"
+    text="${text#*\`}"
+    chunk="${text%%\`*}"
+    result+="${chunk}${TEXT_C}"
+    text="${text#*\`}"
+  done
+  printf '%s' "${result}${text}"
+}
+
+_rep() { local i; for (( i=0; i<$2; i++ )); do printf '%s' "$1"; done; }
+
+_show_box() {
+  local icon="$1" text="$2"
+  local W
+  if [[ -n "${COLUMNS:-}" ]]; then W=$COLUMNS; else W=$(tput cols 2>/dev/null) || W=80; fi
+  local INNER=$(( W - 6 ))
+  [[ $INNER -lt 20 ]] && INNER=20
+
+  mapfile -t wrapped < <(printf '%s\n' "$text" | fold -s -w "$INNER")
+
+  local TITLE=" ${icon}  Tip of the Day "
+  local RIGHT=$(( W - 2 - 1 - ${#TITLE} ))
+  [[ $RIGHT -lt 0 ]] && RIGHT=0
+
+  printf "${BORDER}╭─${TITLE_C}%s${R}${BORDER}" "$TITLE"
+  _rep '─' "$RIGHT"
+  printf "╮${R}\n"
+  printf "${BORDER}│${R}%$(( W - 2 ))s${BORDER}│${R}\n" ''
+  local line pad
+  for line in "${wrapped[@]}"; do
+    pad=$(( INNER - ${#line} ))
+    [[ $pad -lt 0 ]] && pad=0
+    printf "${BORDER}│${R}  ${TEXT_C}%s%*s${R}  ${BORDER}│${R}\n" "$(_highlight "$line")" "$pad" ''
+  done
+  printf "${BORDER}│${R}%$(( W - 2 ))s${BORDER}│${R}\n" ''
+  printf "${BORDER}╰"
+  _rep '─' $(( W - 2 ))
+  printf "╯${R}\n"
+  printf "${HINT}  Ctrl+x d  dismiss  ·  Ctrl+x u  unsubscribe  ·  vib-tip list${R}\n\n"
+}
+
+_load_eligible() {
+  local -n _ids=$1 _icons=$2 _texts=$3
+
+  [[ -f "$DISABLED_FILE" ]] && return 1
+  local tips_setting="${VIB_TIPS:-on}"
+  [[ "$tips_setting" == "off" || "$tips_setting" == "0" || "$tips_setting" == "false" ]] && return 1
+  [[ ! -f "$TIPS_DB" ]] && return 1
+
+  local -A dismissed=()
+  if [[ -f "$DISMISSED_FILE" ]]; then
+    local _id
+    while IFS= read -r _id; do
+      [[ -n "$_id" ]] && dismissed[$_id]=1
+    done < "$DISMISSED_FILE"
+  fi
+
+  local -a subscribed=()
+  if [[ -n "${VIB_TIPS_CATEGORIES:-}" ]]; then
+    read -ra subscribed <<< "$VIB_TIPS_CATEGORIES"
+  fi
+
+  local category icon id text match cat
+  while IFS='|' read -r category icon id text; do
+    [[ -z "$category" || "$category" == \#* ]] && continue
+    [[ -n "${dismissed[$id]:-}" ]] && continue
+    if [[ ${#subscribed[@]} -gt 0 ]]; then
+      match=0
+      for cat in "${subscribed[@]}"; do [[ "$cat" == "$category" ]] && match=1 && break; done
+      [[ $match -eq 0 ]] && continue
+    fi
+    _ids+=("$id"); _icons+=("$icon"); _texts+=("$text")
+  done < "$TIPS_DB"
+  return 0
+}
+
+cmd_show() {
+  local -a ids=() icons=() texts=()
+  _load_eligible ids icons texts || return 0
+  [[ ${#ids[@]} -eq 0 ]] && return 0
+  local pick=$(( RANDOM % ${#ids[@]} ))
+  mkdir -p "$VIB_STATE"
+  printf '%s\n' "${ids[$pick]}" > "$LAST_TIP_FILE"
+  _show_box "${icons[$pick]}" "${texts[$pick]}"
+}
+
+cmd_dismiss() {
+  local tip_id="${1:-}"
+  if [[ -z "$tip_id" ]]; then
+    [[ -f "$LAST_TIP_FILE" ]] && tip_id=$(<"$LAST_TIP_FILE")
+  fi
+  if [[ -z "$tip_id" ]]; then
+    printf 'No tip to dismiss. Show one first with: vib-tip\n' >&2
+    return 1
+  fi
+  mkdir -p "$VIB_STATE"
+  printf '%s\n' "$tip_id" >> "$DISMISSED_FILE"
+  sort -u "$DISMISSED_FILE" -o "$DISMISSED_FILE"
+  printf 'Dismissed: %s\n' "$tip_id"
+}
+
+cmd_disable() {
+  mkdir -p "$VIB_STATE"
+  touch "$DISABLED_FILE"
+  printf 'Tips disabled. Run \`vib-tip enable\` to restore them.\n'
+}
+
+cmd_enable() {
+  if [[ -f "$DISABLED_FILE" ]]; then
+    rm "$DISABLED_FILE"
+    printf 'Tips enabled.\n'
+  else
+    printf 'Tips are already enabled.\n'
+  fi
+}
+
+cmd_reset() {
+  if [[ -f "$DISMISSED_FILE" ]]; then
+    rm "$DISMISSED_FILE"
+    printf 'All dismissed tips restored.\n'
+  else
+    printf 'No dismissed tips.\n'
+  fi
+}
+
+cmd_list() {
+  [[ ! -f "$TIPS_DB" ]] && { printf 'Tips database not found: %s\n' "$TIPS_DB" >&2; return 1; }
+  local -A dismissed=()
+  if [[ -f "$DISMISSED_FILE" ]]; then
+    local _id
+    while IFS= read -r _id; do [[ -n "$_id" ]] && dismissed[$_id]=1; done < "$DISMISSED_FILE"
+  fi
+  local cur_cat="" category icon id text marker
+  while IFS='|' read -r category icon id text; do
+    [[ -z "$category" || "$category" == \#* ]] && continue
+    if [[ "$category" != "$cur_cat" ]]; then
+      printf '\n%s%s%s\n' "$BOLD" "$category" "$R"
+      cur_cat="$category"
+    fi
+    marker="${dismissed[$id]:+  [dismissed]}"
+    printf '  %-36s %s%s\n' "$id" "${text:0:55}" "$marker"
+  done < "$TIPS_DB"
+  printf '\n'
+}
+
+case "${1:-show}" in
+  show)    cmd_show ;;
+  dismiss) cmd_dismiss "${2:-}" ;;
+  disable) cmd_disable ;;
+  enable)  cmd_enable ;;
+  reset)   cmd_reset ;;
+  list)    cmd_list ;;
+  *)       printf 'Usage: vib-tip [show|dismiss [id]|disable|enable|reset|list]\n' >&2; exit 1 ;;
+esac

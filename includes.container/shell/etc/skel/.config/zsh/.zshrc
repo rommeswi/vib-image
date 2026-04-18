@@ -21,3 +21,11 @@ alias la='eza -la --color=always'
 alias cat='batcat'
 eval "$(zoxide init zsh)"
 source /usr/share/doc/fzf/examples/key-bindings.zsh
+
+# vib-tip keybindings (only active at the zsh prompt)
+_vib_dismiss()     { vib-tip dismiss;  zle reset-prompt; }
+_vib_unsubscribe() { vib-tip disable;  zle reset-prompt; }
+zle -N _vib_dismiss
+zle -N _vib_unsubscribe
+bindkey '^Xd' _vib_dismiss
+bindkey '^Xu' _vib_unsubscribe
