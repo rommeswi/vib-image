@@ -131,9 +131,13 @@ tips=(
   # GNOME extensions
   "󰊢|Some GNOME extensions may be installed but switched off - open `Extension Manager` to see what is available"
   # GNOME desktop shortcuts
-  "󰨇|Press `Super` to search for apps, files and settings"
+  "󰨇|Press `Super` to open the overview and search for apps, files and settings"
+  "󰨇|In the overview, press `Alt+number` to jump directly to a specific open window"
+  "󰨇|Right-click an app in the overview and choose Pin to pin it to the dock; then press `Super+number` to launch it instantly"
   "󰨇|Press `Super` twice quickly to open the full app grid"
   "󰨇|Press `Super+Up` to maximise the active window; `Super+Down` to minimise it"
+  "󰨇|Press `Super+Left` or `Super+Right` to snap the active window to half the screen"
+  "󰨇|Press `Super+Space` to switch between keyboard layouts"
   "󰨇|Press `F12` to drop a terminal down from the top of the screen - press it again to hide it"
   # gTile
   "󰨇|Press `Super+Enter` to open the `gTile` grid overlay, then click across cells to snap the active window"
