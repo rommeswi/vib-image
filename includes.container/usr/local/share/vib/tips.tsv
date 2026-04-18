@@ -91,7 +91,6 @@ browser|󰈹|browser-bitwarden|`Bitwarden` is a free open-source password manage
 # Security
 security|󰒃|security-passwords|Never store passwords or API tokens in plain text - use `Bitwarden` for passwords and `GNOME Keyring` for app secrets
 security|󰒃|security-flatseal|`Flatseal` controls what each Flatpak app can access - revoke file, network or device permissions per app
-security|󰒃|security-metadata|`Metadata Cleaner` strips hidden data from files before sharing - location, camera model, author name and more
 # Office and notes
 office|󰏆|office-libreoffice|`LibreOffice` opens and edits Word, Excel and PowerPoint files - use it as a full office suite
 office|󰆴|office-logseq|`Logseq` organises your notes as a knowledge graph - use `[[double brackets]]` to link ideas across pages

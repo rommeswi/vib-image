@@ -21,7 +21,7 @@ BORDER=$'\033[38;2;86;95;137m'
 TITLE_C=$'\033[1;38;2;122;162;247m'
 TEXT_C=$'\033[38;2;192;202;245m'
 CODE_C=$'\033[38;2;125;207;255m'
-HINT=$'\033[38;2;115;122;162m'
+HINT=$'\033[38;2;86;95;137m'
 BOLD=$'\033[1m'
 
 _highlight() {
@@ -58,7 +58,8 @@ _show_box() {
   printf "${BORDER}│${R}%$(( W - 2 ))s${BORDER}│${R}\n" ''
   local line pad
   for line in "${wrapped[@]}"; do
-    pad=$(( INNER - ${#line} ))
+    local stripped="${line//\`/}"
+    pad=$(( INNER - ${#stripped} ))
     [[ $pad -lt 0 ]] && pad=0
     printf "${BORDER}│${R}  ${TEXT_C}%s%*s${R}  ${BORDER}│${R}\n" "$(_highlight "$line")" "$pad" ''
   done
@@ -66,7 +67,7 @@ _show_box() {
   printf "${BORDER}╰"
   _rep '─' $(( W - 2 ))
   printf "╯${R}\n"
-  printf "${HINT}  Ctrl+x d  dismiss  ·  Ctrl+x u  unsubscribe  ·  vib-tip list${R}\n\n"
+  printf "${HINT}  Ctrl+x d  Don't show again  ·  Ctrl+x u  Unsubscribe from all hints${R}\n\n"
 }
 
 _load_eligible() {

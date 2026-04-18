@@ -40,6 +40,9 @@ preset-resize-15=['<Control>5']
 show-support-dialog=false
 last-extension-version=39
 
+[org/gnome/desktop/wm/keybindings]
+close=['<Alt>F4', '<Super>q']
+
 [org/gnome/desktop/default-applications/terminal]
 exec='kitty'
 exec-arg=''
