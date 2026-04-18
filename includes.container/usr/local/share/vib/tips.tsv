@@ -114,7 +114,7 @@ gnome|󰨇|gnome-super-sides|Press `Super+Left` or `Super+Right` to snap the act
 gnome|󰨇|gnome-super-space|Press `Super+Space` to switch between keyboard layouts
 gnome|󰨇|gnome-f12|Press `F12` to drop a terminal down from the top of the screen - press it again to hide it
 gnome|󰨇|gnome-gtile-open|Press `Super+Enter` to open the `gTile` grid overlay, then click cells to snap the active window
-gnome|󰨇|gnome-gtile-presets|Inside the `gTile` overlay, press `Ctrl+1` through `Ctrl+5` to snap the window to a column preset
+gnome|󰨇|gnome-gtile-presets|Inside the `gTile` overlay, press `1`–`5` to place the window in a column (repeat to grow it); `Ctrl+number` for the bottom half, `Shift+number` for the top half
 gnome|󰆍|gnome-gpaste|`GPaste` keeps a history of everything you copy - click the clipboard icon in the top bar to retrieve it
 gnome|󰑫|gnome-shortwave|`Shortwave` is an internet radio app - search by station name, genre or location
 # Claude Code

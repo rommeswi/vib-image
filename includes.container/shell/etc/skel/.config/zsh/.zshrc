@@ -23,9 +23,11 @@ eval "$(zoxide init zsh)"
 source /usr/share/doc/fzf/examples/key-bindings.zsh
 
 # vib-tip keybindings (only active at the zsh prompt)
-_vib_dismiss()     { vib-tip dismiss;  zle reset-prompt; }
-_vib_unsubscribe() { vib-tip disable;  zle reset-prompt; }
+_vib_dismiss()     { zle -I; vib-tip dismiss; }
+_vib_unsubscribe() { zle -I; vib-tip disable; }
 zle -N _vib_dismiss
 zle -N _vib_unsubscribe
 bindkey '^Xd' _vib_dismiss
 bindkey '^Xu' _vib_unsubscribe
+
+[[ $SHLVL -eq 1 && -x /usr/local/bin/vib-tip ]] && vib-tip show
