@@ -8,8 +8,9 @@ The goal of the image is to provide an easy starting point for doing data-driven
 If you already have Vanilla OS installed, just point ABRoot to the custom image to use it:
 
 - Edit the configuration file with the command: `abroot config-editor`.
-- Change the "name" entry from something like `vanilla-os/desktop` to `rommeswi/labstick`.  [**Note**: All characters must be in lowercase.]
-- Change the "tag" entry from `main` to `latest`.
+- Examine the "Packages" section of this repository. It lists a `docker pull` command of the form `docker pull ghcr.io/USERNAME/NAMESPACE:TAG`.
+- Change the "name" entry from something like `vanilla-os/desktop` to `USERNAME/NAMESPACE`.  [**Note**: All characters must be in lowercase.]
+- Change the "tag" entry to `TAG`.
 - Now, Run `abroot upgrade` to switch to the custom image.
 - You may want to create a new user account to make use of the heavy customization of the user environment.
 
