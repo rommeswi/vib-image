@@ -1,5 +1,5 @@
 [Desktop Entry]
 Type=Application
 Name=Vib First Login Setup
-Exec=/bin/bash %h/.local/share/vib/first-login.sh
+Exec=bash -c 'bash "$HOME/.local/share/vib/first-login.sh"'
 X-GNOME-Autostart-enabled=true

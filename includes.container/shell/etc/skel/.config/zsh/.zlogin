@@ -20,10 +20,6 @@
 # Execute code only if STDERR is bound to a TTY.
 if [[ -o INTERACTIVE && -t 2 ]]; then
 
-  # Print a random, hopefully interesting, adage.
-  if (( $+commands[fortune] )); then
-    fortune -s
-    print
-  fi
+  [[ -x "$HOME/.local/share/vib/vib-tip.sh" ]] && bash "$HOME/.local/share/vib/vib-tip.sh"
 
 fi >&2

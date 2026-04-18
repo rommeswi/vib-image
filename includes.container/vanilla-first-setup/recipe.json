@@ -287,6 +287,12 @@
                             "icon": "org.gnome.Epiphany",
                             "flatpak": true,
                             "active": false
+                        },
+                        {
+                            "name": "Zen Browser",
+                            "icon": "app.zen_browser.zen",
+                            "flatpak": true,
+                            "active": false
                         }
                     ]
                 }
@@ -535,6 +541,13 @@
                     "type": "command",
                     "commands": [
                         "!nextBoot !noRoot flatpak install -y com.logseq.Logseq"
+                    ]
+                },
+                {
+                    "if": "Zen Browser",
+                    "type": "command",
+                    "commands": [
+                        "!nextBoot !noRoot flatpak install -y app.zen_browser.zen"
                     ]
                 }
             ]

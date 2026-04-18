@@ -19,6 +19,7 @@ grid-sizes='5x2'
 auto-close=true
 global-presets=false
 moveresize-enabled=false
+show-toggle-tiling=['<Super>Return', '<Super>KP_Enter']
 preset-resize-1=['1']
 preset-resize-10=['<Shift>5']
 preset-resize-11=['<Control>1']

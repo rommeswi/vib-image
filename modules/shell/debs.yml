@@ -7,3 +7,6 @@ source:
   - eza
   - ranger
   - cron
+  - bat
+  - fzf
+  - zoxide
