@@ -6,7 +6,7 @@
     "registryService": "registry.ghcr.io",
     "registryAPIVersion": "v2",
     "name": "changed_automatically_by_vib",
-    "tag": "main",
+    "tag": "latest",
 
     "iPkgMngPre": "lpkg --unlock",
     "iPkgMngPost": "lpkg --lock",
