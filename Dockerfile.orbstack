@@ -6,8 +6,8 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y \
     # core
     vim git meld openssh-client lshw curl wget jq unzip fontconfig \
-    # shell
-    zsh eza ranger cron bat zoxide \
+    # shell + terminal
+    zsh eza ranger cron bat zoxide kitty \
     # editor/dev deps
     fzf ripgrep fd-find nodejs npm \
     # emacs + spacemacs pdf layer build deps
@@ -80,7 +80,7 @@ RUN UV_ARCH=$([ "$TARGETARCH" = "arm64" ] && echo "aarch64-unknown-linux-gnu" ||
     && rm "uv-${UV_ARCH}.tar.gz"
 
 # ── jupyterlab + pip-only lsp plugins ────────────────────────────────────────
-RUN uv pip install --system jupyterlab python-lsp-ruff
+RUN uv pip install --system --break-system-packages jupyterlab python-lsp-ruff
 
 # ── zotero (arch-aware) ───────────────────────────────────────────────────────
 RUN ZOTERO_ARCH=$([ "$TARGETARCH" = "arm64" ] && echo "linux-arm64" || echo "linux-x86_64") \
