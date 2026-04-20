@@ -13,19 +13,7 @@ Click the Apple menu → **About This Mac**.
 
 ---
 
-## 2. Log in to the container registry
-
-Open the macOS **Terminal** app and run:
-
-```bash
-docker login ghcr.io
-```
-
-Use your GitHub username and a [Personal Access Token](https://github.com/settings/tokens) with the `read:packages` scope as the password.
-
----
-
-## 3. Create your container
+## 2. Create your container
 
 Run **one** of the following depending on your Mac (see step 1).
 
@@ -61,7 +49,7 @@ You will land in a **zsh** shell inside the container.
 
 ---
 
-## 4. Day-to-day use
+## 3. Day-to-day use
 
 After the first run, you do not need the long command above again.
 
@@ -83,7 +71,7 @@ docker stop labstick
 
 ---
 
-## 5. Working with files
+## 4. Working with files
 
 Your work folder is shared between your Mac and the container:
 
@@ -95,7 +83,7 @@ You can edit files with Finder, VS Code on the Mac side, or with Neovim/Emacs in
 
 ---
 
-## 6. JupyterLab
+## 5. JupyterLab
 
 Inside the container run:
 
@@ -107,7 +95,7 @@ Then open your Mac browser and go to **http://localhost:8888**. Copy the token f
 
 ---
 
-## 7. GUI applications (Emacs, Zathura, Xournal++, Zotero, JabRef)
+## 6. GUI applications (Emacs, Zathura, Xournal++, Zotero, JabRef)
 
 OrbStack automatically forwards the display — GUI apps launched inside the container appear as normal macOS windows.
 
@@ -125,7 +113,7 @@ jabref         # amd64 only; not yet available for Apple Silicon
 
 ---
 
-## 8. LaTeX
+## 7. LaTeX
 
 Compile a document from inside the container:
 
@@ -144,7 +132,7 @@ VimTeX (in Neovim) and the Spacemacs LaTeX layer are already configured to call 
 
 ---
 
-## 9. Updating the image
+## 8. Updating the image
 
 When a new version of the image is released:
 
