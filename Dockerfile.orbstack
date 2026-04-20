@@ -92,6 +92,8 @@ RUN ZOTERO_ARCH=$([ "$TARGETARCH" = "arm64" ] && echo "linux-arm64" || echo "lin
     && rm /tmp/zotero.tar.xz
 
 # ── jabref (arch-aware; arm64 .deb available from v6.0 stable onwards) ────────
+# Pre-create XDG directory so jabref's post-install xdg-desktop-menu call succeeds
+RUN mkdir -p /usr/share/desktop-directories
 RUN if [ "$TARGETARCH" = "arm64" ]; then \
       JABREF_JQ='.assets[] | select(.name | test("_arm64\\.deb$")) | .browser_download_url'; \
     else \
