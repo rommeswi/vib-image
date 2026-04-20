@@ -102,24 +102,10 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Download vib and plugins
-      run: |
-        wget -q "https://github.com/Vanilla-OS/Vib/releases/download/v0.8.1/plugins.tar.xz"
-        tar -xf plugins.tar.xz
-        mv build/plugins plugins
-        ASSET_URLS=$(curl -s "https://api.github.com/repos/Vanilla-OS/vib-fsguard/releases/tags/v1.6.1" \
-          | grep -o -E 'https://github.com/[^"]+\.so')
-        for ASSET_URL in $ASSET_URLS; do
-          wget -qP plugins/ "$ASSET_URL"
-        done
-        wget -q "https://github.com/Vanilla-OS/Vib/releases/download/v0.8.1/vib"
-        chmod +x vib
-
-    - name: Install plugins to system path
-      run: sudo mkdir -p /usr/share/vib/plugins && sudo cp plugins/*.so /usr/share/vib/plugins/
-
-    - name: Build recipe
-      run: ./vib build recipe.yml
+    - uses: vanilla-os/vib-gh-action@v0.8.1
+      with:
+        recipe: 'recipe.yml'
+        plugins: 'Vanilla-OS/vib-fsguard:v1.5.3'
 
     - uses: actions/upload-artifact@v4
       with:
