@@ -68,12 +68,12 @@ After the first run, you do not need the long command above again.
 **Open a terminal in the container** — easiest via OrbStack:
 1. Open **OrbStack** from your Applications folder
 2. Click **Containers** in the sidebar
-3. Click `labstick` → click **Terminal**
+3. Click `labstick` → click **Terminal** (this opens kitty)
 
 Or from the macOS Terminal:
 ```bash
 docker start labstick
-docker exec -it labstick zsh
+docker exec -it labstick kitty
 ```
 
 **Stop the container** when you are done for the day:
