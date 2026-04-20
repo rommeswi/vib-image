@@ -17,13 +17,13 @@ RUN apt-get update && apt-get install -y \
     texlive-latex-base texlive-latex-recommended texlive-fonts-recommended \
     texlive-science texlive-latex-extra latexmk biber \
     # pdf viewer + annotator
-    zathura zathura-pdf-mupdf xournalpp \
+    zathura zathura-pdf-poppler xournalpp \
     # zotero runtime dep
     libdbus-glib-1-2 \
     # python scientific stack
     python3-venv virtualenv python3-debugpy \
     python3-pylsp python3-pylsp-mypy python3-pylsp-rope \
-    python3-pylsp-black python3-pylsp-isort python3-pylsp-jsonrpc python3-pylsp-ruff \
+    python3-pylsp-black python3-pylsp-isort python3-pylsp-jsonrpc \
     python3-diskcache python3-dask python3-dill \
     python3-scipy python3-numpy python3-pandas python3-jinja2 \
     python3-plotly python3-matplotlib python3-psycopg2 \
@@ -79,8 +79,8 @@ RUN UV_ARCH=$([ "$TARGETARCH" = "arm64" ] && echo "aarch64-unknown-linux-gnu" ||
     && mv uv uvx /usr/local/bin/ \
     && rm "uv-${UV_ARCH}.tar.gz"
 
-# ── jupyterlab ────────────────────────────────────────────────────────────────
-RUN uv pip install --system jupyterlab
+# ── jupyterlab + pip-only lsp plugins ────────────────────────────────────────
+RUN uv pip install --system jupyterlab python-lsp-ruff
 
 # ── zotero (arch-aware) ───────────────────────────────────────────────────────
 RUN ZOTERO_ARCH=$([ "$TARGETARCH" = "arm64" ] && echo "linux-arm64" || echo "linux-x86_64") \
