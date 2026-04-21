@@ -32,6 +32,29 @@ If you are installing Vanilla OS, select the installation option to use a custom
 > [!TIP]
 > The [Vib documentation](https://docs.vanillaos.org/collections/vib) has more information about recipe format, structure of modules and the supported fields.
 
+## Installing on a USB stick — fixing UEFI boot on unfamiliar hardware
+
+A fresh Vanilla OS installation places its bootloader only under `EFI/vanilla/`
+on the EFI System Partition. Many UEFI firmwares — especially on older or
+budget machines — will not find this entry when the stick is inserted into a
+machine it has never booted on before. They instead look exclusively for the
+**UEFI fallback path** `EFI/BOOT/BOOTX64.EFI`, and if that file is absent the
+stick simply does not appear as a boot option.
+
+To fix this, run the provided script as root after installation:
+
+```bash
+sudo scripts/fix-uefi-fallback.sh /dev/sdX   # replace sdX with your USB device
+```
+
+The script:
+1. Locates the EFI System Partition on the given device.
+2. Copies `shimx64.efi` → `EFI/BOOT/BOOTX64.EFI` (the standard fallback name).
+3. Copies `grubx64.efi` and `grub.cfg` into `EFI/BOOT/` alongside it.
+
+It is safe to run on a stick that already has the fallback in place — it will
+detect this and exit without making any changes.
+
 ## Explore
 
 Now, that you are aware of the basics, let's explore the files and directories present in this repository:
