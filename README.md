@@ -55,6 +55,22 @@ The script:
 It is safe to run on a stick that already has the fallback in place — it will
 detect this and exit without making any changes.
 
+To apply the fix manually, mount the ESP (the `vos-efi` partition) and run:
+
+```bash
+ESP=/path/to/mounted/esp   # e.g. /mnt after: mount /dev/sdX2 /mnt
+
+mkdir -p "$ESP/EFI/BOOT"
+cp "$ESP/EFI/vanilla/shimx64.efi" "$ESP/EFI/BOOT/BOOTX64.EFI"
+cp "$ESP/EFI/vanilla/grubx64.efi" "$ESP/EFI/BOOT/grubx64.efi"
+cp "$ESP/EFI/vanilla/grub.cfg"    "$ESP/EFI/BOOT/grub.cfg"
+```
+
+All three source files are installed by the Vanilla OS installer into `EFI/vanilla/` on the ESP:
+- `shimx64.efi` — the Secure Boot shim; becomes `BOOTX64.EFI` under the fallback path, which is the filename UEFI firmware looks for by spec.
+- `grubx64.efi` — the GRUB EFI binary, loaded by the shim.
+- `grub.cfg` — a minimal config that redirects GRUB to its full configuration on the `vos-boot` partition.
+
 ## Explore
 
 Now, that you are aware of the basics, let's explore the files and directories present in this repository:
