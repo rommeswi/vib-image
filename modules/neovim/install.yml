@@ -1,15 +1,12 @@
 name: neovim-install
 type: shell
 commands:
-- curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
-- mkdir -p /tmp
-- tar -C /tmp -xzf nvim-linux-x86_64.tar.gz
-- cd /tmp/nvim-linux-x86_64/
-- cp -r bin/* /usr/local/bin
-- cp -r lib/* /usr/local/lib
-- cp -r share/* /usr/local/share
-- rm -f /nvim-linux-x86_64.tar.gz
-- rm -rf /tmp/nvim-linux-x86_64
+- curl -Lo /tmp/nvim-linux-x86_64.tar.gz https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
+- tar -C /tmp -xzf /tmp/nvim-linux-x86_64.tar.gz
+- cp -r /tmp/nvim-linux-x86_64/bin/* /usr/local/bin
+- cp -r /tmp/nvim-linux-x86_64/lib/* /usr/local/lib
+- cp -r /tmp/nvim-linux-x86_64/share/* /usr/local/share
+- rm -rf /tmp/nvim-linux-x86_64.tar.gz /tmp/nvim-linux-x86_64
 modules:
 - name: neovim-requirements
   type: apt

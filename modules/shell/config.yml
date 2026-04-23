@@ -33,5 +33,6 @@ commands:
 - mkdir -p /etc/skel/.config/eza
 - cp /tmp/shell/eza-themes/themes/tokyonight.yml /etc/skel/.config/eza/theme.yml
 - rm -rf /etc/skel/.config/zsh/.zprezto/.git
+- cd /
 - rm -rf /shell
 - rm -rf /tmp/shell
