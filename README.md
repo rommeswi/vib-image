@@ -32,44 +32,104 @@ If you are installing Vanilla OS, select the installation option to use a custom
 > [!TIP]
 > The [Vib documentation](https://docs.vanillaos.org/collections/vib) has more information about recipe format, structure of modules and the supported fields.
 
-## Installing on a USB stick — fixing UEFI boot on unfamiliar hardware
+## Creating a Labstick USB
 
-A fresh Vanilla OS installation places its bootloader only under `EFI/vanilla/`
-on the EFI System Partition. Many UEFI firmwares — especially on older or
-budget machines — will not find this entry when the stick is inserted into a
-machine it has never booted on before. They instead look exclusively for the
-**UEFI fallback path** `EFI/BOOT/BOOTX64.EFI`, and if that file is absent the
-stick simply does not appear as a boot option.
+This section walks you through installing Vanilla OS on a fast USB stick and
+then switching it to the Labstick image. You will need two USB sticks:
 
-To fix this, run the provided script as root after installation:
+- **Installation stick** — any stick you have lying around, at least 8 GB.
+  Speed does not matter; it is only used once.
+- **Target stick** — the stick you will actually use day-to-day. At least
+  128 GB, and as fast as possible (USB 3.1 Gen 2 or better).
+
+### Step 1 — Prepare the installation stick with Ventoy
+
+[Ventoy](https://www.ventoy.net) turns a USB stick into a bootable menu that
+can hold multiple ISO files. Install it once on your installation stick; after
+that you can simply copy ISOs onto it without reflashing.
+
+1. Download the latest Ventoy release for your operating system from
+   [ventoy.net/en/download.html](https://www.ventoy.net/en/download.html).
+2. Unpack the archive and run `VentoyGUI` (Linux/macOS) or `Ventoy2Disk.exe`
+   (Windows). Select your installation stick and click **Install**.
+3. Download the latest Vanilla OS ISO from
+   [images.vanillaos.org](https://images.vanillaos.org). Copy the `.iso` file
+   onto the Ventoy partition that now appears on your installation stick.
+
+### Step 2 — Install Vanilla OS onto the target stick
+
+Plug both sticks into the computer you will use for installation. Boot from the
+installation stick (press the key your machine uses to open the boot menu —
+usually F11, F12, Esc, or Del — and select the Ventoy stick). In the Ventoy
+menu, select the Vanilla OS ISO and choose **Try Vanilla OS** to load the live
+desktop without touching any disks yet.
+
+Once the desktop has loaded, open the installer. When it asks where to install,
+choose **Manual partitioning** and select your target stick as the destination
+disk. Create the following partitions in order:
+
+| Size | Filesystem | Role |
+|------|-----------|------|
+| 1 GB | ext4 | Boot (`vos-boot`) |
+| 1 GB | FAT32, mark as EFI System Partition | EFI (`vos-efi`) |
+| 40 GB | Leave unformatted (LVM, managed by the installer) | Root |
+| Remaining space | ext4 | Data (`vos-var`) |
+
+> [!IMPORTANT]
+> Do not use automatic partitioning. The automatic layout only assigns 20 GB
+> to the root partition, which is not enough once you switch to the Labstick
+> image. 40 GB is the recommended minimum.
+
+Proceed through the rest of the installer with the standard options (no custom
+image needed at this point — you will switch to the Labstick image after first
+boot). When the installer finishes, **do not reboot yet**.
+
+### Step 3 — Fix UEFI boot so the stick works on any machine
+
+Without this step, the stick may fail to appear as a boot option on machines
+other than the one it was installed on. While you are still in the live desktop
+(before rebooting), open the **Files** application and find the small partition
+labelled `vos-efi` on your target stick. Open it, then:
+
+1. Navigate into the `EFI` folder and create a new folder called `BOOT` inside
+   of it.
+2. Navigate into the `vanilla` folder next to `BOOT`.
+3. Copy `shimx64.efi` into `BOOT` and rename the copy to `BOOTX64.EFI`.
+4. Copy `grubx64.efi` into `BOOT`, keeping the same name.
+5. Copy `grub.cfg` into `BOOT`, keeping the same name.
+
+Afterwards the `EFI` folder should contain both a `vanilla` folder (untouched)
+and a new `BOOT` folder with those three files in it.
+
+If you are comfortable with the terminal, open a terminal from the Activities
+menu and run the script from this repository instead:
 
 ```bash
-sudo scripts/fix-uefi-fallback.sh /dev/sdX   # replace sdX with your USB device
+sudo scripts/fix-uefi-fallback.sh /dev/sdX   # replace sdX with your target stick's device name
 ```
 
-The script:
-1. Locates the EFI System Partition on the given device.
-2. Copies `shimx64.efi` → `EFI/BOOT/BOOTX64.EFI` (the standard fallback name).
-3. Copies `grubx64.efi` and `grub.cfg` into `EFI/BOOT/` alongside it.
+### Step 4 — Boot the target stick and switch to the Labstick image
 
-It is safe to run on a stick that already has the fallback in place — it will
-detect this and exit without making any changes.
+Shut the computer down, remove the installation stick, and start the computer
+again. It should now boot from the target stick into Vanilla OS. Complete the
+first-run setup.
 
-To apply the fix manually, mount the ESP (the `vos-efi` partition) and run:
+Once at the desktop, open a terminal and switch the system to the Labstick
+image by editing the ABRoot configuration:
 
 ```bash
-ESP=/path/to/mounted/esp   # e.g. /mnt after: mount /dev/sdX2 /mnt
-
-mkdir -p "$ESP/EFI/BOOT"
-cp "$ESP/EFI/vanilla/shimx64.efi" "$ESP/EFI/BOOT/BOOTX64.EFI"
-cp "$ESP/EFI/vanilla/grubx64.efi" "$ESP/EFI/BOOT/grubx64.efi"
-cp "$ESP/EFI/vanilla/grub.cfg"    "$ESP/EFI/BOOT/grub.cfg"
+pkexec abroot config-editor
 ```
 
-All three source files are installed by the Vanilla OS installer into `EFI/vanilla/` on the ESP:
-- `shimx64.efi` — the Secure Boot shim; becomes `BOOTX64.EFI` under the fallback path, which is the filename UEFI firmware looks for by spec.
-- `grubx64.efi` — the GRUB EFI binary, loaded by the shim.
-- `grub.cfg` — a minimal config that redirects GRUB to its full configuration on the `vos-boot` partition.
+Change the `name` field to `rommeswi/labstick` and the `tag` field to `main`,
+then save and close the editor. Run:
+
+```bash
+abroot upgrade
+```
+
+After the upgrade completes, reboot. The stick is now running the Labstick
+image.
 
 ## Explore
 
