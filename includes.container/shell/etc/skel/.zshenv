@@ -6,6 +6,8 @@
 #
 
 export ZDOTDIR=~/.config/zsh
+export EDITOR=nvim
+export VISUAL=nvim
 export HISTFILE="$ZDOTDIR/.zsh_history"     # History file
 export ZSHRC="$ZDOTDIR/.zshrc"              # Zsh configuration file
 export ZSH_CACHE_DIR="$ZDOTDIR/cache"       # Cache directory for plugins
