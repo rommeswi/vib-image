@@ -1,7 +1,8 @@
 name: spacemacs
 type: shell
 commands:
-  - git clone https://github.com/syl20bnr/spacemacs /etc/skel/.emacs.d
+  - git clone --depth=1 https://github.com/syl20bnr/spacemacs /etc/skel/.emacs.d
+  - rm -rf /etc/skel/.emacs.d/.git
   - cp -rf /spacemacs/etc/skel/. /etc/skel/
   - mkdir -p /etc/skel/.config/systemd/user/default.target.wants
   - ln -s ../emacs.service /etc/skel/.config/systemd/user/default.target.wants/emacs.service

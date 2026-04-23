@@ -3,7 +3,7 @@ id: labstick
 stages:
 - id: build
   base: ghcr.io/vanilla-os/desktop:main # Optionally, Replace this image URL with a different one i.e. nvidia:main, etc
-  singlelayer: false
+  singlelayer: true
   labels:
     maintainer: self-maintained # Optionally, Replace this with your name
   args:
@@ -29,7 +29,6 @@ stages:
       packages:
       - vim
       - git
-      - clonezilla
       - meld
       - wl-clipboard
       - openssh-client
@@ -105,6 +104,7 @@ stages:
     commands:
     - apt-get install -y nodejs npm
     - npm install -g @anthropic-ai/claude-code
+    - npm cache clean --force
 
   # Put your custom actions before this comment
 

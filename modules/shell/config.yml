@@ -12,6 +12,7 @@ commands:
 # oh-my-posh configuration
 - mkdir -p /etc/skel/.config/oh-my-posh/themes
 - cp -r /root/.cache/oh-my-posh/themes /etc/skel/.config/oh-my-posh/themes
+- rm -rf /root/.cache/oh-my-posh
 # Install Prezto
 - git clone --recursive https://github.com/sorin-ionescu/prezto.git /etc/skel/.config/zsh/.zprezto
 # Install zpm-zsh ls plugin
@@ -31,5 +32,6 @@ commands:
 - git clone https://github.com/eza-community/eza-themes.git /tmp/shell/eza-themes
 - mkdir -p /etc/skel/.config/eza
 - cp /tmp/shell/eza-themes/themes/tokyonight.yml /etc/skel/.config/eza/theme.yml
+- rm -rf /etc/skel/.config/zsh/.zprezto/.git
 - rm -rf /shell
 - rm -rf /tmp/shell

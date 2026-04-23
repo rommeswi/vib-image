@@ -8,6 +8,10 @@ commands:
 - make -f make-linux.mk install
 - cd /tmp
 - rm -r zerotier
+- apt-get purge -y build-essential clang cargo pkg-config libssl-dev libminiupnpc-dev libnatpmp-dev
+- apt-get autoremove -y
+- apt-get clean
+- rm -rf /root/.cargo /root/.rustup
 modules:
 - name: make-deps
   type: apt

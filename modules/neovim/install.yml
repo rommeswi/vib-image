@@ -8,6 +8,8 @@ commands:
 - cp -r bin/* /usr/local/bin
 - cp -r lib/* /usr/local/lib
 - cp -r share/* /usr/local/share
+- rm -f /nvim-linux-x86_64.tar.gz
+- rm -rf /tmp/nvim-linux-x86_64
 modules:
 - name: neovim-requirements
   type: apt
@@ -18,4 +20,3 @@ modules:
     - fzf
     - ripgrep
     - fd-find
-    - nodejs
