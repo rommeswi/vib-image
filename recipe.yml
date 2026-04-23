@@ -33,6 +33,8 @@ stages:
       - wl-clipboard
       - openssh-client
       - linux-headers-amd64
+      - gh
+      - glab
 
   - name: shell-config
     type: includes
