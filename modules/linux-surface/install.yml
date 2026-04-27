@@ -1,0 +1,9 @@
+name: linux-surface-kernel
+type: shell
+commands:
+- wget -qO /tmp/surface.asc https://raw.githubusercontent.com/linux-surface/linux-surface/master/pkg/keys/surface.asc
+- gpg --dearmor < /tmp/surface.asc > /etc/apt/trusted.gpg.d/linux-surface.gpg
+- rm /tmp/surface.asc
+- echo "deb [arch=amd64] https://pkg.surfacelinux.com/debian release main" > /etc/apt/sources.list.d/linux-surface.list
+- apt-get update
+- apt-get install -y linux-image-surface linux-headers-surface libwacom-surface iptsd

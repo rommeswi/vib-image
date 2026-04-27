@@ -1,0 +1,55 @@
+name: labstick-surface
+id: labstick-surface
+stages:
+- id: build
+  base: LABSTICK_BASE_IMAGE
+  singlelayer: true
+  labels:
+    maintainer: self-maintained
+  args:
+    DEBIAN_FRONTEND: noninteractive
+
+  modules:
+  - name: init-setup
+    type: shell
+    commands:
+    - lpkg --unlock
+    - apt-get update
+
+  - name: linux-surface
+    type: includes
+    includes:
+    - modules/linux-surface/install.yml
+
+  - name: set-image-name-abroot
+    type: includes
+    includes:
+      - modules/abroot/config.yml
+
+  - name: cleanup
+    type: shell
+    commands:
+    - apt-get autoremove -y
+    - apt-get clean
+    - lpkg --lock
+
+  - name: fsguard
+    type: fsguard
+    CustomFsGuard: false
+    FsGuardLocation: "/usr/sbin/FsGuard"
+    GenerateKey: true
+    FilelistPaths: ["/usr/bin"]
+    modules:
+      - name: remove-prev-fsguard
+        type: shell
+        commands:
+          - rm -rf /FsGuard
+          - rm -f ./minisign.pub ./minisign.key
+          - chmod +x /usr/sbin/init
+
+  - name: cleanup2
+    type: shell
+    commands:
+      - rm -rf /tmp/*
+      - rm -rf /var/tmp/*
+      - rm -rf /sources
