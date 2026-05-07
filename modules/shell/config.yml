@@ -36,3 +36,6 @@ commands:
 - cd /
 - rm -rf /shell
 - rm -rf /tmp/shell
+# Set kitty as the system-wide default terminal emulator
+- update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator /usr/bin/kitty 50
+- update-alternatives --set x-terminal-emulator /usr/bin/kitty
