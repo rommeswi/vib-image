@@ -66,6 +66,11 @@ stages:
     - modules/gnome/extensions.yml
     - modules/gnome/config.yml
 
+  - name: theme-switcher
+    type: includes
+    includes:
+    - modules/theme-switcher/config.yml
+
 # For using Logitech mice like MX Master
 
   - name: logitech-config

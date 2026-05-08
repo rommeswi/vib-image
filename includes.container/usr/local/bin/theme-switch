@@ -1,0 +1,55 @@
+#!/bin/bash
+# Switches GNOME, kitty, nvim, and emacs between day (light) and night (dark) themes.
+# Usage: theme-switch [day|night|auto]
+set -euo pipefail
+
+MODE="${1:-auto}"
+
+if [ "$MODE" = "auto" ]; then
+    HOUR=$(date +%H)
+    if [ "$HOUR" -ge 8 ] && [ "$HOUR" -lt 20 ]; then
+        MODE=day
+    else
+        MODE=night
+    fi
+fi
+
+_switch_nvim() {
+    local bg="$1"
+    local runtime_dir="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}"
+    for sock in "$runtime_dir"/nvim*.* /tmp/nvim*; do
+        [ -S "$sock" ] || continue
+        nvim --server "$sock" --remote-send "<Esc>:set background=${bg}<CR>" 2>/dev/null || true
+    done
+}
+
+case "$MODE" in
+    day)
+        gsettings set org.gnome.desktop.interface color-scheme 'prefer-light'
+        gsettings set org.gnome.desktop.interface accent-color 'blue'
+
+        cp -f "$HOME/.config/kitty/tokyonight-day.conf" "$HOME/.config/kitty/current-theme.conf"
+        pkill -USR1 kitty 2>/dev/null || true
+
+        _switch_nvim light
+
+        emacsclient --eval "(change-theme-to-light)" 2>/dev/null || true
+        ;;
+
+    night)
+        gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+        gsettings set org.gnome.desktop.interface accent-color 'slate'
+
+        cp -f "$HOME/.config/kitty/tokyonight.conf" "$HOME/.config/kitty/current-theme.conf"
+        pkill -USR1 kitty 2>/dev/null || true
+
+        _switch_nvim dark
+
+        emacsclient --eval "(change-theme-to-dark)" 2>/dev/null || true
+        ;;
+
+    *)
+        echo "Usage: theme-switch [day|night|auto]" >&2
+        exit 1
+        ;;
+esac

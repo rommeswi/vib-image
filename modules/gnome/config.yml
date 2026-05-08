@@ -9,6 +9,8 @@ commands:
 - mkdir -p /etc/skel/Pictures
 - wget -O /etc/skel/Pictures/tokyonight.jpg "https://unsplash.com/photos/H4uGE2skayY/download?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzMwNTUyMDQ5fA&force=true"
 - cp /etc/skel/Pictures/tokyonight.jpg /usr/share/backgrounds/tokyonight.jpg
+- wget -O /etc/skel/Pictures/tokyo-day.jpg "https://unsplash.com/photos/FVK-lpEc-Bc/download?force=true"
+- cp /etc/skel/Pictures/tokyo-day.jpg /usr/share/backgrounds/tokyo-day.jpg
 - tar -xzf /gnome/Colorful-Dark-Icons.tar.gz -C /usr/share/icons/
 - gtk-update-icon-cache -f /usr/share/icons/Colorful-Dark-Icons || true
 - rm -rf /gnome

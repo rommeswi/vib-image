@@ -3,7 +3,7 @@ favorite-apps=['org.gnome.Nautilus.desktop', 'kitty.desktop', 'emacsclient.deskt
 enabled-extensions=['vso@vanillaos.org', 'system-monitor@gnome-shell-extensions.gcampax.github.com', 'drive-menu@gnome-shell-extensions.gcampax.github.com', 'screenshot-window-sizer@gnome-shell-extensions.gcampax.github.com', 'GPaste@gnome-shell-extensions.gnome.org', 'windowsNavigator@gnome-shell-extensions.gcampax.github.com', 'gsconnect@andyholmes.github.io', 'ddterm@amezin.github.com', 'gTile@vibou', 'burn-my-windows@schneegans.github.com', 'AlphabeticalAppGrid@stuarthayhurst', 'places-menu@gnome-shell-extensions.gcampax.github.com', 'apps-menu@gnome-shell-extensions.gcampax.github.com']
 
 [org/gnome/desktop/background]
-picture-uri='file:///usr/share/backgrounds/tokyonight.jpg'
+picture-uri='file:///usr/share/backgrounds/tokyo-day.jpg'
 picture-uri-dark='file:///usr/share/backgrounds/tokyonight.jpg'
 
 [org/gnome/desktop/interface]

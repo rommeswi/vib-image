@@ -1,0 +1,6 @@
+[Unit]
+Description=Switch to day (light) theme
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/theme-switch day

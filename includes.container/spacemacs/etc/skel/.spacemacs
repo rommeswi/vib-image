@@ -131,6 +131,7 @@ This function should only modify configuration layer settings."
    ;; Also include the dependencies as they will not be resolved automatically.
    dotspacemacs-additional-packages '(
                                       auto-dim-other-buffers
+                                      tokyo-night-theme
                                       ;;xenops
                                       )
 
@@ -305,8 +306,8 @@ It should only modify the values of Spacemacs settings."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(solarized-light-high-contrast
-                         rebecca)
+   dotspacemacs-themes '(tokyo-night
+                         tokyo-night-day)
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
    ;; `all-the-icons', `custom', `doom', `vim-powerline' and `vanilla'. The
@@ -633,6 +634,9 @@ configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
 
+  ;; Make the local tokyo-night-day-theme.el discoverable by load-theme
+  (add-to-list 'custom-theme-load-path (expand-file-name "~/.emacs.d/private/themes"))
+
   (defun latex/post-init-auctex ()
     (spacemacs|use-package-add-hook tex
       :post-config
@@ -759,18 +763,17 @@ package is loaded, you should place your code here."
   ;;        Theme
   ;; ~~~~~~~~~~~~~~~~~~~~~~
 
-  ;; Choose theme depending on dark or light mode in GTK
-  ;; use external command to call the following functions
-  ;; emacsclient --eval "(change-theme-to-light)"
+  ;; Choose theme depending on dark or light mode in GTK.
+  ;; Called by: emacsclient --eval "(change-theme-to-light)"
   (defun change-theme-to-light ()
-    (spacemacs/load-theme 'solarized-light-high-contrast)
+    (load-theme 'tokyo-night-day t)
     (dolist (buf (buffer-list))
       (with-current-buffer buf
         (when (eq major-mode 'pdf-view-mode)
           (pdf-view-midnight-minor-mode -1)))))
 
   (defun change-theme-to-dark ()
-    (spacemacs/load-theme 'rebecca)
+    (spacemacs/load-theme 'tokyo-night)
     (dolist (buf (buffer-list))
       (with-current-buffer buf
         (when (eq major-mode 'pdf-view-mode)
@@ -1013,10 +1016,10 @@ package is loaded, you should place your code here."
   (setq-default pdf-view-use-scaling t)
   (setq-default pdf-view-display-size 'fit-page)
 
-  (setq pdf-view-midnight-colors '("#f1eff8" . "#292a44"))
+  (setq pdf-view-midnight-colors '("#a9b1d6" . "#1a1b26"))
   (add-hook 'pdf-view-mode-hook
             (lambda ()
-              (if (eq spacemacs--cur-theme 'rebecca)
+              (if (eq spacemacs--cur-theme 'tokyo-night)
                   (pdf-view-midnight-minor-mode 1)
                 (pdf-view-midnight-minor-mode -1))))
 
@@ -1081,8 +1084,7 @@ This function is called at the very end of Spacemacs initialization."
  ;; If there is more than one, they won't work right.
  '(TeX-engine-alist '((platex "Japanese Tex/LaTeX" "ptex" "platex" "")))
  '(compilation-scroll-output t)
- '(custom-safe-themes
-   '("18cf5d20a45ea1dff2e2ffd6fbcd15082f9aa9705011a3929e77129a971d1cb3" "00445e6f15d31e9afaa23ed0d765850e9cd5e929be5e8e63b114a3346236c44c" default))
+ '(custom-safe-themes t)
  '(evil-surround-pairs-alist
    '((40 "( " . " )")
      (91 "[ " . " ]")
