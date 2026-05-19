@@ -1,0 +1,7 @@
+name: neo-ai-config
+type: shell
+commands:
+- cp /var/opt/neo-ai/config/config.yaml.example /var/opt/neo-ai/config/config.yaml
+- sed -i 's/mode: "lm_studio"/mode: "digital_ocean"/' /var/opt/neo-ai/config/config.yaml
+- chmod 664 /var/opt/neo-ai/config/config.yaml
+- chmod +x /usr/local/bin/neo-shell

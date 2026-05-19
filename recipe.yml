@@ -113,6 +113,12 @@ stages:
     - npm install -g @anthropic-ai/claude-code
     - npm cache clean --force
 
+  - name: neo-ai
+    type: includes
+    includes:
+    - modules/neo-ai/install.yml
+    - modules/neo-ai/config.yml
+
   # Put your custom actions before this comment
 
   - name: set-image-name-abroot

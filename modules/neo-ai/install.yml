@@ -1,0 +1,8 @@
+name: neo-ai-install
+type: shell
+commands:
+- apt-get install -y python3-venv python3-pip
+- mkdir -p /var/opt
+- git clone https://github.com/vasco0x4/neo-ai.git /var/opt/neo-ai
+- bash -c 'cd /var/opt/neo-ai && python3 -m venv venv && source venv/bin/activate && bash install.sh'
+- chmod -R a+rX /var/opt/neo-ai

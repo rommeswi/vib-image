@@ -1,0 +1,4 @@
+#!/bin/bash
+source /var/opt/neo-ai/venv/bin/activate
+python3 /var/opt/neo-ai/main.py "$@"
+exec zsh
