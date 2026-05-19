@@ -1,0 +1,19 @@
+# Operation Mode
+mode: "digital_ocean"
+
+# LM Studio Configuration (Local) — unused in digital_ocean mode
+api_url: "http://127.0.0.1:1234/v1"
+api_key: ""
+model: ""
+
+# DigitalOcean Configuration (Cloud)
+digital_ocean:
+  agent_id: "your-agent-id"
+  agent_key: "your-agent-key"
+  agent_endpoint: "https://your-endpoint.app/api/v1"
+  model: "model-name"
+
+# Security Settings
+security:
+  auto_approve_commands: false
+  require_approval: true
