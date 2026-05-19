@@ -41,6 +41,7 @@ stages:
     includes:
     - modules/shell/debs.yml
     - modules/shell/config.yml
+    - modules/shell/skel-sync.yml
 
 # Streaming and video recording (OBS, DaVinci Resolve)
 

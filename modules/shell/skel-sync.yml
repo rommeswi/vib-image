@@ -1,0 +1,6 @@
+name: skel-sync-setup
+type: shell
+commands:
+- apt-get install -y rsync
+- chmod +x /usr/local/bin/skel-sync
+- systemctl --global enable skel-sync.service

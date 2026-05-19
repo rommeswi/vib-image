@@ -1,0 +1,10 @@
+[Unit]
+Description=Sync new skel files to home directory
+After=default.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/skel-sync
+
+[Install]
+WantedBy=default.target
