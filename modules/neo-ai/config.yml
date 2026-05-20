@@ -14,4 +14,3 @@ commands:
   )
   p.write_text(src)
   EOF
-- chmod +x /usr/local/bin/neo-shell

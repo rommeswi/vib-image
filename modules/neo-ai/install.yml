@@ -5,3 +5,4 @@ commands:
 - git clone https://github.com/vasco0x4/neo-ai.git /usr/local/share/neo-ai
 - bash -c 'cd /usr/local/share/neo-ai && python3 -m venv venv && source venv/bin/activate && bash install.sh'
 - chmod -R a+rX /usr/local/share/neo-ai
+- chmod +x /usr/local/bin/neo-shell
