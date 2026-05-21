@@ -38,6 +38,10 @@ Modules are wired into `recipe.yml` under `type: includes` entries. New custom m
 - **`includes.container/usr/share/abroot/`**: Contains the ABRoot configuration — this controls what image URL Vanilla OS will pull during `abroot upgrade`.
 - **`includes.container/vanilla-first-setup/`**: Controls the first-run setup wizard shown to new users.
 
+## Live System Constraints
+
+The deployed Vanilla OS instance running this repository is **immutable** (managed by ABRoot). The root filesystem is read-only on the live system. Do not attempt to directly modify files under `/usr`, `/etc`, or other system paths on the running OS — those operations will fail or have no lasting effect. All changes must go through the vib image repository and take effect after the next image build and `abroot upgrade`.
+
 ## Modifying the Image
 
 - To add APT packages to the base image: add them to the `lab-packages` module in `recipe.yml` or create a new module.
