@@ -12,6 +12,7 @@ commands:
 - wget -O /etc/skel/Pictures/tokyo-day.jpg "https://unsplash.com/photos/FVK-lpEc-Bc/download?force=true"
 - cp /etc/skel/Pictures/tokyo-day.jpg /usr/share/backgrounds/tokyo-day.jpg
 - tar -xzf /gnome/Colorful-Dark-Icons.tar.gz -C /usr/share/icons/
+- sed -i '/^FollowsColorScheme/d' /usr/share/icons/Colorful-Dark-Icons/index.theme
 - gtk-update-icon-cache -f /usr/share/icons/Colorful-Dark-Icons || true
 - rm -rf /gnome
 plugins:
