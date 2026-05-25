@@ -8,8 +8,7 @@
     "post_run": [
         "sh -c /usr/bin/__first_setup_reset_session",
         "!nextBoot sh -c /usr/bin/__first_setup_cleanup",
-        "!nextBoot !noRoot vso pico-init",
-        "rm -f /etc/vanilla-first-setup-done"
+        "!nextBoot !noRoot vso pico-init"
     ],
     "tour_app": "vanilla-tour",
     "tour": {
