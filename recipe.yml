@@ -120,6 +120,11 @@ stages:
     - modules/neo-ai/install.yml
     - modules/neo-ai/config.yml
 
+  - name: heroku
+    type: includes
+    includes:
+    - modules/heroku/install.yml
+
   # Put your custom actions before this comment
 
   - name: set-image-name-abroot
