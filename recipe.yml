@@ -72,6 +72,11 @@ stages:
     includes:
     - modules/theme-switcher/config.yml
 
+  - name: paperwm
+    type: includes
+    includes:
+    - modules/paperwm/install.yml
+
 # For using Logitech mice like MX Master
 
   - name: logitech-config

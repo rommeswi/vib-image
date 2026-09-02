@@ -1,0 +1,25 @@
+name: paperwm-install
+type: shell
+commands:
+# PaperWM publishes tags but attaches no artifacts to them, so the install comes
+# from a VCS ref. Pinned to the commit behind v50.0.1, whose metadata declares
+# GNOME 45-50. Never point this at a branch; see CLAUDE.md.
+- PAPERWM_REF=af20e70e5d3f9c83a7e1bd548fbcb9377a4b698b
+- PAPERWM_DIR=/usr/share/gnome-shell/extensions/paperwm@paperwm.github.com
+- git clone --filter=blob:none https://github.com/paperwm/PaperWM.git "$PAPERWM_DIR"
+- git -C "$PAPERWM_DIR" checkout --quiet "$PAPERWM_REF"
+- rm -rf "$PAPERWM_DIR/.git"
+# The repo carries a committed gschemas.compiled; rebuild it against this
+# system's glib rather than trusting the checked-in one.
+- glib-compile-schemas "$PAPERWM_DIR/schemas"
+- chmod -R a+rX "$PAPERWM_DIR"
+# Installed only. PaperWM is absent from enabled-extensions in
+# includes.container/etc/dconf/db/local.d/00-lab-defaults, so it stays off until
+# it is switched on by hand.
+modules:
+- name: paperwm-req
+  type: apt
+  source:
+    packages:
+    - git
+    - libglib2.0-bin
