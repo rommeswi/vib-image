@@ -79,9 +79,10 @@ _switch_shell_theme() {
 # light terminal. Rather than flipping the `theme` setting between light and
 # dark -- which a running session does not pick up, and which churns a
 # settings.json that may be under version control -- point the setting once at a
-# custom theme and rewrite that theme's file per mode. Claude Code watches
-# ~/.claude/themes, so the running session repaints. A theme's slug is its
-# filename, so themes/labstick.json is referenced as custom:labstick.
+# custom theme and rewrite that theme's file per mode. A theme's slug is its
+# filename, so themes/labstick.json is referenced as custom:labstick. A session
+# already running keeps the theme it started with either way; the gain over
+# flipping the setting is that settings.json stays constant.
 #
 # The one override is the background of a submitted message, set to GNOME's
 # accent so it matches the desktop in both modes. There is no theme key for that
