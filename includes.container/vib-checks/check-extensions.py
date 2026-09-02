@@ -29,7 +29,15 @@ EXTENSION_DIRS = [
 ]
 DCONF_DEFAULTS = pathlib.Path("/etc/dconf/db/local.d/00-lab-defaults")
 
-ALLOW_INCOMPATIBLE: dict[str, str] = {}
+ALLOW_INCOMPATIBLE: dict[str, str] = {
+    # Ships in the Vanilla OS base image and still declares 46-49 after the base
+    # moved to GNOME 50 (2026-09-02). Nothing in this repository can update it,
+    # and failing every build on it would block security updates as well. GNOME
+    # will refuse to load it, so the VSO shell indicator is absent until Vanilla
+    # OS catches up; abroot and the vso CLI are unaffected. Drop this entry once
+    # the base carries a vso that declares 50.
+    "vso@vanillaos.org": "base image extension, lags the GNOME 50 bump (2026-09-02)",
+}
 
 
 def shell_major() -> str:
