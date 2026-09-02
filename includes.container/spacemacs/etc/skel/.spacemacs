@@ -771,15 +771,21 @@ package is loaded, you should place your code here."
 
   ;; Choose theme depending on dark or light mode in GTK.
   ;; Called by: emacsclient --eval "(change-theme-to-light)"
+  ;; load-theme stacks: without disabling the old theme first, only the faces
+  ;; the new one redefines actually change. spacemacs/load-theme's own disable
+  ;; argument drops just the theme passed as fallback, so sweep
+  ;; custom-enabled-themes explicitly.
   (defun change-theme-to-light ()
-    (load-theme 'tokyo-night-day t)
+    (mapc #'disable-theme custom-enabled-themes)
+    (spacemacs/load-theme 'tokyo-night-day nil t)
     (dolist (buf (buffer-list))
       (with-current-buffer buf
         (when (eq major-mode 'pdf-view-mode)
           (pdf-view-midnight-minor-mode -1)))))
 
   (defun change-theme-to-dark ()
-    (spacemacs/load-theme 'tokyo-night)
+    (mapc #'disable-theme custom-enabled-themes)
+    (spacemacs/load-theme 'tokyo-night nil t)
     (dolist (buf (buffer-list))
       (with-current-buffer buf
         (when (eq major-mode 'pdf-view-mode)
