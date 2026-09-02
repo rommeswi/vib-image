@@ -35,8 +35,12 @@ The script is idempotent — running it repeatedly in the same mode is safe.
 
 1. **GNOME** — calls `gsettings set org.gnome.desktop.interface color-scheme` and `accent-color`.  GNOME automatically picks `picture-uri` (day wallpaper) or `picture-uri-dark` (night wallpaper) to match.
 2. **kitty** — copies `~/.config/kitty/tokyonight-day.conf` or `~/.config/kitty/tokyonight.conf` over `~/.config/kitty/current-theme.conf`, then sends `SIGUSR1` to every running kitty process to reload the config.
-3. **Neovim** — iterates all nvim server sockets under `$XDG_RUNTIME_DIR` and `/tmp`, sending `:set background=light` or `:set background=dark` to each.
-4. **Emacs** — calls `emacsclient --eval "(change-theme-to-light)"` or `"(change-theme-to-dark)"`.
+3. **ddterm** — writes `foreground-color`, `background-color` and the 16-colour `palette` under `/com/github/amezin/ddterm/`.  ddterm repaints open terminals as the keys change.
+4. **oh-my-posh** — copies `~/.config/oh-my-posh/config-day.json` or `config-night.json` over `config.json`.  oh-my-posh re-reads its config on every prompt, so running shells repaint at the next prompt.
+5. **Claude Code** — sets `theme` to `light` or `dark` in `~/.claude/settings.json`.  Claude Code draws its own input box, dim hints and diff highlighting, and defaults to `dark`, which is unreadable on a light terminal.  The key is rewritten only when it actually differs.
+6. **Mode marker** — writes `day` or `night` to `$XDG_STATE_HOME/theme-mode` (`~/.local/state/theme-mode`).  Anything that renders its own colours can read one file instead of querying GNOME on every redraw; the Claude Code status line does exactly that.
+7. **Neovim** — iterates all nvim server sockets under `$XDG_RUNTIME_DIR` and `/tmp`, sending `:set background=light` or `:set background=dark` to each.
+8. **Emacs** — calls `emacsclient --eval "(change-theme-to-light)"` or `"(change-theme-to-dark)"`.
 
 Apps that are not running are silently skipped.
 
@@ -139,6 +143,29 @@ Derived directly from `folke/tokyonight.nvim` `day` style.
 | Cursor | `#3760bf` |
 
 ---
+
+## ddterm and the Prompt
+
+ddterm and oh-my-posh both used to carry a single hardcoded dark palette, so they stayed dark through the day.
+
+**ddterm** stores colours in dconf under `/com/github/amezin/ddterm/`.  `includes.container/etc/dconf/db/local.d/00-ddterm` supplies the initial (night) palette and the font; `theme-switch` writes user-level keys for the current mode, which shadow those defaults from the first switch onward.  The day palette is the same Tokyo Night Day set kitty uses, converted to ddterm's `rgb(r,g,b)` form.
+
+**oh-my-posh** keeps the same layout in both variants and differs only in colour.  The day file replaces the pale pastels, which are unreadable on `#e1e2e7`:
+
+| Segment | Night | Day |
+|---------|-------|-----|
+| session (`user on host`) | `#ffbebc` | `#f52a65` |
+| inline words (`on`, `at`, `MEM:`) | `#ffffff` | `#6172b0` |
+| time | `#bc93ff` | `#9854f1` |
+| git | `#ee79d1` | `#b15c00` |
+| path | `#ffafd2` | `#2e7de9` |
+| execution time, sysinfo, status | `#94ffa2` / `#a9ffb4` | `#587539` |
+| python | `#fffd82` | `#8c6c3e` |
+| status on error | `#ef5350` | `#f52a65` |
+
+## Terminal Fonts
+
+kitty, ddterm and GNOME's `monospace-font-name` are all set to `MesloLGL Nerd Font 11` so a terminal looks the same whichever one opens it, and so Claude Code — which has no font of its own and inherits the terminal's — does too.
 
 ## Neovim
 
@@ -282,6 +309,11 @@ Wallpapers are committed rather than downloaded during the build. The build-time
 | `~/.config/kitty/tokyonight-day.conf` | Kitty day palette |
 | `~/.config/kitty/tokyonight.conf` | Kitty night palette |
 | `~/.config/kitty/current-theme.conf` | Active kitty palette (managed by `theme-switch`) |
+| `~/.config/oh-my-posh/config-day.json` | Prompt colours for day |
+| `~/.config/oh-my-posh/config-night.json` | Prompt colours for night |
+| `~/.config/oh-my-posh/config.json` | Active prompt config (managed by `theme-switch`) |
+| `~/.local/state/theme-mode` | Current mode, for tools that colour themselves |
+| `includes.container/etc/dconf/db/local.d/00-ddterm` | ddterm defaults (initial palette and font) |
 | `~/.config/nvim/lua/config/options.lua` | Detects GNOME scheme at nvim startup |
 | `~/.config/nvim/lua/plugins/tokyonight.lua` | Responds to `background` option changes |
 | `~/.emacs.d/private/themes/tokyo-night-day-theme.el` | Custom Emacs day theme |
