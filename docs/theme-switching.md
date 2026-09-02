@@ -92,7 +92,20 @@ GNOME Shell reads `picture-uri` when `color-scheme` is `prefer-light` and `pictu
 
 These are dconf *defaults*.  A user who has ever picked a wallpaper in Settings has both keys set in their own database, which shadows the defaults and pins one image across both modes.  `gsettings reset org.gnome.desktop.background picture-uri picture-uri-dark` puts such a user back on the image defaults.
 
-The GNOME Shell top bar needs no configuration: since GNOME 47 the stock stylesheet ships light and dark variants and picks one from `color-scheme`, so it follows the switch on its own.  A fixed shell theme installed through the User Themes extension overrides that and holds the panel at one colour in both modes.
+### Shell themes
+
+Since GNOME 47 the stock shell stylesheet ships light and dark variants and picks one from `color-scheme`, so the top bar and menus follow the switch on their own.  The image overrides two things on top of that, through a pair of user shell themes in `/usr/share/themes/`:
+
+| | LabDay | LabNight |
+|---|---|---|
+| Base | `gnome-shell-light.css` | `gnome-shell-dark.css` |
+| `#panel` | transparent | transparent |
+| Popover shell, modal dialogs | `#f3eee2` (stock `#fafafb`) | `#24283b` (stock `#36363a`) |
+| Cards: quick toggles, calendar, notifications | `#fbf8f1` (stock `#ffffff`) | `#2f3449` (stock `#47474c`) |
+
+The transparent panel lets the wallpaper through instead of laying a bar over it.  The menu surfaces move off GNOME's neutral white and grey — warm sand by day to sit with the sunrise wallpaper, Tokyo Night by night to match kitty and ddterm — keeping stock's relationship of lighter cards on a darker popover shell.
+
+`theme-switch` sets `org.gnome.shell.extensions.user-theme name` to the right one, and enables the User Themes extension first, since a user whose own `enabled-extensions` list predates the image default will not have it on.  A single fixed shell theme would hold the panel and menus at one colour in both modes, which is why there is a pair rather than one.
 
 ### Wallpapers
 

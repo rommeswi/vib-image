@@ -1,0 +1,28 @@
+/* Night counterpart to LabDay: stock dark shell, panel cleared so the wallpaper
+   shows through, and the menu surfaces moved from GNOME's neutral greys
+   (#36363a shell, #47474c cards) onto the Tokyo Night palette that kitty and
+   ddterm use, keeping stock's lighter-cards-on-darker-shell relationship. */
+@import url("resource:///org/gnome/shell/theme/gnome-shell-dark.css");
+
+#panel {
+  background-color: transparent;
+}
+
+/* Popover shell: quick settings, the calendar drop-down, app menus */
+.popup-menu-content,
+.candidate-popup-content,
+.modal-dialog {
+  background-color: #24283b;
+  border-color: #414868;
+}
+
+/* Cards laid on top of it: quick toggles, notifications, calendar, clocks */
+.calendar,
+.datemenu-today-button,
+.quick-toggle-menu,
+.message,
+.events-button,
+.world-clocks-button,
+.weather-button {
+  background-color: #2f3449;
+}

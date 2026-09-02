@@ -1,0 +1,28 @@
+/* Stock light shell, with the panel cleared so the wallpaper shows through and
+   the menu surfaces warmed off pure white to sit with the sunrise wallpaper.
+   Stock uses #fafafb for the popover shell and #ffffff for the cards inside it;
+   the tints below keep that same light-on-lighter relationship. */
+@import url("resource:///org/gnome/shell/theme/gnome-shell-light.css");
+
+#panel {
+  background-color: transparent;
+}
+
+/* Popover shell: quick settings, the calendar drop-down, app menus */
+.popup-menu-content,
+.candidate-popup-content,
+.modal-dialog {
+  background-color: #f3eee2;
+  border-color: #e6ded0;
+}
+
+/* Cards laid on top of it: quick toggles, notifications, calendar, clocks */
+.calendar,
+.datemenu-today-button,
+.quick-toggle-menu,
+.message,
+.events-button,
+.world-clocks-button,
+.weather-button {
+  background-color: #fbf8f1;
+}
