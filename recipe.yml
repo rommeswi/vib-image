@@ -12,7 +12,7 @@ stages:
   # Commands to run first before building the modules
   runs:
     commands:
-      - echo 'APT::Install-Recommends "1";' > /etc/apt/apt.conf.d/01norecommends
+      - echo 'APT::Install-Recommends "0";' > /etc/apt/apt.conf.d/01norecommends
 
   modules:
   - name: init-setup
