@@ -75,32 +75,68 @@ _switch_shell_theme() {
     gsettings set org.gnome.shell.extensions.user-theme name "$name" 2>/dev/null || true
 }
 
-# Claude Code renders its own UI colours and defaults to the dark theme, which
-# is unreadable on a light terminal. Rewrite only when the value differs, so a
-# home directory kept under version control stays clean between switches.
+# Claude Code draws its own UI and defaults to the dark theme, unreadable on a
+# light terminal. Rather than flipping the `theme` setting between light and
+# dark -- which a running session does not pick up, and which churns a
+# settings.json that may be under version control -- point the setting once at a
+# custom theme and rewrite that theme's file per mode. Claude Code watches
+# ~/.claude/themes, so the running session repaints. A theme's slug is its
+# filename, so themes/labstick.json is referenced as custom:labstick.
+#
+# The one override is the background of a submitted message, set to GNOME's
+# accent so it matches the desktop in both modes. There is no theme key for that
+# element's text colour: it follows the base theme, which gives white-ish text
+# on the accent in dark mode and dark text in light mode.
 _switch_claude() {
-    local theme="$1"
-    local settings="$HOME/.claude/settings.json"
-    [ -f "$settings" ] || return 0
+    local base="$1"
     command -v python3 >/dev/null 2>&1 || return 0
-    python3 - "$settings" "$theme" <<'PY' 2>/dev/null || true
-import json, os, sys, tempfile
+    local accent
+    accent=$(gsettings get org.gnome.desktop.interface accent-color 2>/dev/null | tr -d "'")
+    python3 - "$HOME/.claude" "$base" "$accent" <<'PYEOF' 2>/dev/null || true
+import json, os, pathlib, sys, tempfile
 
-path, theme = sys.argv[1], sys.argv[2]
+config_dir, base, accent = pathlib.Path(sys.argv[1]), sys.argv[2], sys.argv[3]
+
+# libadwaita accent_bg_color: the value GNOME itself paints white text on.
+ACCENTS = {
+    "blue": "#3584e4", "teal": "#2190a4", "green": "#3a944a",
+    "yellow": "#c88800", "orange": "#ed5b00", "red": "#e62d42",
+    "pink": "#d56199", "purple": "#9141ac", "slate": "#6f8396",
+}
+bg = ACCENTS.get(accent, ACCENTS["blue"])
+
+
+def lighten(colour, amount=0.15):
+    r, g, b = (int(colour[i:i + 2], 16) for i in (1, 3, 5))
+    return "#%02x%02x%02x" % tuple(round(c + (255 - c) * amount) for c in (r, g, b))
+
+
+themes = config_dir / "themes"
+themes.mkdir(parents=True, exist_ok=True)
+(themes / "labstick.json").write_text(json.dumps({
+    "name": "Labstick",
+    "base": base,
+    "overrides": {
+        "userMessageBackground": bg,
+        "userMessageBackgroundHover": lighten(bg),
+    },
+}, indent=2) + "\n")
+
+# Point the setting at the theme once; after that the file carries the mode.
+settings_path = config_dir / "settings.json"
 try:
-    with open(path) as fh:
-        settings = json.load(fh)
+    settings = json.loads(settings_path.read_text())
 except (OSError, ValueError):
     sys.exit(0)
-if settings.get("theme") == theme:
+if settings.get("theme") == "custom:labstick":
     sys.exit(0)
-settings["theme"] = theme
-tmp = tempfile.NamedTemporaryFile("w", dir=os.path.dirname(path), delete=False)
+settings["theme"] = "custom:labstick"
+tmp = tempfile.NamedTemporaryFile("w", dir=settings_path.parent, delete=False)
 json.dump(settings, tmp, indent=2)
 tmp.write("\n")
 tmp.close()
-os.replace(tmp.name, path)
-PY
+os.replace(tmp.name, settings_path)
+PYEOF
 }
 
 case "$MODE" in
