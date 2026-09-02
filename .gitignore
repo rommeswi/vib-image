@@ -3,3 +3,7 @@ Containerfile
 downloads/
 /plugins/
 sources/
+
+# Python bytecode from running the build checks locally
+__pycache__/
+*.pyc
