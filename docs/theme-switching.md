@@ -86,6 +86,10 @@ picture-uri-dark='file:///usr/share/backgrounds/tokyonight.jpg'
 
 GNOME Shell reads `picture-uri` when `color-scheme` is `prefer-light` and `picture-uri-dark` when it is `prefer-dark`.  The theme-switch script only needs to change `color-scheme`; the wallpaper follows automatically.
 
+These are dconf *defaults*.  A user who has ever picked a wallpaper in Settings has both keys set in their own database, which shadows the defaults and pins one image across both modes.  `gsettings reset org.gnome.desktop.background picture-uri picture-uri-dark` puts such a user back on the image defaults.
+
+The GNOME Shell top bar needs no configuration: since GNOME 47 the stock stylesheet ships light and dark variants and picks one from `color-scheme`, so it follows the switch on its own.  A fixed shell theme installed through the User Themes extension overrides that and holds the panel at one colour in both modes.
+
 ### Wallpapers
 
 | File | Photo | Mode |
@@ -93,7 +97,7 @@ GNOME Shell reads `picture-uri` when `color-scheme` is `prefer-light` and `pictu
 | `/usr/share/backgrounds/tokyo-day.jpg` | clement-souchet — Tokyo Tower at sunrise (Unsplash `FVK-lpEc-Bc`) | day |
 | `/usr/share/backgrounds/tokyonight.jpg` | night cityscape (Unsplash `H4uGE2skayY`) | night |
 
-Both are downloaded at image build time and also placed in `~/Pictures/` for each user.
+Both files are committed under `includes.container/usr/share/backgrounds/` and copied verbatim into the image.
 
 ---
 
@@ -114,6 +118,8 @@ include current-theme.conf
 ```
 
 `current-theme.conf` is initialised to the dark theme at image build time.  `theme-switch` replaces its contents and reloads kitty with `pkill -USR1 kitty`.
+
+`skel-sync` copies `/etc/skel` into a home directory with `rsync --ignore-existing`, so a `~/.config/kitty/kitty.conf` that predates the switcher is never updated and keeps whatever `include` line it had.  If kitty ignores the switch, check that its last line reads `include current-theme.conf` and not `include tokyonight.conf`.
 
 ### Tokyo Night Day palette
 
@@ -252,19 +258,18 @@ These match the Tokyo Night dark background (`#1a1b26`) and foreground (`#a9b1d6
 
 ## Adding More Wallpapers
 
-The project root contains reference photos from Unsplash whose filenames encode the photo ID and author:
+The repository keeps a few reference photos from Unsplash at the project root, with the photo ID and author in the filename:
 
 ```
-clement-souchet-FVK-lpEc-Bc-unsplash.jpg   ← current day wallpaper
 tobias-wilden-bNeYImiDDbw-unsplash.jpg
 graham-powell-wood-GqWwKK_Ps_A-unsplash.jpg
 sam-lau-hJnXMWAZsBs-unsplash.jpg
 leo-segundo-d7Q7up8OGZQ-unsplash.jpg
 ```
 
-To switch the day wallpaper to a different photo, update the `wget` line in `modules/gnome/config.yml` with the new photo ID, and update `picture-uri` in `includes.container/etc/dconf/db/local.d/00-lab-defaults` to point to the new filename.
+To use one as the day wallpaper, copy it to `includes.container/usr/share/backgrounds/tokyo-day.jpg`, or add it under a new name there and point `picture-uri` in `includes.container/etc/dconf/db/local.d/00-lab-defaults` at the new file.
 
----
+Wallpapers are committed rather than downloaded during the build. The build-time `wget` of the Unsplash URLs produced 0-byte files and did not fail the build, so the dconf defaults pointed at wallpapers that were not there.
 
 ## File Reference
 
@@ -283,5 +288,5 @@ To switch the day wallpaper to a different photo, update the `wget` line in `mod
 | `/usr/share/backgrounds/tokyo-day.jpg` | Day wallpaper (system-wide) |
 | `/usr/share/backgrounds/tokyonight.jpg` | Night wallpaper (system-wide) |
 | `includes.container/etc/dconf/db/local.d/00-lab-defaults` | GNOME dconf defaults |
+| `includes.container/usr/share/backgrounds/` | Both wallpapers, copied into the image |
 | `modules/theme-switcher/config.yml` | Build-time setup for theme-switcher |
-| `modules/gnome/config.yml` | Downloads both wallpapers at build time |

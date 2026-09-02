@@ -6,11 +6,9 @@ commands:
 - cp -rf /gnome/etc/dconf/. /etc/dconf/
 - chmod +x /etc/skel/.local/share/vib/first-login.sh
 - dconf update
-- mkdir -p /etc/skel/Pictures
-- wget -O /etc/skel/Pictures/tokyonight.jpg "https://unsplash.com/photos/H4uGE2skayY/download?ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzMwNTUyMDQ5fA&force=true"
-- cp /etc/skel/Pictures/tokyonight.jpg /usr/share/backgrounds/tokyonight.jpg
-- wget -O /etc/skel/Pictures/tokyo-day.jpg "https://unsplash.com/photos/FVK-lpEc-Bc/download?force=true"
-- cp /etc/skel/Pictures/tokyo-day.jpg /usr/share/backgrounds/tokyo-day.jpg
+# Wallpapers ship in includes.container/usr/share/backgrounds/. Downloading them
+# at build time left 0-byte files in the image without failing the build, so the
+# dconf defaults pointed at wallpapers that did not exist.
 - tar -xzf /gnome/Colorful-Dark-Icons.tar.gz -C /usr/share/icons/
 - sed -i '/^FollowsColorScheme/d' /usr/share/icons/Colorful-Dark-Icons/index.theme
 - gtk-update-icon-cache -f /usr/share/icons/Colorful-Dark-Icons || true
