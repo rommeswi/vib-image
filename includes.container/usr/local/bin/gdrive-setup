@@ -1,0 +1,18 @@
+#!/bin/bash
+# Authorise rclone against Google Drive and start the ~/gdrive mount.
+# GNOME 50 ships no Google Drive backend, so the mount is provided by rclone.
+set -euo pipefail
+
+if rclone listremotes | grep -qx 'gdrive:'; then
+    echo "Remote 'gdrive' already configured."
+else
+    echo "Opening a browser to authorise Google Drive."
+    echo "Sign in, grant access, then return here."
+    rclone config create gdrive drive scope=drive
+fi
+
+systemctl --user enable --now rclone-gdrive.service
+echo
+echo "Drive is mounted at ~/gdrive."
+echo "Status:  systemctl --user status rclone-gdrive"
+echo "Unmount: systemctl --user stop rclone-gdrive"

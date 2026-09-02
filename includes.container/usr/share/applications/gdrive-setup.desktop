@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Connect Google Drive
+Comment=Authorise Google Drive and mount it at ~/gdrive
+Exec=gdrive-setup
+Icon=folder-remote
+Terminal=true
+Categories=Utility;X-GNOME-Utilities;
+Keywords=google;drive;cloud;rclone;

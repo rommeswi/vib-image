@@ -114,6 +114,14 @@ stages:
     - npm install -g @anthropic-ai/claude-code
     - npm cache clean --force
 
+# Google Drive (GNOME 50 ships no Drive backend)
+
+  - name: gdrive
+    type: includes
+    includes:
+    - modules/gdrive/install.yml
+    - modules/gdrive/config.yml
+
   - name: neo-ai
     type: includes
     includes:

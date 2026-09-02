@@ -1,0 +1,6 @@
+name: gdrive-packages
+type: apt
+source:
+  packages:
+  - rclone
+  - fuse3

@@ -1,0 +1,4 @@
+name: gdrive-config
+type: shell
+commands:
+- chmod +x /usr/local/bin/gdrive-setup
