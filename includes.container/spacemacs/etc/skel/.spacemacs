@@ -431,7 +431,7 @@ It should only modify the values of Spacemacs settings."
    ;; If non-nil the frame is undecorated when Emacs starts up. Combine this
    ;; variable with `dotspacemacs-maximized-at-startup' in OSX to obtain
    ;; borderless fullscreen. (default nil)
-   dotspacemacs-undecorated-at-startup nil
+   dotspacemacs-undecorated-at-startup t
 
    ;; A value from the range (0..100), in increasing opacity, which describes
    ;; the transparency level of a frame when it's active or selected.
@@ -723,6 +723,12 @@ initialization after layers configuration. This is the place
 where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a
 package is loaded, you should place your code here."
+
+  ;; Emacs draws no GTK headerbar, so the window manager hands it a bare title
+  ;; bar that matches neither the Emacs theme nor the rest of the desktop.
+  ;; Drop it on every frame, not just the startup one. GNOME still moves the
+  ;; window with Super+drag and resizes it with Super+middle-drag.
+  (add-to-list 'default-frame-alist '(undecorated . t))
 
   ;; ~~~~~~~~~~~~~~~~~~~~~~
   ;;        Buffers
