@@ -9,11 +9,15 @@ commands:
 # Wallpapers ship in includes.container/usr/share/backgrounds/. Downloading them
 # at build time left 0-byte files in the image without failing the build, so the
 # dconf defaults pointed at wallpapers that did not exist.
-# The Light Style extension ships with gnome-shell-extensions and predates
-# GNOME's own light/dark handling; it forces a light GTK theme under a dark
-# shell, which fights the theme switcher. The package supplies extensions we do
-# want, so drop just this one rather than the package.
-- rm -rf "/usr/share/gnome-shell/extensions/light-style@gnome-shell-extensions.gcampax.github.com"
+# gnome-shell-extensions bundles extensions this image has no use for. Light
+# Style in particular predates GNOME's own light/dark handling and forces a
+# light GTK theme under a dark shell, fighting the theme switcher. The package
+# also supplies User Themes, Apps Menu, Places Menu, Drive Menu and Windows
+# Navigator, which are used, so drop the individual extensions, not the package.
+- rm -rf /usr/share/gnome-shell/extensions/light-style@gnome-shell-extensions.gcampax.github.com
+- rm -rf /usr/share/gnome-shell/extensions/window-list@gnome-shell-extensions.gcampax.github.com
+- rm -rf /usr/share/gnome-shell/extensions/native-window-placement@gnome-shell-extensions.gcampax.github.com
+- rm -rf /usr/share/gnome-shell/extensions/screenshot-window-sizer@gnome-shell-extensions.gcampax.github.com
 - tar -xzf /gnome/Colorful-Dark-Icons.tar.gz -C /usr/share/icons/
 - sed -i '/^FollowsColorScheme/d' /usr/share/icons/Colorful-Dark-Icons/index.theme
 - gtk-update-icon-cache -f /usr/share/icons/Colorful-Dark-Icons || true

@@ -1,6 +1,6 @@
 [org/gnome/shell]
 favorite-apps=['org.gnome.Nautilus.desktop', 'kitty.desktop', 'emacsclient.desktop']
-enabled-extensions=['vso@vanillaos.org', 'system-monitor@gnome-shell-extensions.gcampax.github.com', 'drive-menu@gnome-shell-extensions.gcampax.github.com', 'screenshot-window-sizer@gnome-shell-extensions.gcampax.github.com', 'GPaste@gnome-shell-extensions.gnome.org', 'windowsNavigator@gnome-shell-extensions.gcampax.github.com', 'gsconnect@andyholmes.github.io', 'ddterm@amezin.github.com', 'gTile@vibou', 'burn-my-windows@schneegans.github.com', 'AlphabeticalAppGrid@stuarthayhurst', 'places-menu@gnome-shell-extensions.gcampax.github.com', 'apps-menu@gnome-shell-extensions.gcampax.github.com', 'user-theme@gnome-shell-extensions.gcampax.github.com']
+enabled-extensions=['vso@vanillaos.org', 'system-monitor@gnome-shell-extensions.gcampax.github.com', 'drive-menu@gnome-shell-extensions.gcampax.github.com', 'GPaste@gnome-shell-extensions.gnome.org', 'windowsNavigator@gnome-shell-extensions.gcampax.github.com', 'gsconnect@andyholmes.github.io', 'ddterm@amezin.github.com', 'gTile@vibou', 'burn-my-windows@schneegans.github.com', 'AlphabeticalAppGrid@stuarthayhurst', 'places-menu@gnome-shell-extensions.gcampax.github.com', 'apps-menu@gnome-shell-extensions.gcampax.github.com', 'user-theme@gnome-shell-extensions.gcampax.github.com']
 
 [org/gnome/shell/extensions/user-theme]
 name='LabNight'
