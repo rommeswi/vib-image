@@ -113,6 +113,12 @@ stages:
     - apt-get install -y nodejs npm
     - npm install -g @anthropic-ai/claude-code
     - npm cache clean --force
+    # /usr is read-only on the deployed system, so the auto-updater can only
+    # ever fail and nag. The env var is read at startup and suppresses both the
+    # update attempt and the failure notice; /etc/claude-code/managed-settings.json
+    # (from includes.container) carries the same setting for shells that do not
+    # go through a PAM session.
+    - echo 'DISABLE_AUTOUPDATER=1' >> /etc/environment
 
 # Google Drive (GNOME 50 ships no Drive backend)
 
