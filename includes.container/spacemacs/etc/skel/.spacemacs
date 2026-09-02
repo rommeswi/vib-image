@@ -769,6 +769,22 @@ package is loaded, you should place your code here."
   ;;        Theme
   ;; ~~~~~~~~~~~~~~~~~~~~~~
 
+  (defun labstick/pdf-midnight (colors)
+    ;; Set through custom, not setq. pdf-view-midnight-colors carries a value
+    ;; under the `user' custom theme (from custom-set-variables further down),
+    ;; and load-theme re-enables `user' last so user settings win -- which
+    ;; reverts a plain setq on the next theme change, and on any later
+    ;; midnight-mode toggle. Setting the `user' theme's own value makes it stick.
+    (custom-theme-set-variables 'user (list 'pdf-view-midnight-colors
+                                            (list 'quote colors)))
+    ;; A rendered page keeps the colours it was rendered with, so re-apply the
+    ;; mode to reach PDFs that are already open.
+    (dolist (buf (buffer-list))
+      (with-current-buffer buf
+        (when (and (derived-mode-p 'pdf-view-mode) pdf-view-midnight-minor-mode)
+          (pdf-view-midnight-minor-mode -1)
+          (pdf-view-midnight-minor-mode 1)))))
+
   ;; Choose theme depending on dark or light mode in GTK.
   ;; Called by: emacsclient --eval "(change-theme-to-light)"
   ;; load-theme stacks: without disabling the old theme first, only the faces
@@ -778,18 +794,12 @@ package is loaded, you should place your code here."
   (defun change-theme-to-light ()
     (mapc #'disable-theme custom-enabled-themes)
     (spacemacs/load-theme 'tokyo-night-day nil t)
-    (dolist (buf (buffer-list))
-      (with-current-buffer buf
-        (when (eq major-mode 'pdf-view-mode)
-          (pdf-view-midnight-minor-mode -1)))))
+    (labstick/pdf-midnight '("#3760bf" . "#e1e2e7")))
 
   (defun change-theme-to-dark ()
     (mapc #'disable-theme custom-enabled-themes)
     (spacemacs/load-theme 'tokyo-night nil t)
-    (dolist (buf (buffer-list))
-      (with-current-buffer buf
-        (when (eq major-mode 'pdf-view-mode)
-          (pdf-view-midnight-minor-mode 1)))))
+    (labstick/pdf-midnight '("#a9b1d6" . "#1a1b26")))
 
   ;; Spaceline configuration
   (setq spaceline-all-the-icons-separator-type 'none)
@@ -1028,12 +1038,12 @@ package is loaded, you should place your code here."
   (setq-default pdf-view-use-scaling t)
   (setq-default pdf-view-display-size 'fit-page)
 
+  ;; Midnight mode stays on under both themes; pdf-view-midnight-colors carries
+  ;; the mode, set by change-theme-to-light and change-theme-to-dark. Turning it
+  ;; off in the day theme instead would render PDFs on plain white, which
+  ;; matches neither theme.
   (setq pdf-view-midnight-colors '("#a9b1d6" . "#1a1b26"))
-  (add-hook 'pdf-view-mode-hook
-            (lambda ()
-              (if (eq spacemacs--cur-theme 'tokyo-night)
-                  (pdf-view-midnight-minor-mode 1)
-                (pdf-view-midnight-minor-mode -1))))
+  (add-hook 'pdf-view-mode-hook (lambda () (pdf-view-midnight-minor-mode 1)))
 
   ;; ~~~~~~~~~~~
   ;; Magit
