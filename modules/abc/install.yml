@@ -1,0 +1,8 @@
+name: abc-install
+type: shell
+commands:
+- ABC_REF=879d99356998e6145d3503c2d05eb3bee11a5110
+- export UV_TOOL_DIR=/usr/local/share/uv-tools UV_TOOL_BIN_DIR=/usr/local/bin
+- uv tool install --python /usr/bin/python3 "abc-cli @ git+https://github.com/alestic/abc.git@${ABC_REF}" --with "abc-provider-anthropic @ git+https://github.com/alestic/abc.git@${ABC_REF}#subdirectory=abc_provider_anthropic"
+- cp /usr/local/share/uv-tools/abc-cli/lib/python*/site-packages/abc_cli/abc.sh /usr/local/share/abc/abc.sh
+- chmod -R a+rX /usr/local/share/uv-tools /usr/local/share/abc

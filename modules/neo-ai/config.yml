@@ -1,5 +1,0 @@
-name: neo-ai-config
-type: shell
-commands:
-- python3 /usr/local/bin/patch-neo-ai.py
-- rm /usr/local/bin/patch-neo-ai.py

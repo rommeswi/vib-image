@@ -1,9 +1,0 @@
-name: neo-ai-install
-type: shell
-commands:
-- apt-get install -y python3-venv python3-pip python3-dev build-essential
-- git clone https://github.com/vasco0x4/neo-ai.git /usr/local/share/neo-ai
-- bash -c 'cd /usr/local/share/neo-ai && python3 -m venv venv && source venv/bin/activate && bash install.sh'
-- apt-get purge -y build-essential
-- chmod -R a+rX /usr/local/share/neo-ai
-- chmod +x /usr/local/bin/neo-shell

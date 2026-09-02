@@ -49,3 +49,34 @@ The deployed Vanilla OS instance running this repository is **immutable** (manag
 - To add a new feature module: create `modules/<name>/install.yml` + `config.yml`, then reference them in `recipe.yml`.
 - To install `.deb` files directly: place them in `includes.container/deb-pkgs/`.
 - NVIDIA drivers: change `desktop:main` to `nvidia:main` in `recipe.yml` line 5.
+
+## Pinned Third-Party Sources
+
+`modules/abc/install.yml` installs [alestic/abc](https://github.com/alestic/abc) from a
+pinned commit (`ABC_REF`). The project publishes no releases, tags, or PyPI package, so the
+pin is the only thing keeping image contents reproducible. Never change `ABC_REF` to a branch
+name, and never leave it unpinned.
+
+When asked to check for updates — and proactively whenever working in this repository after a
+gap of a month or more — do the following:
+
+1. `git ls-remote https://github.com/alestic/abc.git HEAD` and compare against `ABC_REF`.
+2. If it moved, review the actual diff before bumping:
+   `git clone` the repo and `git log --oneline <ABC_REF>..HEAD`, then
+   `git diff <ABC_REF>..HEAD` over `abc_cli/` and `abc_provider_anthropic/`.
+3. Run a safety check on the new code and report findings before changing the pin. Look for:
+   - new `subprocess`, `os.system`, `eval`, or `exec` calls in the Python (there are none at
+     the pinned commit; any addition is worth explaining)
+   - changes to `abc_cli/abc.sh`, which runs inside the user's interactive shell and ends in
+     `eval "$user_cmd"` — in particular anything that shortens the path between LLM output and
+     that `eval`, or that removes the typeahead flush guarding it
+   - changes to `process_generated_command` in `abc_generate.py`, which neutralizes
+     high-danger commands by commenting them out
+   - new network egress beyond the configured LLM provider's own API, and any telemetry
+   - anything reading `~/.config/abc/config`, which holds an API key in plaintext, or
+     weakening its mode 600
+4. Only bump `ABC_REF` after reporting what changed. If the diff contains anything from the
+   list above, say so and let the user decide rather than bumping.
+
+Apply the same discipline to any other module installing from a VCS ref rather than a
+versioned artifact.

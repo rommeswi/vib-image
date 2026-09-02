@@ -122,11 +122,10 @@ stages:
     - modules/gdrive/install.yml
     - modules/gdrive/config.yml
 
-  - name: neo-ai
+  - name: abc
     type: includes
     includes:
-    - modules/neo-ai/install.yml
-    - modules/neo-ai/config.yml
+    - modules/abc/install.yml
 
   - name: heroku
     type: includes

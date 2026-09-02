@@ -1,0 +1,10 @@
+# abc configuration. Copy to ~/.config/abc/config and chmod 600.
+#
+#   install -Dm600 /usr/local/share/abc/config.template ~/.config/abc/config
+#
+# The file holds an API key in plaintext, so keep it mode 600.
+
+[default]
+provider = anthropic
+api_key = REPLACE_WITH_ANTHROPIC_API_KEY
+model = claude-sonnet-5

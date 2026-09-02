@@ -22,6 +22,8 @@ alias cat='batcat'
 eval "$(zoxide init zsh)"
 source /usr/share/doc/fzf/examples/key-bindings.zsh
 
+[[ -f /usr/local/share/abc/abc.sh ]] && source /usr/local/share/abc/abc.sh
+
 # vib-tip keybindings (only active at the zsh prompt)
 _vib_dismiss()     { zle -I; vib-tip dismiss; }
 _vib_unsubscribe() { zle -I; vib-tip disable; }
