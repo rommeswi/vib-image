@@ -78,5 +78,37 @@ gap of a month or more — do the following:
 4. Only bump `ABC_REF` after reporting what changed. If the diff contains anything from the
    list above, say so and let the user decide rather than bumping.
 
+`modules/paperwm/install.yml` installs [paperwm/PaperWM](https://github.com/paperwm/PaperWM)
+the same way, from a pinned commit (`PAPERWM_REF`). The project tags releases but attaches
+no artifacts to them, so a clone is the only route. Check for updates and review the diff
+before bumping, as above; PaperWM hooks deeply into window management, so pay attention to
+changes in keybinding registration and in what it does to `enabled-extensions`.
+
 Apply the same discipline to any other module installing from a VCS ref rather than a
 versioned artifact.
+
+## GNOME Extensions
+
+Extensions live in three places and all three must agree:
+
+- installed into `/usr/share/gnome-shell/extensions/` — from the `gnome-shell-extensions`
+  deb, from `includes.container/gnome/extensions.yml` (GitHub release assets), or from a
+  module like `modules/paperwm/install.yml`
+- switched on in `enabled-extensions` in `includes.container/etc/dconf/db/local.d/00-lab-defaults`
+- compatible with the GNOME Shell the base image ships
+
+`modules/checks/extensions.yml` enforces the last two at build time. It runs
+`includes.container/vib-checks/check-extensions.py` after every module that installs an
+extension, and fails the build if any installed extension does not declare support for this
+GNOME Shell, or if `enabled-extensions` names a UUID that ships no files. Vib joins every
+recipe command with `&&`, so a non-zero exit stops the build and nothing is pushed.
+
+This exists because both failures happen without anyone editing this repository: the base
+image moves to a new GNOME Shell and strands every extension that has not been updated. When
+the build fails that way, update the extension, drop it from the image, or -- if shipping it
+broken is a deliberate choice -- add its UUID to `ALLOW_INCOMPATIBLE` in the script with a
+reason.
+
+Installing an extension does not enable it. Anything absent from `enabled-extensions` ships
+dormant, which is how PaperWM is set up. When removing an extension, remove it from both the
+filesystem and that list; the check catches the half-done case.

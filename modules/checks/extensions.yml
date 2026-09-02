@@ -1,0 +1,8 @@
+name: verify-extensions
+type: shell
+commands:
+# Gate, not a report: Vib joins every recipe command with `&&`, so a non-zero
+# exit here fails the build and the image is never pushed. Runs after every
+# module that installs a GNOME extension.
+- python3 /vib-checks/check-extensions.py
+- rm -rf /vib-checks

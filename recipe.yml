@@ -145,6 +145,11 @@ stages:
 
   # Put your custom actions before this comment
 
+  - name: verify-extensions
+    type: includes
+    includes:
+    - modules/checks/extensions.yml
+
   - name: set-image-name-abroot
     type: includes
     includes:
