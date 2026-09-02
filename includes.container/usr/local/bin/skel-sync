@@ -1,2 +1,4 @@
 #!/bin/bash
-rsync -a --ignore-existing /etc/skel/ "$HOME/"
+rsync -a --ignore-existing \
+    --exclude='.config/autostart/org.vanillaos.FirstSetup.autostart.desktop' \
+    /etc/skel/ "$HOME/"
