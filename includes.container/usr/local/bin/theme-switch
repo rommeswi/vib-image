@@ -1,5 +1,6 @@
 #!/bin/bash
-# Switches GNOME, kitty, nvim, and emacs between day (light) and night (dark) themes.
+# Switches GNOME, kitty, ddterm, the oh-my-posh prompt, Claude Code, nvim and
+# emacs between day (light) and night (dark) themes.
 # Usage: theme-switch [day|night|auto]
 set -euo pipefail
 
@@ -14,6 +15,15 @@ if [ "$MODE" = "auto" ]; then
     fi
 fi
 
+# Records the active mode so other tools that render their own colours -- the
+# Claude Code status line, for one -- can pick a palette without querying GNOME
+# on every redraw.
+_write_mode() {
+    local state_dir="${XDG_STATE_HOME:-$HOME/.local/state}"
+    mkdir -p "$state_dir" 2>/dev/null || return 0
+    printf '%s\n' "$1" > "$state_dir/theme-mode"
+}
+
 _switch_nvim() {
     local bg="$1"
     local runtime_dir="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}"
@@ -23,14 +33,73 @@ _switch_nvim() {
     done
 }
 
+_switch_kitty() {
+    local variant="$1"
+    local dir="$HOME/.config/kitty"
+    [ -f "$dir/$variant" ] || return 0
+    cp -f "$dir/$variant" "$dir/current-theme.conf"
+    pkill -USR1 kitty 2>/dev/null || true
+}
+
+# oh-my-posh re-reads its config on every prompt, so replacing the active file
+# repaints running shells at their next prompt.
+_switch_posh() {
+    local variant="$1"
+    local dir="$HOME/.config/oh-my-posh"
+    [ -f "$dir/config-$variant.json" ] || return 0
+    cp -f "$dir/config-$variant.json" "$dir/config.json"
+}
+
+# ddterm keeps its colours in dconf and applies them to open terminals live.
+_switch_ddterm() {
+    local fg="$1" bg="$2" palette="$3"
+    command -v dconf >/dev/null 2>&1 || return 0
+    dconf write /com/github/amezin/ddterm/foreground-color "'$fg'" 2>/dev/null || true
+    dconf write /com/github/amezin/ddterm/background-color "'$bg'" 2>/dev/null || true
+    dconf write /com/github/amezin/ddterm/palette "$palette" 2>/dev/null || true
+}
+
+DDTERM_PALETTE_NIGHT="['rgb(65,72,104)', 'rgb(247,118,142)', 'rgb(115,218,202)', 'rgb(224,175,104)', 'rgb(122,162,247)', 'rgb(187,154,247)', 'rgb(125,207,255)', 'rgb(192,202,245)', 'rgb(65,72,104)', 'rgb(247,118,142)', 'rgb(115,218,202)', 'rgb(224,175,104)', 'rgb(122,162,247)', 'rgb(187,154,247)', 'rgb(125,207,255)', 'rgb(192,202,245)']"
+DDTERM_PALETTE_DAY="['rgb(233,233,236)', 'rgb(245,42,101)', 'rgb(88,117,57)', 'rgb(140,108,62)', 'rgb(46,125,233)', 'rgb(152,84,241)', 'rgb(0,113,151)', 'rgb(97,114,176)', 'rgb(168,174,203)', 'rgb(245,42,101)', 'rgb(88,117,57)', 'rgb(140,108,62)', 'rgb(46,125,233)', 'rgb(152,84,241)', 'rgb(0,113,151)', 'rgb(208,213,227)']"
+
+# Claude Code renders its own UI colours and defaults to the dark theme, which
+# is unreadable on a light terminal. Rewrite only when the value differs, so a
+# home directory kept under version control stays clean between switches.
+_switch_claude() {
+    local theme="$1"
+    local settings="$HOME/.claude/settings.json"
+    [ -f "$settings" ] || return 0
+    command -v python3 >/dev/null 2>&1 || return 0
+    python3 - "$settings" "$theme" <<'PY' 2>/dev/null || true
+import json, os, sys, tempfile
+
+path, theme = sys.argv[1], sys.argv[2]
+try:
+    with open(path) as fh:
+        settings = json.load(fh)
+except (OSError, ValueError):
+    sys.exit(0)
+if settings.get("theme") == theme:
+    sys.exit(0)
+settings["theme"] = theme
+tmp = tempfile.NamedTemporaryFile("w", dir=os.path.dirname(path), delete=False)
+json.dump(settings, tmp, indent=2)
+tmp.write("\n")
+tmp.close()
+os.replace(tmp.name, path)
+PY
+}
+
 case "$MODE" in
     day)
         gsettings set org.gnome.desktop.interface color-scheme 'prefer-light'
         gsettings set org.gnome.desktop.interface accent-color 'blue'
 
-        cp -f "$HOME/.config/kitty/tokyonight-day.conf" "$HOME/.config/kitty/current-theme.conf"
-        pkill -USR1 kitty 2>/dev/null || true
-
+        _write_mode day
+        _switch_kitty tokyonight-day.conf
+        _switch_posh day
+        _switch_ddterm 'rgb(55,96,191)' 'rgb(225,226,231)' "$DDTERM_PALETTE_DAY"
+        _switch_claude light
         _switch_nvim light
 
         emacsclient --eval "(change-theme-to-light)" 2>/dev/null || true
@@ -40,9 +109,11 @@ case "$MODE" in
         gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
         gsettings set org.gnome.desktop.interface accent-color 'slate'
 
-        cp -f "$HOME/.config/kitty/tokyonight.conf" "$HOME/.config/kitty/current-theme.conf"
-        pkill -USR1 kitty 2>/dev/null || true
-
+        _write_mode night
+        _switch_kitty tokyonight.conf
+        _switch_posh night
+        _switch_ddterm 'rgb(169,177,214)' 'rgb(26,27,38)' "$DDTERM_PALETTE_NIGHT"
+        _switch_claude dark
         _switch_nvim dark
 
         emacsclient --eval "(change-theme-to-dark)" 2>/dev/null || true
