@@ -2,9 +2,9 @@ name: paperwm-install
 type: shell
 commands:
 # PaperWM publishes tags but attaches no artifacts to them, so the install comes
-# from a VCS ref. Pinned to the commit behind v50.0.1, whose metadata declares
-# GNOME 45-50. Never point this at a branch; see CLAUDE.md.
-- PAPERWM_REF=af20e70e5d3f9c83a7e1bd548fbcb9377a4b698b
+# from a VCS ref. Pinned to the commit behind v51.0.0, whose metadata declares
+# GNOME 45-51. Never point this at a branch; see CLAUDE.md.
+- PAPERWM_REF=2d460db8365b2dee235dde15103161e67df83247
 - PAPERWM_DIR=/usr/share/gnome-shell/extensions/paperwm@paperwm.github.com
 - git clone --filter=blob:none https://github.com/paperwm/PaperWM.git "$PAPERWM_DIR"
 - git -C "$PAPERWM_DIR" checkout --quiet "$PAPERWM_REF"
