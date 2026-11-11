@@ -1,72 +1,59 @@
 #!/bin/bash
+# Installs every extension listed in extensions.yml from its repository's latest
+# GitHub release. Any failure stops the build: an extension that silently fails
+# to install is absent from the image with nothing in the build to show it.
+set -euo pipefail
 
-# YAML file containing repositories and assets
 YAML_FILE="/gnome/extensions.yml"
+EXT_DIR="/usr/share/gnome-shell/extensions"
 
-# Check if file exists.
-if [ -f "$YAML_FILE" ]; then
-  echo "Processing Gnome Extensions in $YAML_FILE."
-else
+if [ ! -f "$YAML_FILE" ]; then
   echo "Error: Failed to find $YAML_FILE."
   exit 1
 fi
 
-# Check if yq is installed
 if ! command -v yq &>/dev/null; then
   echo "Error: yq is not installed. Please install yq to parse the YAML file."
   exit 1
 fi
 
-# Parse the YAML file and loop through each repository and asset
-repos=$(yq '.repositories' $YAML_FILE)
+echo "Processing Gnome Extensions in $YAML_FILE."
+mkdir -p "$EXT_DIR"
+WORK_DIR=$(mktemp -d)
 
-mkdir -p /usr/share/gnome-shell/extensions
-
-for i in $(seq 0 $(echo "$repos" | yq 'length-1')); do
-  REPO=$(echo "$repos" | yq -r ".[$i].repo")
-  ASSET_NAME=$(echo "$repos" | yq -r ".[$i].asset")
-
-  # Make extensions directory
-
+count=$(yq '.repositories | length' "$YAML_FILE")
+for i in $(seq 0 $((count - 1))); do
+  REPO=$(yq -r ".repositories[$i].repo" "$YAML_FILE" | xargs)
+  ASSET_NAME=$(yq -r ".repositories[$i].asset" "$YAML_FILE" | xargs)
   echo "Processing $REPO for asset $ASSET_NAME..."
 
-  # Encode the @ symbol in the asset name to match URL encoding
-  ENCODED_ASSET_NAME=$(echo "$ASSET_NAME" | sed 's/@/%40/g')
-
-  echo "Converted asset name to $ENCODED_ASSET_NAME."
-
-  # Fetch the latest release from the GitHub API
+  # Release asset URLs encode @ as %40.
+  ENCODED_ASSET_NAME=${ASSET_NAME//@/%40}
   API_URL="https://api.github.com/repos/$REPO/releases/latest"
-  echo "Fetching asset url from $API_URL..."
-
-  ASSET_URL=$(curl -s $API_URL | grep "browser_download_url" | grep "$ENCODED_ASSET_NAME" | grep -v ".asc" | cut -d '"' -f 4)
-  echo "Obtained asset url $ASSET_URL."
-
-  # Check if we got the asset URL
+  ASSET_URL=$(curl -fsS "$API_URL" | jq -r --arg name "$ENCODED_ASSET_NAME" \
+    '.assets[].browser_download_url | select(endswith("/" + $name))')
   if [ -z "$ASSET_URL" ]; then
-    echo "Error: Couldn't find the asset URL for $ASSET_NAME in $REPO."
-    continue
+    echo "Error: Couldn't find the asset $ASSET_NAME in the latest release of $REPO."
+    exit 1
   fi
+  echo "Downloading $ASSET_URL."
 
-  # Download the asset
-  curl -L -o "$ASSET_NAME" "$ASSET_URL"
-
-  # Verify if the file was downloaded
-  if [ -f "$ASSET_NAME" ]; then
-    echo "$ASSET_NAME downloaded successfully from $REPO, installing."
-    mkdir -p /usr/share/gnome-shell/extensions/tmp
-    unzip "$ASSET_NAME" -d /usr/share/gnome-shell/extensions/tmp
-    ASSET_UUID=$(jq -r '.uuid' /usr/share/gnome-shell/extensions/tmp/metadata.json)
-    mv /usr/share/gnome-shell/extensions/tmp "/usr/share/gnome-shell/extensions/$ASSET_UUID"
-    rm "$ASSET_NAME"
-    cd "/usr/share/gnome-shell/extensions/$ASSET_UUID/schemas"
-    glib-compile-schemas .
-    if [ -f "gschemas.compiled"]; then
-      echo "Extension $ASSET_NAME successfully installed."
-    else
-      echo "Error installing $ASSET_NAME."
-    fi
-  else
-    echo "Error: Failed to download $ASSET_NAME from $REPO."
+  ZIP="$WORK_DIR/$ASSET_NAME"
+  UNPACK="$WORK_DIR/unpacked"
+  curl -fsSL -o "$ZIP" "$ASSET_URL"
+  unzip -q "$ZIP" -d "$UNPACK"
+  ASSET_UUID=$(jq -r '.uuid' "$UNPACK/metadata.json")
+  if [ -z "$ASSET_UUID" ] || [ "$ASSET_UUID" = "null" ]; then
+    echo "Error: $ASSET_NAME has no uuid in metadata.json."
+    exit 1
   fi
+  rm -rf "${EXT_DIR:?}/$ASSET_UUID"
+  mv "$UNPACK" "$EXT_DIR/$ASSET_UUID"
+
+  if [ -d "$EXT_DIR/$ASSET_UUID/schemas" ]; then
+    glib-compile-schemas "$EXT_DIR/$ASSET_UUID/schemas"
+  fi
+  echo "Installed $ASSET_UUID."
 done
+
+rm -rf "$WORK_DIR"
